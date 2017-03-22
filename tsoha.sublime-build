@@ -1,4 +1,0 @@
-{
-  "cmd": ["bash", "/home/longsword/tsoha/deploy.sh"],
-  "selector" : "source.shell"
-}
