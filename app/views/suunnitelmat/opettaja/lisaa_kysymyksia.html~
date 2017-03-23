@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+
+	<p>Hei, <strong>Arto (opettaja)</strong></p>
+	<a href="koti_opettaja.html">Koti</a>
+	<h1 style="padding: 10px 0px 60px 0px"> Kurssikysely </h1>	
+
+	<h3>Luo kurssikohtaisia kysymyksiä: webdevving (online course)</h3>
+	<br>
+
+	<ul class="list-group">
+		<li class="list-group-item">esim.: aiemmin luotu kysymys</li>
+	</ul>
+		
+	<input class="form-control" placeholder="Uusi kysymys" type="text"><br>
+	<button class="btn btn-primary btn-sm">lisää kysymys</button><br>
+	
+	<div style="padding: 0px 0px 40px 0px"></div>
+	<button class="btn btn-success">Valmis</button>
+
+{% endblock %}

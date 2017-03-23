@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+
+	<p>Hei, <strong>Arto (opettaja)</strong></p>
+	<a href="/tsoha/koti_opettaja">Koti</a>
+	<h1 style="padding: 10px 0px 60px 0px"> Kurssikysely </h1>	
+
+	<h3>Luo kysely: Tietokoneen toiminta</h3>
+	<br>
+
+	<h4>Yleiset kysymykset:</h4>
+		<ul class="list-group">
+			<li class="list-group-item">Kuinka vaikea kurssi oli?</li>
+			<li class="list-group-item">Kuinka hauska kurssi oli?</li>
+		</ul>
+	<h4>Laitoskohtaiset kysymykset:</h4>
+		<ul class="list-group">
+			<li class="list-group-item">Opettiko kurssi uutta tietojenkäsittelytieteestä?</li>
+		</ul>
+	<h4>Kurssikohtaiset kysymykset:</h4>
+		<ul class="list-group">
+			<li class="list-group-item">esim.: aiemmin luotu kysymys</li>
+		</ul>
+		
+		<input class="form-control" placeholder="Uusi kysymys" type="text"><br>
+		<button class="btn btn-primary btn-sm">lisää kysymys</button><br>
+	
+	<div style="padding: 0px 0px 40px 0px"></div>
+
+	<button class="btn btn-success">Valmis</button>
+
+{% endblock %}

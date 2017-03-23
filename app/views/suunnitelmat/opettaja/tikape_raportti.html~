@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+
+	<p>Hei, <strong>Arto (opettaja)</strong></p>
+	<a href="/tsoha/koti_opettaja">Koti</a>
+	<h1 style="padding: 10px 0px 60px 0px"> Kurssikysely </h1>	
+
+	<h3>Kyselyraportti: Tietokantojen perusteet</h3>
+
+	<div class="panel panel-default">
+		  <div class="panel-heading">Kuinka vaikea kurssi oli?</div>
+		  <div class="panel-body">
+    		  	3.6
+  		</div>
+	</div>
+	<div class="panel panel-default">
+		  <div class="panel-heading">Kuinka hauska kurssi oli?</div>
+		  <div class="panel-body">
+    		  	3.9
+  		</div>
+	</div>
+	<div class="panel panel-default">
+		  <div class="panel-heading"> Opettiko kurssi uutta tietojenkäsittelytieteestä?</div>
+		  <div class="panel-body">
+    		  	4.3
+  		</div>
+	</div>
+	<div class="panel panel-default">
+		  <div class="panel-heading"> Kuinka vaikea ryhmätyö oli?</div>
+		  <div class="panel-body">
+    		  	3.2
+  		</div>
+	</div>
+	<div class="panel panel-default">
+		  <div class="panel-heading"> Kommentteja</div>
+		  <div class="panel-body">
+    		  	<ul class="list-group">
+				  <li class="list-group-item">Tylsä!!!!</li>
+				  <li class="list-group-item">OK kurssi</li>
+				  <li class="list-group-item">Opin paljon</li>
+				  <li class="list-group-item">Liian vaikea</li>
+			</ul>
+  		</div>
+	</div>
+	
+
+	<p><strong>Vastaajia: </strong> 187 / 214</p>
+
+{% endblock %}

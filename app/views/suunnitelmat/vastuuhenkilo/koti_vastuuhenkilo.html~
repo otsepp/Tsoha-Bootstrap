@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+
+	 <p>Hei, <strong>Matti (vastuuhenkilö: Tietojenkäsittelytieteen laitos)</strong></p>
+	<a href="/tsoha/koti_vastuuhenkilo">Koti</a>
+	<h1 style="padding: 10px 0px 60px 0px"> Kurssikysely </h1>	
+
+	<a href="/tsoha/vastuuhenkilo_kurssit" class="btn btn-primary">Kurssit</a>
+	<a href="/tsoha/vastuuhenkilo_opettajat" class="btn btn-primary">Opettajat</a>
+	<a href="/tsoha/vastuuhenkilo_kysymykset.html" class="btn btn-primary">Kysymykset</a>
+
+{% endblock %}

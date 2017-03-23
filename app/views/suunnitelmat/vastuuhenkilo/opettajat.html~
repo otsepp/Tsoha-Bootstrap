@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+
+	 <p>Hei, <strong>Matti (vastuuhenkilö: Tietojenkäsittelytieteen laitos)</strong></p>
+	<a href="/tsohakoti_vastuuhenkilo">Koti</a>
+	<h1 style="padding: 10px 0px 60px 0px"> Kurssikysely </h1>	
+
+	<h3>Opettajat</h3>
+
+	<ul class="list-group">
+	  	<li class="list-group-item">
+			<span class="badge"><a href="arto.html"><font color="cyan">näytä</font></a></span>
+			Arto</li>
+		<li class="list-group-item">
+			<span class="badge"><a href=""><font color="cyan">näytä</font></a></span>
+			Jaakko</li>
+	  	<li class="list-group-item">
+			<span class="badge"><a href=""><font color="cyan">näytä</font></a></span>
+			Juuso</li>
+		<li class="list-group-item">
+			<span class="badge"><a href=""><font color="cyan">näytä</font></a></span>
+			Kari</li>
+	</ul>
+
+{% endblock %}
