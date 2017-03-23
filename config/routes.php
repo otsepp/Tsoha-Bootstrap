@@ -69,6 +69,10 @@
       staticVastuuHenkiloController::vastuuhenkiloKurssit();
   });
   
+  $routes->get('/vastuuhenkilo_luo_kurssi', function() {
+      staticVastuuHenkiloController::vastuuhenkiloLuoKurssi();
+  });
+  
   $routes->get('/vastuuhenkilo_yhteenveto', function() {
       staticVastuuHenkiloController::vastuuhenkiloYhteenveto();
   });
@@ -77,11 +81,35 @@
       staticVastuuHenkiloController::vastuuhenkiloTikape();
   });
   
+  $routes->get('/vastuuhenkilo_tikape_raportti', function() {
+      staticVastuuHenkiloController::vastuuhenkiloTikapeRaportti();
+  });
+  
+  $routes->get('/vastuuhenkilo_tikape_muokkaa', function() {
+      staticVastuuHenkiloController::vastuuhenkiloTikapeMuokkaa();
+  });
+  
   $routes->get('/vastuuhenkilo_opettajat', function() {
       staticVastuuHenkiloController::vastuuhenkiloOpettajat();
   });
   
+  $routes->get('/vastuuhenkilo_opettajat_arto', function() {
+      staticVastuuHenkiloController::vastuuhenkiloOpettajatArto();
+  });
+  
+  $routes->get('/vastuuhenkilo_opettajat_muokkaa', function() {
+      staticVastuuHenkiloController::vastuuhenkiloOpettajatMuokkaa();
+  });
+  
   $routes->get('/vastuuhenkilo_kysymykset', function() {
       staticVastuuHenkiloController::vastuuhenkiloKysymykset();
+  });
+  
+  $routes->get('/vastuuhenkilo_kysymykset_muokkaa', function() {
+      staticVastuuHenkiloController::vastuuhenkiloKysymyksetMuokkaa();
+  });
+  
+  $routes->get('/vastuuhenkilo_kysymykset_lisaa', function() {
+      staticVastuuHenkiloController::vastuuhenkiloKysymyksetLisaa();
   });
   

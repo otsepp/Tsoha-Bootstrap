@@ -1,25 +1,15 @@
- <!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Kurssikysely</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
-<body>
+{% extends "base.html" %}
+{% block content %}
 
-<div class="container">
 	 <p>Hei, <strong>Matti (vastuuhenkilö: Tietojenkäsittelytieteen laitos)</strong></p>
-	<a href="koti_vastuuhenkilo.html">Koti</a>
+	<a href="/tsoha/koti_vastuuhenkilo">Koti</a>
 	<h1 style="padding: 10px 0px 60px 0px"> Kurssikysely </h1>	
 
 	<h3>Opettaja: Arto</h3>
 	<label>Kurssit</label>
 	<ul class="list-group">
 		  <li class="list-group-item">
-			<span class="badge"><a href="tikape.html"><font color="cyan">näytä</font></a></span>		
+			<span class="badge"><a href="/tsoha/vastuuhenkilo_tikape"><font color="cyan">näytä</font></a></span>		
 			Tietokantojen perusteet</li>
 		  <li class="list-group-item">
 			<span class="badge"><a href=""><font color="cyan">näytä</font></a></span>
@@ -29,9 +19,6 @@
 			webdevving (online course)</li>
 	</ul>
 
-	<a href ="muokkaa_arto.html" class="btn btn-primary">Muokkaa</a>
+	<a href ="/tsoha/vastuuhenkilo_opettajat_muokkaa" class="btn btn-primary">Muokkaa</a>
 
-</div>
-
-</body>
-</html>
+{% endblock %}
