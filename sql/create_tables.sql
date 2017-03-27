@@ -1,5 +1,3 @@
--- Lisää CREATE TABLE lauseet tähän tiedostoon
-
 CREATE TABLE Laitos (
 	id SERIAL PRIMARY KEY,
 	nimi varchar(50) NOT NULL
@@ -8,53 +6,56 @@ CREATE TABLE Laitos (
 
 CREATE TABLE Oppilas (
 	id SERIAL PRIMARY KEY,
-	laitosID INTEGER REFERENCES Laitos(id),
+	laitos_id INTEGER REFERENCES Laitos(id),
 	nimi varchar(50) NOT NULL
 );
 
 CREATE TABLE Opettaja (
 	id SERIAL PRIMARY KEY,
-	laitosID INTEGER REFERENCES Laitos(id),
+	laitos_id INTEGER REFERENCES Laitos(id),
 	nimi varchar(50) NOT NULL
 );
 
 CREATE TABLE Vastuuhenkilö (
 	id SERIAL PRIMARY KEY,
-	laitosID INTEGER REFERENCES Laitos(id),
+	laitos_id INTEGER REFERENCES Laitos(id),
 	nimi varchar(50) NOT NULL
 );
 
 
 CREATE TABLE Kurssi (
 	id SERIAL PRIMARY KEY,
-	laitosID INTEGER REFERENCES Laitos(id),
-	opettajaID INTEGER REFERENCES Opettaja(id),
-	nimi varchar(50) NOT NULL
+	laitos_id INTEGER REFERENCES Laitos(id),
+	opettaja_id INTEGER REFERENCES Opettaja(id),
+	nimi varchar(50) NOT NULL,
+	kysely_käynnissä boolean DEFAULT FALSE
 );
 
 CREATE TABLE Ilmoittautuminen (
-	kurssiID INTEGER REFERENCES Kurssi(id),
-	oppilasID INTEGER REFERENCES Oppilas(id)
+	id SERIAL PRIMARY KEY,
+	kurssi_id INTEGER REFERENCES Kurssi(id),
+	oppilas_id INTEGER REFERENCES Oppilas(id)
 );
 
 
 CREATE TABLE Kysely (
 	id SERIAL PRIMARY KEY,
-	kurssiID INTEGER REFERENCES Kurssi(id),
-	oppilasID INTEGER REFERENCES Oppilas(id),
+	kurssi_id INTEGER REFERENCES Kurssi(id),
+	oppilas_id INTEGER REFERENCES Oppilas(id),
 	kommentti varchar(500)
 );
 
 CREATE TABLE Kysymys (
 	id SERIAL PRIMARY KEY,
-	laitosID INTEGER REFERENCES Laitos(id),
-	kurssiID INTEGER REFERENCES Kurssi(id),
+	laitos_id INTEGER REFERENCES Laitos(id),
+	kurssi_id INTEGER REFERENCES Kurssi(id),
 	sisältö varchar(200) NOT NULL
 );
 
 CREATE TABLE Vastaus (
-	kyselyID INTEGER REFERENCES Kysely(id),
-	kysymysID INTEGER REFERENCES Kysymys(id), 
+	id SERIAL PRIMARY KEY,
+	kysely_id INTEGER REFERENCES Kysely(id),
+	kysymys_id INTEGER REFERENCES Kysymys(id), 
 	arvosana INTEGER NOT NULL
 );
 

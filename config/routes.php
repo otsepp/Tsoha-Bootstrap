@@ -9,6 +9,7 @@
   });
   
   
+  
   //static sivut
   
   $routes->get('/etusivu', function() {

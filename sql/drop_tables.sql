@@ -1,5 +1,3 @@
--- Lisää DROP TABLE lauseet tähän tiedostoon
-
 DROP TABLE IF EXISTS Laitos CASCADE;
 DROP TABLE IF EXISTS Oppilas CASCADE;
 DROP TABLE IF EXISTS Opettaja CASCADE;

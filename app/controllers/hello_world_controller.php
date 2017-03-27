@@ -1,6 +1,12 @@
 <?php
 
-  class HelloWorldController extends BaseController{
+require 'app/models/Kurssi.php';
+require 'app/models/Opettaja.php';
+require 'app/models/Vastuuhenkilö.php';
+require 'app/models/Oppilas.php';
+
+
+class HelloWorldController extends BaseController{
 
     public static function index(){
       // make-metodi renderöi app/views-kansiossa sijaitsevia tiedostoja
@@ -8,7 +14,12 @@
     }
 
     public static function sandbox(){
-        View::make('helloworld.html');
+        $laitoksenKurssit = Kurssi::laitoksenKurssit(1);
+        $opettajanKurssit = Kurssi::opettajanKurssit(1);
+        $opettajat = Opettaja::kaikki();
+        Kint::dump($laitoksenKurssit);
+        Kint::dump($opettajanKurssit);
+        Kint::dump($opettajat);
     }
     
     //static sivu OPPILAS
