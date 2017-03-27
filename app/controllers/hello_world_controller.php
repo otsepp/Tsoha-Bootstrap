@@ -4,7 +4,7 @@ require 'app/models/Kurssi.php';
 require 'app/models/Opettaja.php';
 require 'app/models/Vastuuhenkilö.php';
 require 'app/models/Oppilas.php';
-
+require 'app/models/Kysymys.php';
 
 class HelloWorldController extends BaseController{
 
@@ -14,12 +14,12 @@ class HelloWorldController extends BaseController{
     }
 
     public static function sandbox(){
-        $laitoksenKurssit = Kurssi::laitoksenKurssit(1);
-        $opettajanKurssit = Kurssi::opettajanKurssit(1);
-        $opettajat = Opettaja::kaikki();
-        Kint::dump($laitoksenKurssit);
-        Kint::dump($opettajanKurssit);
-        Kint::dump($opettajat);
+        $yleiset = Kysymys::etsiYleisetKysymykset();
+        $kurssiK = Kysymys::etsiKurssiKysymykset(1);
+        $laitosK = Kysymys::etsiLaitosKysymykset(1);
+        Kint::dump($yleiset);
+        Kint::dump($kurssiK);
+        Kint::dump($laitosK);
     }
     
     //static sivu OPPILAS

@@ -12,14 +12,14 @@ class Opettaja extends BaseModel {
         $query = DB::connection()->prepare('SELECT * FROM Opettaja WHERE laitos_id=:id');
         $query->execute(array('id' => $laitos_id));
         $rows = $query->fetchAll();
-        return self::luoOpettajat($rows);
+        return self::luoOpettajaOliot($rows);
     }
     
     public static function kaikki() {
         $query = DB::connection()->prepare('SELECT * FROM Opettaja');
         $query->execute();
         $rows = $query->fetchAll();
-        return self::luoOpettajat($rows);
+        return self::luoOpettajaOliot($rows);
     }
     
     public static function etsi($id) {
@@ -39,7 +39,7 @@ class Opettaja extends BaseModel {
         return $opettaja;
     }
     
-     private static function luoOpettajat($rows) {
+     private static function luoOpettajaOliot($rows) {
         $opettaja = array();
         foreach($rows as $row) {
             $opettajat[] = new Opettaja(array(

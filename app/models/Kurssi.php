@@ -13,14 +13,14 @@ class Kurssi extends BaseModel {
         $query = DB::connection()->prepare('SELECT * FROM Kurssi WHERE laitos_id=:id');
         $query->execute(array('id' => $laitos_id));
         $rows = $query->fetchAll();
-        return self::luoKurssit($rows);
+        return self::luoKurssiOliot($rows);
     }
     
     public static function opettajanKurssit($opettaja_id) {
         $query = DB::connection()->prepare('SELECT * FROM Kurssi WHERE opettaja_id=:id');
         $query->execute(array('id' => $opettaja_id));
         $rows = $query->fetchAll();
-        return self::luoKurssit($rows);
+        return self::luoKurssiOliot($rows);
     }
 
     public static function etsi($id) {
@@ -42,7 +42,7 @@ class Kurssi extends BaseModel {
         return $kurssi;
     }
 
-    private static function luoKurssit($rows) {
+    private static function luoKurssiOliot($rows) {
         $kurssit = array();
         foreach($rows as $row) {
             $kurssit[] = new Kurssi(array(
