@@ -1,11 +1,5 @@
 <?php
 
-require 'app/models/Kurssi.php';
-require 'app/models/Opettaja.php';
-require 'app/models/Vastuuhenkilö.php';
-require 'app/models/Oppilas.php';
-require 'app/models/Kysymys.php';
-
 class HelloWorldController extends BaseController{
 
     public static function index(){
