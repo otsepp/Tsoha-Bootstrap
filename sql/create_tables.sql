@@ -42,17 +42,17 @@ CREATE TABLE Kysely (
 	id SERIAL PRIMARY KEY,
 	kurssiID INTEGER REFERENCES Kurssi(id),
 	oppilasID INTEGER REFERENCES Oppilas(id),
-	kommentti varchar(500) NOT NULL
+	kommentti varchar(500)
 );
 
 CREATE TABLE Kysymys (
 	id SERIAL PRIMARY KEY,
 	laitosID INTEGER REFERENCES Laitos(id),
 	kurssiID INTEGER REFERENCES Kurssi(id),
-	sisaltö varchar(200) NOT NULL
+	sisältö varchar(200) NOT NULL
 );
 
-CREATE TABLE Kyselynkysymys (
+CREATE TABLE Vastaus (
 	kyselyID INTEGER REFERENCES Kysely(id),
 	kysymysID INTEGER REFERENCES Kysymys(id), 
 	arvosana INTEGER NOT NULL
