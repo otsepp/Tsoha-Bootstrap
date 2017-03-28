@@ -1,10 +1,25 @@
 {% extends "base.html" %}
+
 {% block content %}
 
-	<p>Hei, <strong>Matti (vastuuhenkilö: Tietojenkäsittelytieteen laitos)</strong></p>
-	<a href="/tsoha/koti_vastuuhenkilo">Koti</a>
+	<p>Hei <strong>{{käyttäjä.nimi}}</strong></p>
+
+	<a href="{{base_path}}/vastuuhenkilo/koti">Koti</a>
 	<h1 style="padding: 10px 0px 60px 0px"> Kurssikysely </h1>	
 
+	<h3>Opettajat</h3>
+
+	<ul class="list-group">
+
+		{% for opettaja in opettajat %}
+			<li class="list-group-item">
+				<span class="badge"><a href="{{base_path}}/opettaja/{{opettaja.id}}">näytä</a></span>
+				{{opettaja.nimi}}
+			</li>
+		{% endfor %}
+	</ul>
+
+<!--
 	<h3>Opettajat</h3>
 
 	<ul class="list-group">
@@ -21,5 +36,6 @@
 			<span class="badge"><a href=""><font color="cyan">näytä</font></a></span>
 			Kari</li>
 	</ul>
+-->
 
 {% endblock %}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+	<p>Hei <strong>{{käyttäjä.nimi}}</strong></p>
+
+	<a href="{{base_path}}/vastuuhenkilo/koti">Koti</a>
+	<h1 style="padding: 10px 0px 60px 0px"> Kurssikysely </h1>	
+
+	<h3>Kurssit:</h3>
+	<!--<a href="{{base_path}}/vastuuhenkilo_yhteenveto" class="btn btn-primary">Näytä yhteenveto</a>-->
+	<br><br>
+
+	<ul class="list-group">
+		{% for kurssi in kurssit %}
+			<li class="list-group-item">
+				<span class="badge"><a href="{{base_path}}/kurssi/{{kurssi.id}}">näytä</a></span>
+				{% if kurssi.kysely_käynnissä %}
+					<span class="badge">kysely käynnissä</span>		 
+				{% endif %}
+				{{kurssi.nimi}}
+			</li>
+		{% endfor %}
+	</ul>
+
+	<!--<a href ="{{base_path}}/vastuuhenkilo/luo_kurssi" class="btn btn-primary">Luo kurssi</a>-->
+
+{% endblock %}

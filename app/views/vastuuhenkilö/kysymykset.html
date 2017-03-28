@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+	<p>Hei <strong>{{käyttäjä.nimi}}</strong></p>
+
+	<a href="{{base_path}}/vastuuhenkilo/koti">Koti</a>
+	<h1 style="padding: 10px 0px 60px 0px"> Kurssikysely </h1>	
+
+	<h3>Kysymykset</h3>
+
+	<label>Yleiset kysymykset</label>
+	<ul class="list-group">
+		{% for kysymys in yleisetKysymykset %}
+			<li class="list-group-item">
+				<!--<span class="badge"><a href="">muokkaa</a></span>-->
+				<!--<span class="badge"><a href="">poista</a></span>-->
+				{{kysymys.sisalto}}
+			</li>
+		{% endfor %}
+	</ul>
+	<br><br>
+
+	<label>Laitoskohtaiset kysymykset</label>
+	<ul class="list-group">
+		{% for kysymys in laitosKysymykset %}
+			<li class="list-group-item">
+				<!--<span class="badge"><a href="">muokkaa</a></span>-->
+				<!--<span class="badge"><a href="">poista</a></span>-->
+				{{kysymys.sisalto}}		
+			</li>
+		{% endfor %}
+	</ul><br><br>
+	<a href="{{base_path}}/vastuuhenkilo/kysymykset/uusi" class="btn btn-primary ">lisää uusi kysymys</a>
+
+	
+	
+
+	<!--
+	<h3>Kysymykset</h3>
+
+	<label>Yleiset kysymykset</label>
+	<ul class="list-group">
+	  	<li class="list-group-item">
+			<span class="badge"><a href="/tsoha/vastuuhenkilo_kysymykset_muokkaa"><font color="cyan">muokkaa</font></a></span>
+			<span class="badge"><a href=""><font color="red">poista</font></a></span>
+			Kuinka vaikea kurssi oli?</li>
+		<li class="list-group-item">
+			<span class="badge"><a href=""><font color="cyan">muokkaa</font></a></span>
+			<span class="badge"><a href=""><font color="red">poista</font></a></span>
+			Kuinka hauska kurssi oli?</li>
+	</ul>
+	<a href="/tsoha/vastuuhenkilo_kysymykset_lisaa" class="btn btn-primary btn-sm">lisää</a><br><br>
+
+	<label>Laitoskohtaiset kysymykset</label>
+	<ul class="list-group">
+	  	<li class="list-group-item">
+			<span class="badge"><a href=""><font color="cyan">muokkaa</font></a></span>
+			<span class="badge"><a href=""><font color="red">poista</font></a></span>
+			Opettiko kurssi uutta tietojenkäsittelytieteestä?</li>
+	</ul>
+	<button class="btn btn-primary btn-sm">lisää</button>
+	-->
+{% endblock %}

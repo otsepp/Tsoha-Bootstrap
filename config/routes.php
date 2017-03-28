@@ -8,10 +8,48 @@
     HelloWorldController::sandbox();
   });
   
+  $routes->get('/kirjautuminen', function() {
+      HelloWorldController::kirjautuminen();
+  });
   
+  $routes->get('/vastuuhenkilo/koti', function() {
+      VastuuhenkilöController::koti();
+  });
+  
+  $routes->get('/vastuuhenkilo/kurssit', function() {
+      VastuuhenkilöController::kurssit();
+  });
+  
+  $routes->get('/vastuuhenkilo/opettajat', function() {
+      VastuuhenkilöController::opettajat();
+  });
+  
+  $routes->get('/vastuuhenkilo/kysymykset', function() {
+      VastuuhenkilöController::kysymykset();
+  });
+  
+  $routes->get('/vastuuhenkilo/kysymykset/uusi', function() {
+      VastuuhenkilöController::uusiKysymys();
+  });
+  
+  $routes->post('/uusi_yleinen_kysymys', function() {
+      KysymysController::luoYleinenKysymys();
+  });
+  
+  $routes->post('/uusi_laitoskysymys', function() {
+      KysymysController::luoLaitosKysymys();
+  });
+  
+  $routes->get('/kurssi/:id', function($id) {      
+      KurssiController::näytä($id);
+  });
+  
+  $routes->get('/opettaja/:id', function($id) {
+      OpettajaController::näytä($id);
+  });
   
   //static sivut
-  
+  /*
   $routes->get('/etusivu', function() {
     HelloWorldController::etusivu();
   });
@@ -113,4 +151,6 @@
   $routes->get('/vastuuhenkilo_kysymykset_lisaa', function() {
       staticVastuuHenkiloController::vastuuhenkiloKysymyksetLisaa();
   });
+  
+  */
   

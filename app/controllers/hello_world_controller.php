@@ -6,14 +6,14 @@ class HelloWorldController extends BaseController{
       // make-metodi renderöi app/views-kansiossa sijaitsevia tiedostoja
       View::make('home.html');
     }
+    
+    public static function kirjautuminen() {
+        View::make('kirjautuminen.html');
+    }
 
     public static function sandbox(){
         $yleiset = Kysymys::etsiYleisetKysymykset();
-        $kurssiK = Kysymys::etsiKurssiKysymykset(1);
-        $laitosK = Kysymys::etsiLaitosKysymykset(1);
         Kint::dump($yleiset);
-        Kint::dump($kurssiK);
-        Kint::dump($laitosK);
     }
     
     //static sivu OPPILAS

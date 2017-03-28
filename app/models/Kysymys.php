@@ -1,10 +1,20 @@
 <?php
 
 class Kysymys extends BaseModel {
-    public $id, $laitos_id, $kurssi_id, $sisältö;
+    public $id, $laitos_id, $kurssi_id, $sisalto;
     
     public function __construct($attributes) {
         parent::__construct($attributes);
+    }
+    
+     public function talleta() {
+        $query = DB::connection()->prepare("INSERT INTO Kysymys (sisältö, laitos_id, kurssi_id) VALUES (:sisalto, :laitos_id, :kurssi_id) RETURNING id");
+        $query->execute(array('sisalto' => $this->sisalto, 
+            'laitos_id' => $this->laitos_id,
+            'kurssi_id' => $this->kurssi_id
+                ));
+        $row = $query->fetch();
+        $this->id = $row['id'];
     }
     
     public static function etsiYleisetKysymykset() {
@@ -35,7 +45,7 @@ class Kysymys extends BaseModel {
                 'id' => $row['id'],
                 'laitos_id' => $row['laitos_id'],
                 'kurssi_id' => $row['kurssi_id'],
-                'sisältö' => $row['sisältö']
+                'sisalto' => $row['sisältö']
             ));
         }
         return $kysymykset;

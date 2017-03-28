@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+	<p>Hei <strong>{{käyttäjä.nimi}}</strong></p>
+
+	<a href="{{base_path}}/vastuuhenkilo/koti">Koti</a>
+	<h1 style="padding: 10px 0px 60px 0px"> Kurssikysely </h1>	
+
+	<a href="{{base_path}}/vastuuhenkilo/kurssit" class="btn btn-primary">Kurssit</a>
+	<a href="{{base_path}}/vastuuhenkilo/opettajat" class="btn btn-primary">Opettajat</a>
+	<a href="{{base_path}}/vastuuhenkilo/kysymykset" class="btn btn-primary">Kysymykset</a>
+
+{% endblock %}

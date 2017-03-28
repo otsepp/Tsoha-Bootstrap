@@ -7,7 +7,16 @@ class Kurssi extends BaseModel {
         parent::__construct($attributes);
     }
     
+    public function haeOpettaja() {
+        return Opettaja::etsi($this->opettaja_id);
+    }
     
+    public function osallistujenMäärä() {
+        $query = DB::connection()->prepare('SELECT COUNT(id) FROM Ilmoittautuminen WHERE id=:id');
+        $query->execute(array('id' => $this->id));
+        $row = $query->fetch();
+        return $row['count'];
+    }
     
     public static function laitoksenKurssit($laitos_id) {
         $query = DB::connection()->prepare('SELECT * FROM Kurssi WHERE laitos_id=:id');
