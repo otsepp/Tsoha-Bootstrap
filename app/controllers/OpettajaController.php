@@ -3,13 +3,13 @@
 class OpettajaController extends BaseController {
     
     public static function näytä($id) {
-        $käyttäjä = Vastuuhenkilö::getTestiVH();
+        $kayttaja = Vastuuhenkilo::getTestiVH();
         
         $opettaja = Opettaja::etsi($id);
         $kurssit = Kurssi::opettajanKurssit($opettaja->id);
         
         View::make('vastuuhenkilö/opettaja.html', array(
-            'käyttäjä' => $käyttäjä,
+            'kayttaja' => $kayttaja,
             'opettaja' => $opettaja,
             'kurssit' => $kurssit,
         ));

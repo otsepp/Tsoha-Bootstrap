@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
 
-	<p>Hei <strong>{{käyttäjä.nimi}}</strong></p>
+	<p>Hei <strong>{{kayttaja.nimi}}</strong></p>
 
 	<a href="{{base_path}}/vastuuhenkilo/koti">Koti</a>
 	<h1 style="padding: 10px 0px 60px 0px"> Kurssikysely </h1>	
 	
 	<h3>{{kurssi.nimi}}</h3>
 	<p><strong>Opettaja: </strong> {{opettaja.nimi}}</p>
-	<p><strong>Osallistujia: </strong>{{osallistujienMäärä}}</p>
+	<p><strong>Osallistujia: </strong>{{osallistujienMaara}}</p>
 
 
 	<!--

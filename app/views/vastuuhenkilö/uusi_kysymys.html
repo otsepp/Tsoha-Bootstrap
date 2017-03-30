@@ -2,7 +2,7 @@
 
 {% block content %}
 
-	<p>Hei <strong>{{käyttäjä.nimi}}</strong></p>
+	<p>Hei <strong>{{kayttaja.nimi}}</strong></p>
 
 	<a href="{{base_path}}/vastuuhenkilo/koti">Koti</a>
 	<h1 style="padding: 10px 0px 60px 0px"> Kurssikysely </h1>	
@@ -15,7 +15,7 @@
 			<input name="sisalto" type="text" class="form-control"><br>
 		</div>
 		<div class="form-group">
-			<button type="submit" class="btn btn-success">Valmis</button>
+			<button type="submit" class="btn btn-success">Lisää</button>
 		</div>	
 	</form>
 
@@ -23,10 +23,10 @@
 	<form method="post" action="{{base_path}}/uusi_laitoskysymys">
 		<div class="form-group">
 			<input name="sisalto" type="text" class="form-control"><br>
-			<input name="laitos_id" type="hidden" value="1">		
+			<input name="laitos_id" type="hidden" value="{{kayttaja.laitos_id}}">		
 		</div>
 		<div class="form-group">
-			<button type="submit" class="btn btn-success">Valmis</button>
+			<button type="submit" class="btn btn-success">Lisää</button>
 		</div>	
 	</form>
 

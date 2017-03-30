@@ -5,21 +5,21 @@ class KurssiController extends BaseController{
     public static function näytä($id) {
         $kurssi = Kurssi::etsi($id);
         
-        $käyttäjä = Vastuuhenkilö::getTestiVH(); //testaus
-        $vastuuhenkilöStatus = true;
+        $kayttaja = Vastuuhenkilo::getTestiVH(); //testaus
+        $vastuuhenkiloStatus = true;
         
         $opettajaStatus = false;
         
         $opettaja = $kurssi->haeOpettaja();
-        $osallistujienMäärä = $kurssi->osallistujenMäärä();
+        $osallistujienMaara = $kurssi->osallistujenMaara();
         
         View::make('kurssi.html', array(
-            'käyttäjä' => $käyttäjä,
+            'kayttaja' => $kayttaja,
             'kurssi' => $kurssi,
-            'vastuuhenkilöStatus' => $vastuuhenkilöStatus,
+            'vastuuhenkiloStatus' => $vastuuhenkiloStatus,
             'opettajaStatus' => $opettajaStatus,
             'opettaja' => $opettaja,
-            'osallistujienMäärä' => $osallistujienMäärä
+            'osallistujienMaara' => $osallistujienMaara
             ));
     }
     

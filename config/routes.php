@@ -13,23 +13,23 @@
   });
   
   $routes->get('/vastuuhenkilo/koti', function() {
-      VastuuhenkilöController::koti();
+      VastuuhenkiloController::koti();
   });
   
   $routes->get('/vastuuhenkilo/kurssit', function() {
-      VastuuhenkilöController::kurssit();
+      VastuuhenkiloController::kurssit();
   });
   
   $routes->get('/vastuuhenkilo/opettajat', function() {
-      VastuuhenkilöController::opettajat();
+      VastuuhenkiloController::opettajat();
   });
   
   $routes->get('/vastuuhenkilo/kysymykset', function() {
-      VastuuhenkilöController::kysymykset();
+      VastuuhenkiloController::kysymykset();
   });
   
   $routes->get('/vastuuhenkilo/kysymykset/uusi', function() {
-      VastuuhenkilöController::uusiKysymys();
+      VastuuhenkiloController::uusiKysymys();
   });
   
   $routes->post('/uusi_yleinen_kysymys', function() {

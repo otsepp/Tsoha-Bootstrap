@@ -3,7 +3,6 @@ CREATE TABLE Laitos (
 	nimi varchar(50) NOT NULL
 );
 
-
 CREATE TABLE Oppilas (
 	id SERIAL PRIMARY KEY,
 	laitos_id INTEGER REFERENCES Laitos(id),
@@ -16,7 +15,7 @@ CREATE TABLE Opettaja (
 	nimi varchar(50) NOT NULL
 );
 
-CREATE TABLE Vastuuhenkilö (
+CREATE TABLE Vastuuhenkilo (
 	id SERIAL PRIMARY KEY,
 	laitos_id INTEGER REFERENCES Laitos(id),
 	nimi varchar(50) NOT NULL
@@ -28,7 +27,7 @@ CREATE TABLE Kurssi (
 	laitos_id INTEGER REFERENCES Laitos(id),
 	opettaja_id INTEGER REFERENCES Opettaja(id),
 	nimi varchar(50) NOT NULL,
-	kysely_käynnissä boolean DEFAULT FALSE
+	kysely_kaynnissa boolean DEFAULT FALSE
 );
 
 CREATE TABLE Ilmoittautuminen (
@@ -49,7 +48,7 @@ CREATE TABLE Kysymys (
 	id SERIAL PRIMARY KEY,
 	laitos_id INTEGER REFERENCES Laitos(id),
 	kurssi_id INTEGER REFERENCES Kurssi(id),
-	sisältö varchar(200) NOT NULL
+	sisalto varchar(200) NOT NULL
 );
 
 CREATE TABLE Vastaus (

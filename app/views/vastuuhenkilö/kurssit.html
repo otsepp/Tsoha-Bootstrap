@@ -2,7 +2,7 @@
 
 {% block content %}
 
-	<p>Hei <strong>{{käyttäjä.nimi}}</strong></p>
+	<p>Hei <strong>{{kayttaja.nimi}}</strong></p>
 
 	<a href="{{base_path}}/vastuuhenkilo/koti">Koti</a>
 	<h1 style="padding: 10px 0px 60px 0px"> Kurssikysely </h1>	
@@ -15,7 +15,7 @@
 		{% for kurssi in kurssit %}
 			<li class="list-group-item">
 				<span class="badge"><a href="{{base_path}}/kurssi/{{kurssi.id}}">näytä</a></span>
-				{% if kurssi.kysely_käynnissä %}
+				{% if kurssi.kysely_kaynnissa %}
 					<span class="badge">kysely käynnissä</span>		 
 				{% endif %}
 				{{kurssi.nimi}}

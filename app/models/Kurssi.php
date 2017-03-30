@@ -1,7 +1,7 @@
 <?php
 
 class Kurssi extends BaseModel {
-    public $id, $laitos_id, $opettaja_id, $nimi, $kysely_käynnissä;
+    public $id, $laitos_id, $opettaja_id, $nimi, $kysely_kaynnissa;
     
     public function __construct($attributes) {
         parent::__construct($attributes);
@@ -11,7 +11,7 @@ class Kurssi extends BaseModel {
         return Opettaja::etsi($this->opettaja_id);
     }
     
-    public function osallistujenMäärä() {
+    public function osallistujenMaara() {
         $query = DB::connection()->prepare('SELECT COUNT(id) FROM Ilmoittautuminen WHERE id=:id');
         $query->execute(array('id' => $this->id));
         $row = $query->fetch();
@@ -45,7 +45,7 @@ class Kurssi extends BaseModel {
                 'laitos_id' => $row['laitos_id'],
                 'opettaja_id' => $row['opettaja_id'],
                 'nimi' => $row['nimi'],
-                'kysely_käynnissä' => $row['kysely_käynnissä']
+                'kysely_kaynnissa' => $row['kysely_kaynnissa']
             ));
         }
         return $kurssi;
@@ -59,7 +59,7 @@ class Kurssi extends BaseModel {
                     'laitos_id' => $row['laitos_id'],
                     'opettaja_id' => $row['opettaja_id'],
                     'nimi' => $row['nimi'],
-                    'kysely_käynnissä' => $row['kysely_käynnissä']
+                    'kysely_kaynnissa' => $row['kysely_kaynnissa']
             ));
         }
         return $kurssit;

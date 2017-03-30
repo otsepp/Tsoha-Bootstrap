@@ -6,10 +6,10 @@ INSERT INTO Opettaja (laitos_id, nimi) VALUES (1, 'Arto');
 INSERT INTO Opettaja (laitos_id, nimi) VALUES (1, 'Jaakko');
 INSERT INTO Opettaja (laitos_id, nimi) VALUES (1, 'Juuso');
 INSERT INTO Opettaja (laitos_id, nimi) VALUES (1, 'Kari');
-INSERT INTO Vastuuhenkilö (laitos_id, nimi) VALUES (1, 'Matti');
+INSERT INTO Vastuuhenkilo (laitos_id, nimi) VALUES (1, 'Matti');
 
-INSERT INTO Kurssi (laitos_id, opettaja_id, nimi, kysely_käynnissä) VALUES (1, 1, 'Tietokantojen perusteet', TRUE);
-INSERT INTO Kurssi (laitos_id, opettaja_id, nimi, kysely_käynnissä) VALUES (1, 2, 'Tietokoneen toiminta', TRUE);
+INSERT INTO Kurssi (laitos_id, opettaja_id, nimi, kysely_kaynnissa) VALUES (1, 1, 'Tietokantojen perusteet', TRUE);
+INSERT INTO Kurssi (laitos_id, opettaja_id, nimi, kysely_kaynnissa) VALUES (1, 2, 'Tietokoneen toiminta', TRUE);
 INSERT INTO Kurssi (laitos_id, opettaja_id, nimi) VALUES (1, 1, 'Webdevving (online course)');
 INSERT INTO Kurssi (laitos_id, opettaja_id, nimi) VALUES (1, 4, 'Game Dev Course');
 
@@ -19,10 +19,10 @@ INSERT INTO Ilmoittautuminen (kurssi_id, oppilas_id) VALUES (2, 2);
 INSERT INTO Kysely (kurssi_id, oppilas_id, kommentti) VALUES (1, 1, 'Tylsä');
 INSERT INTO Kysely (kurssi_id, oppilas_id, kommentti) VALUES (2, 2, 'Opin paljon');
 
-INSERT INTO Kysymys (sisältö) VALUES ('Oliko kurssi vaikea?');
-INSERT INTO Kysymys (sisältö) VALUES ('Kuinka hauska kurssi oli?');
-INSERT INTO Kysymys (laitos_id, sisältö) VALUES (1, 'Opettiko kurssi tkt:sta?');
-INSERT INTO Kysymys (kurssi_id, sisältö) VALUES (1, 'Oliko ryhmätyö haastava?');
+INSERT INTO Kysymys (sisalto) VALUES ('Oliko kurssi vaikea?');
+INSERT INTO Kysymys (sisalto) VALUES ('Kuinka hauska kurssi oli?');
+INSERT INTO Kysymys (laitos_id, sisalto) VALUES (1, 'Opettiko kurssi tkt:sta?');
+INSERT INTO Kysymys (kurssi_id, sisalto) VALUES (1, 'Oliko ryhmätyö haastava?');
 
 INSERT INTO Vastaus(kysely_id, kysymys_id, arvosana) VALUES (1, 1, 4);
 INSERT INTO Vastaus(kysely_id, kysymys_id, arvosana) VALUES (1, 2, 3);

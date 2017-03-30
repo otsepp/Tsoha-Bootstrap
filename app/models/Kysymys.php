@@ -8,7 +8,7 @@ class Kysymys extends BaseModel {
     }
     
      public function talleta() {
-        $query = DB::connection()->prepare("INSERT INTO Kysymys (sisältö, laitos_id, kurssi_id) VALUES (:sisalto, :laitos_id, :kurssi_id) RETURNING id");
+        $query = DB::connection()->prepare("INSERT INTO Kysymys (sisalto, laitos_id, kurssi_id) VALUES (:sisalto, :laitos_id, :kurssi_id) RETURNING id");
         $query->execute(array('sisalto' => $this->sisalto, 
             'laitos_id' => $this->laitos_id,
             'kurssi_id' => $this->kurssi_id
@@ -45,7 +45,7 @@ class Kysymys extends BaseModel {
                 'id' => $row['id'],
                 'laitos_id' => $row['laitos_id'],
                 'kurssi_id' => $row['kurssi_id'],
-                'sisalto' => $row['sisältö']
+                'sisalto' => $row['sisalto']
             ));
         }
         return $kysymykset;

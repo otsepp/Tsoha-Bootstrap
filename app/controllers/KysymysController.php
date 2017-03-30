@@ -23,7 +23,6 @@ class KysymysController extends BaseController {
             'kurssi_id' => null,
             'sisalto' => $params['sisalto']
         ));
-        Kint::dump($kysymys);
         $kysymys->talleta();
         Redirect::to('/vastuuhenkilo/kysymykset', array('message' => 'Kysymys lisätty'));
     }

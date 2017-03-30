@@ -23,7 +23,7 @@ class Laitos extends BaseModel {
                     'laitos_id' => $row['laitos_id'],
                     'opettaja_id' => $row['opettaja_id'],
                     'nimi' => $row['nimi'],
-                    'kysely_käynnissä' => $row['kysely_käynnissä']
+                    'kysely_kaynnissa' => $row['kysely_kaynnissa']
             ));
         }
         return $kurssit;
