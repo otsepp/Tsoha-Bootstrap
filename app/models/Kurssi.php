@@ -5,7 +5,7 @@ class Kurssi extends BaseModel {
     
     public function __construct($attributes) {
         parent::__construct($attributes);
-        $this->validators = array('validate_string');
+        $this->validators = $this->validate_string('nimi', $this->nimi, 50);;
     }
     
     public function talleta() {

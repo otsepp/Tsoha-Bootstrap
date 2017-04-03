@@ -4,26 +4,20 @@
     // "protected"-attribuutti on käytössä vain luokan ja sen perivien luokkien sisällä
     protected $validators;
 
+    
     public function validate_nimi($nimi) {
-        if($nimi== '' || $nimi==null) {
-            return 'Nimi ei saa olla tyhjä';
-        }
-        $pituus = 20;
-        if(strlen($nimi) > $pituus) {
-            return 'Nimi on liian pitkä (max. ' . $pituus . ')';
-        }
-    }
-
-    public function validate_laitos_id($laitos_id) {
-        if ($laitos_id == null) {
-            return 'laitos_id ei saa olla tyhjä';
-        }
+        return $this->validate_string('nimi', $nimi, 20);
     }
     
-    public function validate_kurssi_id($laitos_id) {
-        if ($laitos_id == null) {
-            return 'laitos_id ei saa olla tyhjä';
+    public function validate_string($kentta_nimi, $string, $pituus) {
+        $errors = array();
+        if ($string == '' || $string == null)  {
+            $errors[] = $kentta_nimi . ' ei saa olla tyhjä';
         }
+        if (strlen($string) > $pituus) {
+            $errors[] = $kentta_nimi . ' on liian pitkä (max. ' . $pituus . ')';
+        }
+        return $errors;
     }
     
     public function __construct($attributes = null){

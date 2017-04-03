@@ -5,23 +5,7 @@ class Kysymys extends BaseModel {
     
     public function __construct($attributes) {
         parent::__construct($attributes);
-        $this->validators = $this->create_validators();
-    }
-    
-    public function create_validators() {
-        $validators = array();
-        $validators[] = $this->validate_sisalto();
-        return $validators;
-    }
-    
-    public function validate_sisalto() {
-        if($this->sisalto == '' || $this->sisalto ==null) {
-            return 'sisalto ei saa olla tyhjä';
-        }
-        $pituus = 50;
-        if(strlen($nimi) > $pituus) {
-            return 'sisalto on liian pitkä (max. ' . $pituus . ')';
-        }
+        $this->validators = $this->validate_string('sisalto', $this->sisalto, 50);
     }
     
      public function talleta() {

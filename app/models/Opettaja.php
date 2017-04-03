@@ -5,13 +5,7 @@ class Opettaja extends BaseModel {
     
     public function __construct($attributes) {
         parent::__construct($attributes);
-        $this->validators = $this->create_validators();
-    }
-   
-    public function create_validators() {
-        $validators = array();
-        $validators[] = $this->validate_id($kentta_nimi, $id);
-        return $validators;
+        $this->validators = $this->validate_nimi($this->nimi);
     }
     
     public function talleta() {

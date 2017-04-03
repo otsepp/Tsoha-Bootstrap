@@ -13,12 +13,19 @@ class HelloWorldController extends BaseController{
 
     public static function sandbox(){
         //Kint::dump($varname);
-        $kysymys = new Kysymys(array(
+        $opettaja = new Opettaja(array(
             'id' => 1,
-            'laitos_id' => 1,
-            'kurssi_id' => null,
-            'sisalto' => 'Oliko kurssi vaikea?'
+            'laitos_id' => 0,
+            'nimi' => 'Kaarle kustaa xvi vaasa'
         ));
+        $kurssi = new Kurssi(array(
+           'nimi' => 'Apart from counting words and characters, oasdasagaga' 
+        ));
+        $kysymys = new Kysymys(array(
+           'sisalto' => '' 
+        ));
+        Kint::dump($opettaja->errors());
+        Kint::dump($kurssi->errors());
         Kint::dump($kysymys->errors());
     }
     
