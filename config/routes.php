@@ -32,14 +32,6 @@
       VastuuhenkiloController::opettajat();
   });
   
-  $routes->get('/vastuuhenkilo/opettajat/uusi', function() {
-      VastuuhenkiloController::uusiOpettaja();
-  });
-  
-  $routes->post('/vastuuhenkilo/uusi_opettaja', function() {
-      OpettajaController::luoOpettaja();
-  });
-  
   $routes->get('/vastuuhenkilo/kysymykset', function() {
       VastuuhenkiloController::kysymykset();
   });
