@@ -16,6 +16,15 @@ class VastuuhenkiloController extends BaseController {
             ));
     }
     
+    public static function uusiKurssi() {
+        $kayttaja = Vastuuhenkilo::getTestiVH();
+        $opettajat = Opettaja::laitoksenOpettajat($kayttaja->laitos_id);
+        View::make('vastuuhenkilö/uusi_kurssi.html', array(
+            'kayttaja' => $kayttaja,
+            'opettajat' => $opettajat
+        ));
+    }
+    
     public static function opettajat() {
         $kayttaja = Vastuuhenkilo::getTestiVH();
         
@@ -24,6 +33,14 @@ class VastuuhenkiloController extends BaseController {
         View::make('vastuuhenkilö/opettajat.html', array(
             'kayttaja' => $kayttaja,
             'opettajat' => $opettajat
+        ));
+        
+    }
+    
+    public static function uusiOpettaja() {
+        $kayttaja = Vastuuhenkilo::getTestiVH();
+        View::make('vastuuhenkilö/uusi_opettaja.html', array(
+            'kayttaja' => $kayttaja
         ));
     }
     

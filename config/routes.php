@@ -20,8 +20,24 @@
       VastuuhenkiloController::kurssit();
   });
   
+  $routes->get('/vastuuhenkilo/kurssit/uusi', function() {
+      VastuuhenkiloController::uusiKurssi();
+  });
+  
+  $routes->post('/vastuuhenkilo/uusi_kurssi', function() {
+      KurssiController::luoKurssi();
+  });
+  
   $routes->get('/vastuuhenkilo/opettajat', function() {
       VastuuhenkiloController::opettajat();
+  });
+  
+  $routes->get('/vastuuhenkilo/opettajat/uusi', function() {
+      VastuuhenkiloController::uusiOpettaja();
+  });
+  
+  $routes->post('/vastuuhenkilo/uusi_opettaja', function() {
+      OpettajaController::luoOpettaja();
   });
   
   $routes->get('/vastuuhenkilo/kysymykset', function() {

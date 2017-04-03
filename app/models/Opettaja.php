@@ -7,6 +7,15 @@ class Opettaja extends BaseModel {
         parent::__construct($attributes);
     }
    
+    public function talleta() {
+        $query = DB::connection()->prepare('INSERT INTO Opettaja (laitos_id, nimi) VALUES (:laitos_id, :nimi) RETURNING id');
+        $query->execute(array(
+            'laitos_id' => $this->laitos_id,
+            'nimi' => $this->nimi
+        ));
+        $row = $query->fetch();
+        $this->id = $row['id'];
+    }
     
     public static function laitoksenOpettajat($laitos_id) {
         $query = DB::connection()->prepare('SELECT * FROM Opettaja WHERE laitos_id=:id');

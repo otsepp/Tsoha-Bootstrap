@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+	<p>Hei <strong>{{kayttaja.nimi}}</strong></p>
+
+	<a href="{{base_path}}/vastuuhenkilo/koti">Koti</a>
+	<h1 style="padding: 10px 0px 60px 0px"> Kurssikysely </h1>	
+
+	<h3>Lisää opettaja</h3>
+	
+	<form method="post" action="{{base_path}}/vastuuhenkilo/uusi_opettaja">
+		<div class="form-group">
+			<label>Nimi</label>
+			<input name="nimi" type="text" class="form-control">
+			<input name="laitos_id" type="hidden" value="{{kayttaja.laitos_id}}">
+		</div>
+		<div class="form-group">
+			<button type="submit" class="btn btn-success">Lisää</button>
+		</div>
+	</form>
+	
+
+{% endblock %}

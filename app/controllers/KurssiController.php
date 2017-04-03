@@ -2,6 +2,18 @@
 
 class KurssiController extends BaseController{
     
+    public static function luoKurssi() {
+        $params = $_POST;
+            
+        $kurssi = new Kurssi(array(
+            'laitos_id' => $params['laitos_id'],
+            'opettaja_id' => $params['opettaja_id'],
+            'nimi' => $params['nimi']
+        ));
+        $kurssi->talleta();
+        Redirect::to('/vastuuhenkilo/kurssit', array('message' => 'Kurssi lisätty'));
+    }
+    
     public static function näytä($id) {
         $kurssi = Kurssi::etsi($id);
         

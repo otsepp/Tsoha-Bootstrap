@@ -3,6 +3,18 @@
 class Kurssi extends BaseModel {
     public $id, $laitos_id, $opettaja_id, $nimi, $kysely_kaynnissa;
     
+    public function talleta() {
+        $query = DB::connection()->prepare('INSERT INTO Kurssi (laitos_id, opettaja_id, nimi) VALUES (:laitos_id, :opettaja_id, :nimi) RETURNING id');
+        $query->execute(array(
+            'laitos_id' => $this->laitos_id,
+            'opettaja_id' => $this->opettaja_id,
+            'nimi' => $this->nimi
+        ));
+        $row = $query->fetch();
+        $this->id = $row['id'];
+        
+    }
+
     public function __construct($attributes) {
         parent::__construct($attributes);
     }
