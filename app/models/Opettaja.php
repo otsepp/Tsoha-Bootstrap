@@ -5,8 +5,15 @@ class Opettaja extends BaseModel {
     
     public function __construct($attributes) {
         parent::__construct($attributes);
+        $this->validators = $this->create_validators();
     }
    
+    public function create_validators() {
+        $validators = array();
+        $validators[] = $this->validate_id($kentta_nimi, $id);
+        return $validators;
+    }
+    
     public function talleta() {
         $query = DB::connection()->prepare('INSERT INTO Opettaja (laitos_id, nimi) VALUES (:laitos_id, :nimi) RETURNING id');
         $query->execute(array(

@@ -3,6 +3,11 @@
 class Kurssi extends BaseModel {
     public $id, $laitos_id, $opettaja_id, $nimi, $kysely_kaynnissa;
     
+    public function __construct($attributes) {
+        parent::__construct($attributes);
+        $this->validators = array('validate_string');
+    }
+    
     public function talleta() {
         $query = DB::connection()->prepare('INSERT INTO Kurssi (laitos_id, opettaja_id, nimi) VALUES (:laitos_id, :opettaja_id, :nimi) RETURNING id');
         $query->execute(array(
@@ -15,10 +20,6 @@ class Kurssi extends BaseModel {
         
     }
 
-    public function __construct($attributes) {
-        parent::__construct($attributes);
-    }
-    
     public function haeOpettaja() {
         return Opettaja::etsi($this->opettaja_id);
     }

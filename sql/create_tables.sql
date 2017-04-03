@@ -1,6 +1,6 @@
 CREATE TABLE Laitos (
 	id SERIAL PRIMARY KEY,
-	nimi varchar(50) NOT NULL
+	nimi varchar(20) NOT NULL
 );
 
 CREATE TABLE Oppilas (
@@ -12,13 +12,13 @@ CREATE TABLE Oppilas (
 CREATE TABLE Opettaja (
 	id SERIAL PRIMARY KEY,
 	laitos_id INTEGER REFERENCES Laitos(id),
-	nimi varchar(50) NOT NULL
+	nimi varchar(20) NOT NULL
 );
 
 CREATE TABLE Vastuuhenkilo (
 	id SERIAL PRIMARY KEY,
 	laitos_id INTEGER REFERENCES Laitos(id),
-	nimi varchar(50) NOT NULL
+	nimi varchar(20) NOT NULL
 );
 
 
@@ -48,7 +48,7 @@ CREATE TABLE Kysymys (
 	id SERIAL PRIMARY KEY,
 	laitos_id INTEGER REFERENCES Laitos(id),
 	kurssi_id INTEGER REFERENCES Kurssi(id),
-	sisalto varchar(200) NOT NULL
+	sisalto varchar(50) NOT NULL
 );
 
 CREATE TABLE Vastaus (

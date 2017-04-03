@@ -12,8 +12,14 @@ class HelloWorldController extends BaseController{
     }
 
     public static function sandbox(){
-        $yleiset = Kysymys::etsiYleisetKysymykset();
-        Kint::dump($yleiset);
+        //Kint::dump($varname);
+        $kysymys = new Kysymys(array(
+            'id' => 1,
+            'laitos_id' => 1,
+            'kurssi_id' => null,
+            'sisalto' => 'Oliko kurssi vaikea?'
+        ));
+        Kint::dump($kysymys->errors());
     }
     
     //static sivu OPPILAS
