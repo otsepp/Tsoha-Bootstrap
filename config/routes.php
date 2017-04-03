@@ -16,6 +16,7 @@
       VastuuhenkiloController::koti();
   });
   
+  
   $routes->get('/vastuuhenkilo/kurssit', function() {
       VastuuhenkiloController::kurssit();
   });
@@ -26,6 +27,14 @@
   
   $routes->post('/vastuuhenkilo/uusi_kurssi', function() {
       KurssiController::luoKurssi();
+  });
+  
+  $routes->get('/vastuuhenkilo/muokkaa_kurssia/:id', function($id) {
+      VastuuhenkiloController::muokkaaKurssia($id);
+  });
+  
+  $routes->post('/vastuuhenkilo/muokkaa_kurssia/:id', function($id) {
+      KurssiController::paivita($id);
   });
   
   $routes->get('/vastuuhenkilo/opettajat', function() {
@@ -40,7 +49,7 @@
       VastuuhenkiloController::uusiKysymys();
   });
   
-  $routes->post('/uusi_yleinen_kysymys', function() {
+  $routes->post('/uusi_yleinen_kysymys/kurssi/:id', function() {
       KysymysController::luoYleinenKysymys();
   });
   

@@ -19,6 +19,17 @@ class Kurssi extends BaseModel {
         $this->id = $row['id'];
         
     }
+    
+    public function paivita() {
+        $query = DB::connection()->prepare('UPDATE Kurssi SET nimi=:nimi, opettaja_id=:opettaja_id, kysely_kaynnissa=:kysely_kaynnissa WHERE id=:id');
+        $query->execute(array(
+            'nimi' => $this->nimi,
+            'opettaja_id' => $this->opettaja_id,
+            'kysely_kaynnissa' => $this->kysely_kaynnissa,
+            'id' => $this->id
+        ));
+//        $row = $query->fetch();
+    }
 
     public function haeOpettaja() {
         return Opettaja::etsi($this->opettaja_id);

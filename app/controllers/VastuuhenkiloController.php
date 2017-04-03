@@ -25,6 +25,21 @@ class VastuuhenkiloController extends BaseController {
         ));
     }
     
+    public static function muokkaaKurssia($id) {
+        $kayttaja = Vastuuhenkilo::getTestiVH();
+        
+        $kurssi = Kurssi::etsi($id);
+        
+        Kint::dump($kurssi);
+        
+        $opettajat = Opettaja::laitoksenOpettajat($kayttaja->laitos_id);
+        View::make('vastuuhenkilö/kurssi_muokkaa.html', array(
+            'kayttaja' => $kayttaja,
+            'kurssi' => $kurssi,
+            'opettajat' =>$opettajat
+        ));
+    }
+    
     public static function opettajat() {
         $kayttaja = Vastuuhenkilo::getTestiVH();
         

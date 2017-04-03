@@ -10,7 +10,9 @@
 	<p><strong>Opettaja: </strong> {{opettaja.nimi}}</p>
 	<p><strong>Osallistujia: </strong>{{osallistujienMaara}}</p>
 
-
+	{% if kurssi.kysely_kaynnissa == false %}
+		<a href="{{base_path}}/vastuuhenkilo/muokkaa_kurssia/{{kurssi.id}}" class= "btn btn-warning">Muokkaa kurssia</a>
+	{% endif %}
 	<!--
 	<a href ="/tsoha/vastuuhenkilo_tikape_raportti" class="btn btn-primary">Näytä kyselyraportti</a><br><br>
 	<a href ="/tsoha/vastuuhenkilo_tikape_muokkaa" class="btn btn-warning">Muokkaa kurssia</a>
