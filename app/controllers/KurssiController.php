@@ -10,8 +10,20 @@ class KurssiController extends BaseController{
             'opettaja_id' => $params['opettaja_id'],
             'nimi' => $params['nimi']
         ));
-        $kurssi->talleta();
-        Redirect::to('/vastuuhenkilo/kurssit', array('message' => 'Kurssi lisätty'));
+        $errors = $kurssi->errors();
+        if (count($errors) == 0) {
+            $kurssi.talleta();
+            Redirect::to('/vastuuhenkilo/kurssit', array('message' => 'Kurssi lisätty'));
+        } else {
+             $kayttaja = Vastuuhenkilo::getTestiVH();
+             $opettajat = Opettaja::laitoksenOpettajat($kayttaja->laitos_id);
+             View::make('vastuuhenkilö/uusi_kurssi.html', array(
+                'kayttaja' => $kayttaja,
+                'opettajat' => $opettajat,
+                 'errors' => $errors
+            ));
+        }
+        
     }
     
     public static function näytä($id) {

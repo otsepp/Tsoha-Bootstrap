@@ -12,8 +12,8 @@ class VastuuhenkiloController extends BaseController {
         $kayttaja = Vastuuhenkilo::getTestiVH();
         View::make('vastuuhenkilö/kurssit.html', array(
             'kayttaja' => $kayttaja,
-            'kurssit' => Kurssi::laitoksenKurssit($kayttaja->laitos_id)   
-            ));
+            'kurssit' => Kurssi::laitoksenKurssit($kayttaja->laitos_id)
+        ));
     }
     
     public static function uusiKurssi() {
