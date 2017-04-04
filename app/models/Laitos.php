@@ -7,9 +7,6 @@ class Laitos extends BaseModel {
         parent::__construct($attributes);
     }
     
-    
-    
-    //ei tarvitse ainakaan nyt
     public static function kurssit($kurssi_id) {
         $query = DB::connection()->prepare('SELECT * FROM Kurssi WHERE laitos_id=:id');
         $query->execute(array('id' => $kurssi_id));

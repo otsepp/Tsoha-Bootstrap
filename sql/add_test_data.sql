@@ -8,8 +8,8 @@ INSERT INTO Opettaja (laitos_id, nimi) VALUES (1, 'Juuso');
 INSERT INTO Opettaja (laitos_id, nimi) VALUES (1, 'Kari');
 INSERT INTO Vastuuhenkilo (laitos_id, nimi) VALUES (1, 'Matti');
 
-INSERT INTO Kurssi (laitos_id, opettaja_id, nimi, kysely_kaynnissa) VALUES (1, 1, 'Tietokantojen perusteet', TRUE);
-INSERT INTO Kurssi (laitos_id, opettaja_id, nimi, kysely_kaynnissa) VALUES (1, 2, 'Tietokoneen toiminta', TRUE);
+INSERT INTO Kurssi (laitos_id, opettaja_id, nimi, kysely_kaynnissa) VALUES (1, 1, 'Tietokantojen perusteet', 1);
+INSERT INTO Kurssi (laitos_id, opettaja_id, nimi, kysely_kaynnissa) VALUES (1, 2, 'Tietokoneen toiminta', 1);
 INSERT INTO Kurssi (laitos_id, opettaja_id, nimi) VALUES (1, 1, 'Webdevving (online course)');
 INSERT INTO Kurssi (laitos_id, opettaja_id, nimi) VALUES (1, 4, 'Game Dev Course');
 

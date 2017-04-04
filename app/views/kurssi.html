@@ -10,7 +10,7 @@
 	<p><strong>Opettaja: </strong> {{opettaja.nimi}}</p>
 	<p><strong>Osallistujia: </strong>{{osallistujienMaara}}</p>
 
-	{% if kurssi.kysely_kaynnissa == false %}
+	{% if kurssi.kysely_kaynnissa == 0%}
 		<a href="{{base_path}}/vastuuhenkilo/muokkaa_kurssia/{{kurssi.id}}" class= "btn btn-warning">Muokkaa kurssia</a>
 	{% endif %}
 	<!--

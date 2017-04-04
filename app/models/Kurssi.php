@@ -28,7 +28,6 @@ class Kurssi extends BaseModel {
             'kysely_kaynnissa' => $this->kysely_kaynnissa,
             'id' => $this->id
         ));
-//        $row = $query->fetch();
     }
 
     public function haeOpettaja() {

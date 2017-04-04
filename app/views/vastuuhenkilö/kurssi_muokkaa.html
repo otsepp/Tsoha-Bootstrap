@@ -28,6 +28,7 @@
 					<option value="{{opettaja.id}}">{{opettaja.nimi}}</option>
 				{% endfor %}
 			</select> 
+			<input name="laitos_id" type="hidden" value="{{kurssi.laitos_id}}">
 			<input name="kysely_kaynnissa" type="hidden" value="{{kurssi.kysely_kaynnissa}}">
 		</div>
 		<div class="form-group">

@@ -2,6 +2,8 @@
 
 {% block content %}
 
+	{% import "macros/forms.html" as forms %}
+
 	<p>Hei <strong>{{kayttaja.nimi}}</strong></p>
 
 	<a href="{{base_path}}/vastuuhenkilo/koti">Koti</a>
@@ -13,20 +15,20 @@
 	<ul class="list-group">
 		{% for kysymys in yleisetKysymykset %}
 			<li class="list-group-item">
-				<!--<span class="badge"><a href="">muokkaa</a></span>-->
-				<!--<span class="badge"><a href="">poista</a></span>-->
+				{{forms.destroy_button("#{base_path}/vastuuhenkilo/kysymykset/poista/#{kysymys.id}")}}
 				{{kysymys.sisalto}}
 			</li>
 		{% endfor %}
 	</ul>
 	<br><br>
 
+	
+
 	<label>Laitoskohtaiset kysymykset</label>
 	<ul class="list-group">
 		{% for kysymys in laitosKysymykset %}
 			<li class="list-group-item">
-				<!--<span class="badge"><a href="">muokkaa</a></span>-->
-				<!--<span class="badge"><a href="">poista</a></span>-->
+				{{forms.destroy_button("#{base_path}/vastuuhenkilo/kysymykset/poista/#{kysymys.id}")}}
 				{{kysymys.sisalto}}		
 			</li>
 		{% endfor %}

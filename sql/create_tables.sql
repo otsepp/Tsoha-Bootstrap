@@ -1,6 +1,6 @@
 CREATE TABLE Laitos (
 	id SERIAL PRIMARY KEY,
-	nimi varchar(20) NOT NULL
+	nimi varchar(50) NOT NULL
 );
 
 CREATE TABLE Oppilas (
@@ -27,7 +27,7 @@ CREATE TABLE Kurssi (
 	laitos_id INTEGER REFERENCES Laitos(id),
 	opettaja_id INTEGER REFERENCES Opettaja(id),
 	nimi varchar(50) NOT NULL,
-	kysely_kaynnissa boolean DEFAULT FALSE
+	kysely_kaynnissa integer DEFAULT 0
 );
 
 CREATE TABLE Ilmoittautuminen (

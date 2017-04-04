@@ -13,20 +13,8 @@ class HelloWorldController extends BaseController{
 
     public static function sandbox(){
         //Kint::dump($varname);
-        $opettaja = new Opettaja(array(
-            'id' => 1,
-            'laitos_id' => 0,
-            'nimi' => 'Kaarle kustaa xvi vaasa'
-        ));
-        $kurssi = new Kurssi(array(
-           'nimi' => 'Apart from counting words and characters, oasdasagaga' 
-        ));
-        $kysymys = new Kysymys(array(
-           'sisalto' => '' 
-        ));
-        Kint::dump($opettaja->errors());
-        Kint::dump($kurssi->errors());
-        Kint::dump($kysymys->errors());
+        $vastaukset = Vastaus::kysymyksen_vastaukset(3);
+        Kint::dump($vastaukset);
     }
     
     //static sivu OPPILAS

@@ -15,13 +15,24 @@ class KysymysController extends BaseController {
     //ei valmis
      public static function luoLaitosKysymys() {
         $params = $_POST;
-        
         $kysymys = new Kysymys(array(
             'laitos_id' => $params['laitos_id'],
             'kurssi_id' => null,
             'sisalto' => $params['sisalto']
         ));
         KysymysController::tarkista_virheet($kysymys);
+    }
+    
+    public static function poista($id) {
+        $kysymys = new Kysymys(array(
+           'id' => $id 
+        ));
+        $vastaukset = Vastaus::kysymyksen_vastaukset($kysymys->id);
+        foreach($vastaukset as $vastaus) {
+            $vastaus->poista($vastaus->kysymys_id);
+        }
+        $kysymys->poista();
+        Redirect::to('/vastuuhenkilo/kysymykset', array('message' => 'Kysymys poistettu'));
     }
     
    public static function tarkista_virheet($kysymys) {

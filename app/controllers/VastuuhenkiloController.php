@@ -29,9 +29,6 @@ class VastuuhenkiloController extends BaseController {
         $kayttaja = Vastuuhenkilo::getTestiVH();
         
         $kurssi = Kurssi::etsi($id);
-        
-        Kint::dump($kurssi);
-        
         $opettajat = Opettaja::laitoksenOpettajat($kayttaja->laitos_id);
         View::make('vastuuhenkilö/kurssi_muokkaa.html', array(
             'kayttaja' => $kayttaja,
@@ -70,4 +67,9 @@ class VastuuhenkiloController extends BaseController {
             'kayttaja' => $kayttaja
         ));
     }
+    
+    public static function poistaKysymys() {
+        
+    }
+    
 }

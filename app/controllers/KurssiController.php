@@ -12,7 +12,7 @@ class KurssiController extends BaseController{
         ));
         $errors = $kurssi->errors();
         if (count($errors) == 0) {
-            $kurssi.talleta();
+            $kurssi->talleta();
             Redirect::to('/vastuuhenkilo/kurssit', array('message' => 'Kurssi lisätty'));
         } else {
              $kayttaja = Vastuuhenkilo::getTestiVH();
@@ -41,7 +41,7 @@ class KurssiController extends BaseController{
             Redirect::to('/vastuuhenkilo/kurssit', array('message' => 'Kurssia muokattiin onnistuneesti'));
         } else {
             $kayttaja = Vastuuhenkilo::getTestiVH();
-            
+
             $kurssi = Kurssi::etsi($id);
             View::make('vastuuhenkilö/kurssi_muokkaa.html', array(
                 'kayttaja' => $kayttaja,

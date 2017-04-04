@@ -41,21 +41,27 @@
       VastuuhenkiloController::opettajat();
   });
   
+  
   $routes->get('/vastuuhenkilo/kysymykset', function() {
       VastuuhenkiloController::kysymykset();
+  });
+  
+  $routes->post('/vastuuhenkilo/kysymykset/poista/:id', function($id) {
+      KysymysController::poista($id);
   });
   
   $routes->get('/vastuuhenkilo/kysymykset/uusi', function() {
       VastuuhenkiloController::uusiKysymys();
   });
   
-  $routes->post('/uusi_yleinen_kysymys/kurssi/:id', function() {
+  $routes->post('/uusi_yleinen_kysymys', function() {
       KysymysController::luoYleinenKysymys();
   });
   
   $routes->post('/uusi_laitoskysymys', function() {
       KysymysController::luoLaitosKysymys();
   });
+  
   
   $routes->get('/kurssi/:id', function($id) {      
       KurssiController::näytä($id);
