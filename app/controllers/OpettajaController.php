@@ -2,24 +2,24 @@
 
 class OpettajaController extends BaseController {
     
-//    public static function luoOpettaja() {
-//        $params = $_POST;
-//        $opettaja = new Opettaja(array(
-//            'laitos_id' => $params['laitos_id'],
-//            'nimi' => $params['nimi']
-//        ));
-//        $errors = $opettaja->errors();
-//        if(count($errors) == 0) {
-//           $opettaja->talleta();
-//            Redirect::to('/vastuuhenkilo/opettajat', array('message' => 'Kurssi lisätty'));
-//        } else {
-//            $kayttaja = Vastuuhenkilo::getTestiVH();
-//            View::make('vastuuhenkilö/uusi_opettaja.html', array(
-//                'kayttaja' => $kayttaja,
-//                'errors' => $errors
-//                ));
-//        }
-//    }
+    public static function luoOpettaja() {
+        $params = $_POST;
+        $opettaja = new Opettaja(array(
+            'laitos_id' => $params['laitos_id'],
+            'nimi' => $params['nimi']
+        ));
+        $errors = $opettaja->errors();
+        if(count($errors) == 0) {
+           $opettaja->talleta();
+            Redirect::to('/vastuuhenkilo/opettajat', array('message' => 'Kurssi lisätty'));
+        } else {
+            $kayttaja = Vastuuhenkilo::getTestiVH();
+            View::make('vastuuhenkilö/uusi_opettaja.html', array(
+                'kayttaja' => $kayttaja,
+                'errors' => $errors
+                ));
+        }
+    }
     
     public static function näytä($id) {
         $kayttaja = Vastuuhenkilo::getTestiVH();

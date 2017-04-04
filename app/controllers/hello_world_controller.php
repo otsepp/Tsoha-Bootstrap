@@ -7,7 +7,13 @@ class HelloWorldController extends BaseController{
       View::make('home.html');
     }
     
+    public static function luo_kayttaja() {
+        View::make('luo_kayttaja.html');
+    }
+    
     public static function kirjautuminen() {
+        
+        
         View::make('kirjautuminen.html');
     }
 

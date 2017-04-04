@@ -8,6 +8,10 @@
     HelloWorldController::sandbox();
   });
   
+  $routes->get('/luo_kayttaja', function() {
+      HelloWorldController::luo_kayttaja();
+  });
+  
   $routes->get('/kirjautuminen', function() {
       HelloWorldController::kirjautuminen();
   });
