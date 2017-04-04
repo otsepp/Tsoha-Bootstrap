@@ -1,10 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
 
-	<p>Hei <strong>{{kayttaja.nimi}}</strong></p>
-
-	<a href="{{base_path}}/vastuuhenkilo/koti">Koti</a>
-	<h1 style="padding: 10px 0px 60px 0px"> Kurssikysely </h1>	
+	{% import "macros/menu.html" as menu %}
+	{{menu.menu("#{kayttaja.nimi}", "#{base_path}/vastuuhenkilo/koti")}}
 	
 	<h3>{{kurssi.nimi}}</h3>
 	<p><strong>Opettaja: </strong> {{opettaja.nimi}}</p>
@@ -18,6 +16,5 @@
 	<a href ="/tsoha/vastuuhenkilo_tikape_muokkaa" class="btn btn-warning">Muokkaa kurssia</a>
 	<button class="btn btn-danger">Poista kurssi</button>
 	-->
-
 
 {% endblock %}

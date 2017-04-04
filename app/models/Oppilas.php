@@ -7,6 +7,19 @@ class Oppilas extends BaseModel {
         parent::__construct($attributes);
     }
     
+    public static function etsi($id) {
+        $query = DB::connection()->prepare('SELECT * FROM Oppilas WHERE id=:id LIMIT 1');
+        $query->execute(array('id' => $id));
+        $row = $query->fetch();
+        
+        $oppilas = NULL;
+        
+        if ($row) {
+            $oppilas = self::luo_olio($row);
+        }
+        return $oppilas;
+    }
+    
     public static function kaikki() {
         $query = DB::connection()->prepare('SELECT * FROM Oppilas');
         $query->execute();
@@ -15,13 +28,17 @@ class Oppilas extends BaseModel {
         $oppilaat = array();
         
         foreach($rows as $row) {
-            $oppilaat[] = new Oppilas(array(
-                'id' => $row['id'],
-                'laitos_id' => $row['laitos_id'],
-                'nimi' => $row['nimi']
-            ));
+            $oppilaat[] = self::luo_olio($row);
         }
         return $oppilaat;
+    }
+    
+    private static function luo_olio($row) {
+        return new Oppilas(array(
+            'id' => $row['id'],
+            'laitos_id' => $row['laitos_id'],
+            'nimi' => $row['nimi']
+        ));
     }
     
 }

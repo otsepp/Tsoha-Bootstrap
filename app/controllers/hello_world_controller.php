@@ -7,20 +7,19 @@ class HelloWorldController extends BaseController{
       View::make('home.html');
     }
     
-    public static function luo_kayttaja() {
-        View::make('luo_kayttaja.html');
-    }
-    
-    public static function kirjautuminen() {
-        
-        
-        View::make('kirjautuminen.html');
+    public static function aloitus() {
+        View::make('aloitus.html');
     }
 
     public static function sandbox(){
         //Kint::dump($varname);
-        $vastaukset = Vastaus::kysymyksen_vastaukset(3);
-        Kint::dump($vastaukset);
+        $matti = Vastuuhenkilo::authenticate('Matti', 'ssana');
+        
+        $_SESSION['kayttaja'] = $matti->id;
+        $_SESSION['vastuuhenkilo_status'] = 1;
+       
+        Kint::dump(BaseController::get_user_logged_in());
+        Kint::dump($_SESSION);
     }
     
     //static sivu OPPILAS

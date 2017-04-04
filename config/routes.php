@@ -12,14 +12,21 @@
       HelloWorldController::luo_kayttaja();
   });
   
-  $routes->get('/kirjautuminen', function() {
-      HelloWorldController::kirjautuminen();
+  $routes->get('/aloitus', function() {
+      HelloWorldController::aloitus();
   });
   
   $routes->get('/vastuuhenkilo/koti', function() {
       VastuuhenkiloController::koti();
   });
   
+  $routes->get('/vastuuhenkilo/login', function() {
+      VastuuhenkiloController::login();
+  });
+  
+  $routes->post('/vastuuhenkilo/login', function() {
+      VastuuhenkiloController::handle_login();
+  });
   
   $routes->get('/vastuuhenkilo/kurssit', function() {
       VastuuhenkiloController::kurssit();

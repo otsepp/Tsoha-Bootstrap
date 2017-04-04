@@ -7,6 +7,22 @@ class Laitos extends BaseModel {
         parent::__construct($attributes);
     }
     
+    public static function kaikki() {
+        $query = DB::connection()->prepare('SELECT * FROM Laitos');
+        $query->execute();
+        $rows = $query->fetchAll();
+
+        $laitokset = array();
+        
+        foreach($rows as $row) {
+            $laitokset[] = new Laitos(array(
+               'id' => $row['id'],
+               'nimi' => $row['nimi']
+            ));
+        }
+        return $laitokset;
+    }
+    
     public static function kurssit($kurssi_id) {
         $query = DB::connection()->prepare('SELECT * FROM Kurssi WHERE laitos_id=:id');
         $query->execute(array('id' => $kurssi_id));
@@ -41,4 +57,5 @@ class Laitos extends BaseModel {
         }
         return $laitos;
     }
+    
 }

@@ -6,19 +6,22 @@ CREATE TABLE Laitos (
 CREATE TABLE Oppilas (
 	id SERIAL PRIMARY KEY,
 	laitos_id INTEGER REFERENCES Laitos(id),
-	nimi varchar(50) NOT NULL
+	nimi varchar(20) NOT NULL,
+	salasana varchar(10) NOT NULL
 );
 
 CREATE TABLE Opettaja (
 	id SERIAL PRIMARY KEY,
 	laitos_id INTEGER REFERENCES Laitos(id),
-	nimi varchar(20) NOT NULL
+	nimi varchar(20) NOT NULL,
+	salasana varchar(10) NOT NULL
 );
 
 CREATE TABLE Vastuuhenkilo (
 	id SERIAL PRIMARY KEY,
 	laitos_id INTEGER REFERENCES Laitos(id),
-	nimi varchar(20) NOT NULL
+	nimi varchar(20) NOT NULL,
+	salasana varchar(10) NOT NULL
 );
 
 
