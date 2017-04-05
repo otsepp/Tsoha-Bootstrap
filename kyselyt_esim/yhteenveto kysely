@@ -1,0 +1,7 @@
+SELECT nimi, sisalto, ROUND(AVG(arvosana), 1)
+	FROM Vastaus 
+		JOIN Kysely ON kysely_id = Kysely.id
+		JOIN Kurssi on kurssi_id = Kurssi.id
+		JOIN Kysymys ON kysymys_id = Kysymys.id
+	GROUP BY nimi, sisalto
+	ORDER BY nimi
