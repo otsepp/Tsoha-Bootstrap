@@ -5,7 +5,6 @@
     public static function get_user_logged_in(){
       // Toteuta kirjautuneen käyttäjän haku tähän
         $kayttaja = null;
-        
         if (isset($_SESSION['kayttaja'])) {
             $kayttaja_id = $_SESSION['kayttaja'];
             
@@ -25,4 +24,18 @@
       // Jos käyttäjä ei ole kirjautunut sisään, ohjaa hänet toiselle sivulle (esim. kirjautumissivulle).
     }
 
+    public static function kayttaja_on_vastuuhenkilo() {
+        if (isset($_SESSION['vastuuhenkilo_status'])) {
+            return true;
+        }
+        return false;
+    }
+    
+    public static function kayttaja_on_opettaja() {
+        if (isset($_SESSION['opettaja_status'])) {
+            return true;
+        }
+        return false;
+    }
+    
   }

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+
+	{% import "macros/menu.html" as menu %}
+	{{menu.menu("#{kayttaja.nimi}", "#{base_path}/vastuuhenkilo/koti")}}
+	
+	<h3>Kyselyraportti: {{kurssi.nimi}}</h3>
+
+	
+		{% for tulos in tulokset %}
+			<div class="panel panel-default">
+				 <div class="panel-heading">{{tulos['sisalto']}}</div>
+				 <div class="panel-body">
+		    		  	{{tulos['keskiarvo']}}
+		  		</div>
+			</div>	
+		{% endfor %}
+	
+
+	{% if kommentit %}
+		<div class="panel panel-default">
+			  <div class="panel-heading"> Kommentteja</div>
+			  <div class="panel-body">
+	    		  	<ul class="list-group">
+					{% for kommentti in kommentit %}
+					  <li class="list-group-item">{{kommentti}}</li>
+					{% endfor %}
+				</ul>
+	  		</div>
+		</div>
+	{% endif %}
+
+	{% if vastaajat %}
+		<p>Vastaajia: {{vastaajat}}</p>
+	{% endif %}
+
+{% endblock %}

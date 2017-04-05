@@ -28,6 +28,10 @@
       VastuuhenkiloController::handle_login();
   });
   
+  $routes->get('/vastuuhenkilo/kurssit/yhteenveto', function() {
+      VastuuhenkiloController::kurssitYhteenveto();
+  });
+  
   $routes->get('/vastuuhenkilo/kurssit', function() {
       VastuuhenkiloController::kurssit();
   });
@@ -76,6 +80,10 @@
   
   $routes->get('/kurssi/:id', function($id) {      
       KurssiController::näytä($id);
+  });
+  
+  $routes->get('/kurssi/:id/raportti', function($id) {      
+      KurssiController::raportti($id);
   });
   
   $routes->get('/opettaja/:id', function($id) {

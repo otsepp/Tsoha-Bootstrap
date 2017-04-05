@@ -29,13 +29,13 @@ class Kurssi extends BaseModel {
             'id' => $this->id
         ));
     }
-
+    
     public function haeOpettaja() {
         return Opettaja::etsi($this->opettaja_id);
     }
     
     public function osallistujenMaara() {
-        $query = DB::connection()->prepare('SELECT COUNT(id) FROM Ilmoittautuminen WHERE id=:id');
+        $query = DB::connection()->prepare('SELECT COUNT(id) FROM Ilmoittautuminen WHERE kurssi_id=:id');
         $query->execute(array('id' => $this->id));
         $row = $query->fetch();
         return $row['count'];

@@ -8,13 +8,16 @@
 	<p><strong>Opettaja: </strong> {{opettaja.nimi}}</p>
 	<p><strong>Osallistujia: </strong>{{osallistujienMaara}}</p>
 
-	{% if kurssi.kysely_kaynnissa == 0%}
+	{% if kurssi.kysely_kaynnissa == 0 and vastuuhenkiloStatus%}
 		<a href="{{base_path}}/vastuuhenkilo/muokkaa_kurssia/{{kurssi.id}}" class= "btn btn-warning">Muokkaa kurssia</a>
 	{% endif %}
+	{% if kurssi.kysely_kaynnissa %}
+		<a href="{{base_path}}/kurssi/{{kurssi.id}}/raportti" class="btn btn-primary"class="btn btn-primary">Näytä raportti</a>
+	{% endif %}
 	<!--
-	<a href ="/tsoha/vastuuhenkilo_tikape_raportti" class="btn btn-primary">Näytä kyselyraportti</a><br><br>
-	<a href ="/tsoha/vastuuhenkilo_tikape_muokkaa" class="btn btn-warning">Muokkaa kurssia</a>
-	<button class="btn btn-danger">Poista kurssi</button>
+	<a href ="" class="btn btn-primary">Näytä kyselyraportti</a><br><br>
+	<a href ="" class="btn btn-warning">Muokkaa kurssia</a>
+	<a href ="" class="btn btn-danger">Poista kurssi</a>
 	-->
 
 {% endblock %}

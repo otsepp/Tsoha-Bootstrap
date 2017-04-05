@@ -54,10 +54,15 @@ class KurssiController extends BaseController{
     public static function näytä($id) {
         $kurssi = Kurssi::etsi($id);
         
-        $kayttaja = Vastuuhenkilo::getTestiVH(); //testaus
-        $vastuuhenkiloStatus = true;
+        $kayttaja = self::get_user_logged_in(); //testaus
         
-        $opettajaStatus = false;
+        if (self::kayttaja_on_vastuuhenkilo()) {
+            $vastuuhenkiloStatus = true;
+            $opettajaStatus = false;
+        } else if (self::kayttaja_on_opettaja()) {
+            $vastuuhenkiloStatus = false;
+            $opettajaStatus = true;
+        }
         
         $opettaja = $kurssi->haeOpettaja();
         $osallistujienMaara = $kurssi->osallistujenMaara();
@@ -72,4 +77,24 @@ class KurssiController extends BaseController{
             ));
     }
     
+    public static function raportti($id) {
+        $kayttaja = self::get_user_logged_in();
+        $kurssi = Kurssi::etsi($id);
+        
+        $tulokset = Kysely::raportti($kurssi->id);
+        
+        $kommentit = Kysely::kommentit($kurssi->id);
+        
+        $vastaajienMaara = Kysely::vastaajienMaara($kurssi->id);
+        if ($vastaajienMaara > 0) {
+            $vastaajat = $vastaajienMaara . "/" . $kurssi->osallistujenMaara();
+        }
+        View::make('kurssiraportti.html', array(
+           'kayttaja' => $kayttaja,
+           'kurssi' => $kurssi,
+           'tulokset' => $tulokset,
+           'kommentit' => $kommentit,
+           'vastaajat' => $vastaajat
+        ));
+    }
 }

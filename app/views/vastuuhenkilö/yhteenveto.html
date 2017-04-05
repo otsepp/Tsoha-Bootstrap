@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+	{% import "macros/menu.html" as menu %}
+	{{menu.menu("#{kayttaja.nimi}", "#{base_path}/vastuuhenkilo/koti")}}
+
+	<h3>Yhteenveto</h3>
+	
+	{% if rivit %}
+		<table class="table">
+			<tr>
+				<th>Kurssi</th>
+				<th>Kysymys</th>
+				<th>Keskiarvo</th>
+			</tr>
+			{% for rivi in rivit %}
+				<tr>
+					<td>{{rivi['nimi']}}</td>
+					<td>{{rivi['sisalto']}}</td>
+					<td>{{rivi['keskiarvo']}}</td>
+				</tr>				
+			{% endfor %}			
+		</table>
+	{% endif %}
+
+
+{% endblock %}

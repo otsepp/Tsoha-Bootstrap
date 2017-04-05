@@ -15,6 +15,7 @@ class VastuuhenkiloController extends BaseController {
         if (!$kayttaja) {
             View::make('vastuuhenkilö/login.html', array('error' => 'väärä käyttäjätunnus tai salasana'));
         } else {
+            
             $_SESSION['kayttaja'] = $kayttaja->id;
             $_SESSION['vastuuhenkilo_status'] = 1;
             self::koti();
@@ -32,6 +33,15 @@ class VastuuhenkiloController extends BaseController {
         View::make('vastuuhenkilö/kurssit.html', array(
             'kayttaja' => $kayttaja,
             'kurssit' => Kurssi::laitoksenKurssit($kayttaja->laitos_id)
+        ));
+    }
+    
+    public static function kurssitYhteenveto() {
+        $kayttaja = self::get_user_logged_in();
+        $rivit = Kysely::yhteenveto($kayttaja->laitos_id);
+        View::make('vastuuhenkilö/yhteenveto.html', array(
+           'kayttaja' =>  $kayttaja,
+           'rivit' => $rivit
         ));
     }
     

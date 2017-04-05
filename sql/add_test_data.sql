@@ -15,9 +15,11 @@ INSERT INTO Kurssi (laitos_id, opettaja_id, nimi) VALUES (1, 4, 'Game Dev Course
 
 INSERT INTO Ilmoittautuminen (kurssi_id, oppilas_id) VALUES (1, 1);
 INSERT INTO Ilmoittautuminen (kurssi_id, oppilas_id) VALUES (2, 2);
+INSERT INTO Ilmoittautuminen (kurssi_id, oppilas_id) VALUES (1, 2);
 
 INSERT INTO Kysely (kurssi_id, oppilas_id, kommentti) VALUES (1, 1, 'Tylsä');
 INSERT INTO Kysely (kurssi_id, oppilas_id, kommentti) VALUES (2, 2, 'Opin paljon');
+INSERT INTO Kysely (kurssi_id, oppilas_id, kommentti) VALUES (1, 2, 'Kiinnostava!!');
 
 INSERT INTO Kysymys (sisalto) VALUES ('Oliko kurssi vaikea?');
 INSERT INTO Kysymys (sisalto) VALUES ('Kuinka hauska kurssi oli?');
@@ -28,7 +30,13 @@ INSERT INTO Vastaus(kysely_id, kysymys_id, arvosana) VALUES (1, 1, 4);
 INSERT INTO Vastaus(kysely_id, kysymys_id, arvosana) VALUES (1, 2, 3);
 INSERT INTO Vastaus(kysely_id, kysymys_id, arvosana) VALUES (1, 3, 2);
 INSERT INTO Vastaus(kysely_id, kysymys_id, arvosana) VALUES (1, 4, 3);
+
 INSERT INTO Vastaus(kysely_id, kysymys_id, arvosana) VALUES (2, 1, 2);
 INSERT INTO Vastaus(kysely_id, kysymys_id, arvosana) VALUES (2, 2, 5);
 INSERT INTO Vastaus(kysely_id, kysymys_id, arvosana) VALUES (2, 3, 4);
 INSERT INTO Vastaus(kysely_id, kysymys_id, arvosana) VALUES (2, 4, 1);
+
+INSERT INTO Vastaus(kysely_id, kysymys_id, arvosana) VALUES (3, 1, 2);
+INSERT INTO Vastaus(kysely_id, kysymys_id, arvosana) VALUES (3, 2, 4);
+INSERT INTO Vastaus(kysely_id, kysymys_id, arvosana) VALUES (3, 3, 5);
+INSERT INTO Vastaus(kysely_id, kysymys_id, arvosana) VALUES (3, 4, 1);
