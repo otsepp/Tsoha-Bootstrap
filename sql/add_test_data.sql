@@ -34,7 +34,6 @@ INSERT INTO Vastaus(kysely_id, kysymys_id, arvosana) VALUES (1, 4, 3);
 INSERT INTO Vastaus(kysely_id, kysymys_id, arvosana) VALUES (2, 1, 2);
 INSERT INTO Vastaus(kysely_id, kysymys_id, arvosana) VALUES (2, 2, 5);
 INSERT INTO Vastaus(kysely_id, kysymys_id, arvosana) VALUES (2, 3, 4);
-INSERT INTO Vastaus(kysely_id, kysymys_id, arvosana) VALUES (2, 4, 1);
 
 INSERT INTO Vastaus(kysely_id, kysymys_id, arvosana) VALUES (3, 1, 2);
 INSERT INTO Vastaus(kysely_id, kysymys_id, arvosana) VALUES (3, 2, 4);
