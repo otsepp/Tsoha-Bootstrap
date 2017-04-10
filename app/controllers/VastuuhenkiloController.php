@@ -13,7 +13,7 @@ class VastuuhenkiloController extends BaseController {
         if (!$kayttaja) {
             View::make('vastuuhenkilö/login.html', array('error' => 'väärä käyttäjätunnus tai salasana'));
         } else {
-            
+            self::tyhjenna_sessio();
             $_SESSION['kayttaja'] = $kayttaja->id;
             $_SESSION['vastuuhenkilo_status'] = 1;
             self::koti();

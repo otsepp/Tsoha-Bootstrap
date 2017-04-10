@@ -16,6 +16,20 @@
       BaseController::logout();
   });
   
+  
+  $routes->get('/opettaja/login', function() {
+      OpettajaController::login();
+  });
+  
+  $routes->post('/opettaja/login', function() {
+      OpettajaController::handle_login();
+  });
+  
+  $routes->get('/opettaja/koti', function() {
+      OpettajaController::koti();
+  });
+  
+  
   $routes->get('/vastuuhenkilo/login', function() {
       VastuuhenkiloController::login();
   });

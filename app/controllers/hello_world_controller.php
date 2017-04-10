@@ -14,10 +14,6 @@ class HelloWorldController extends BaseController{
     public static function sandbox(){
         //Kint::dump($varname);
         Kint::dump($_SESSION);
-        BaseController::logout();
-        Kint::dump($_SESSION);
-        if (!isset($_SESSION['oppilas_status'])) {
-            Kint::dump(1);
-        }
+        Kint::dump(BaseController::get_user_logged_in());
     }
   }

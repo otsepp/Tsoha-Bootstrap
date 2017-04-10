@@ -6,7 +6,6 @@
         $kayttaja = null;
         if (isset($_SESSION['kayttaja'])) {
             $kayttaja_id = $_SESSION['kayttaja'];
-            
             if (isset($_SESSION['vastuuhenkilo_status'])) {
                 $kayttaja = Vastuuhenkilo::etsi($kayttaja_id);
             } elseif(isset($_SESSION['opettaja_status'])) {
@@ -20,6 +19,12 @@
     
     public static function tarkista_onko_kayttaja_vastuuhenkilo() {
         if (!self::kayttaja_on_vastuuhenkilo()) {
+            self::redirect_kun_ei_oikeuksia();
+        }
+    }
+    
+    public static function tarkista_onko_kayttaja_opettaja() {
+        if (!self::kayttaja_on_opettaja()) {
             self::redirect_kun_ei_oikeuksia();
         }
     }
@@ -46,12 +51,16 @@
         return false;
     }
     
-    public static function logout() {
+    public static function tyhjenna_sessio() {
         $_SESSION['kayttaja'] = null;
         $_SESSION['vastuuhenkilo_status'] = null;
         $_SESSION['opettaja_status'] = null;
         $_SESSION['oppilas_status'] = null;
-        Redirect::to('/aloitus');
+    }
+    
+    public static function logout() {
+       self::tyhjenna_sessio();
+       Redirect::to('/aloitus');
     }
     
   }

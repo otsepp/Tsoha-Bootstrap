@@ -1,21 +1,21 @@
 <?php
 
 class Opettaja extends BaseModel {
-    public $id, $laitos_id, $nimi;
+    public $id, $laitos_id, $nimi, $salasana;
     
     public function __construct($attributes) {
         parent::__construct($attributes);
-        $this->validators = $this->validate_nimi($this->nimi);
     }
     
-    public function talleta() {
-        $query = DB::connection()->prepare('INSERT INTO Opettaja (laitos_id, nimi) VALUES (:laitos_id, :nimi) RETURNING id');
-        $query->execute(array(
-            'laitos_id' => $this->laitos_id,
-            'nimi' => $this->nimi
-        ));
+    public static function authenticate($nimi, $salasana) {
+        $query = DB::connection()->prepare('SELECT * FROM Opettaja WHERE nimi=:nimi AND salasana=:salasana LIMIT 1');
+        $query->execute(array('nimi' => $nimi, 'salasana' => $salasana));
         $row = $query->fetch();
-        $this->id = $row['id'];
+        if ($row) {
+            return self::luoOlio($row);
+        } else {
+            return null;
+        }
     }
     
     public static function laitoksenOpettajat($laitos_id) {
@@ -36,29 +36,29 @@ class Opettaja extends BaseModel {
         $query = DB::connection()->prepare('SELECT * FROM Opettaja WHERE id=:id LIMIT 1');
         $query->execute(array('id' => $id));
         $row = $query->fetch();
-        
         $opettaja = NULL;
-        
         if ($row) {
-            $opettaja = new Opettaja(array(
-                'id' => $row['id'],
-                'laitos_id' => $row['laitos_id'],
-                'nimi' => $row['nimi']
-            ));
+            return self::luoOlio($row);
         }
         return $opettaja;
     }
     
      private static function luoOpettajaOliot($rows) {
-        $opettaja = array();
+        $opettajat = array();
         foreach($rows as $row) {
-            $opettajat[] = new Opettaja(array(
-                'id' => $row['id'],
-                'laitos_id' => $row['laitos_id'],
-                'nimi' => $row['nimi']
-            ));
+            $opettajat[] = self::luoOlio($row);
         }
         return $opettajat;
+    }
+    
+    private static function luoOlio($row) {
+        $opettaja = new Opettaja(array(
+            'id' => $row['id'],
+            'laitos_id' => $row['laitos_id'],
+            'nimi' => $row['nimi'],
+            'salasana' => $row['salasana']
+        ));
+        return $opettaja;
     }
     
 }

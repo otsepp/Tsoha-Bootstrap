@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+	<h1>Kirjaudu sisään</h1> 
+	
+	{% if error %}
+		<div class="alert alert-danger">
+			{{error}}
+		</div>
+	{% endif %}
+
+	<form method="post" action="{{base_path}}/opettaja/login">
+		<div class="form-group">
+			<label>Nimi</label>
+			<input class="form-control" name="nimi" type="text">
+
+			<label>Salasana</label>
+			<input class="form-control" name="salasana" type="password">
+		</div>
+		<button type="submit" class="btn btn-primary">Valmis</button>
+	</form>
+
+{% endblock %}

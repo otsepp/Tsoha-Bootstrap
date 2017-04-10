@@ -1,11 +1,17 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h1>Kurssikysely</h1>
+<h1>Kurssikysely</h1><br>
+
+{% if message %}
+		<div class="alert alert-danger">
+			{{message}}
+		</div>
+{% endif %}
 
 <a href="{{base_path}}/vastuuhenkilo/login" class="btn btn-primary">Kirjaudu vastuuhenkilönä</a>
-
-<!--<p><a href="{{base_path}}/vastuuhenkilo/koti">Siirry kotisivulle(vastuuhenkilö)</a><p>-->
+<br><br>
+<a href="{{base_path}}/opettaja/login" class="btn btn-primary">Kirjaudu opettajana</a>
 
 <!--<a href="{{base_path}}/luo_kayttaja" class="btn btn-primary">Luo käyttäjä</a>-->
 

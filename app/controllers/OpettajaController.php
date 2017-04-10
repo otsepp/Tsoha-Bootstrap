@@ -1,25 +1,30 @@
 <?php
 
 class OpettajaController extends BaseController {
-    
-    public static function luoOpettaja() {
-        self::tarkista_onko_kayttaja_vastuuhenkilo();
-        $params = $_POST;
-        $opettaja = new Opettaja(array(
-            'laitos_id' => $params['laitos_id'],
-            'nimi' => $params['nimi']
-        ));
-        $errors = $opettaja->errors();
-        if(count($errors) == 0) {
-           $opettaja->talleta();
-            Redirect::to('/vastuuhenkilo/opettajat', array('message' => 'Kurssi lisätty'));
+    public static function login() {
+        View::make('opettaja/login.html');
+    }
+
+    public static function handle_login() {
+        $params = $_POST;        
+        $kayttaja = Opettaja::authenticate($params['nimi'], $params['salasana']);
+        
+        if (!$kayttaja) {
+            View::make('opettaja/login.html', array('error' => 'väärä käyttäjätunnus tai salasana'));
         } else {
-            $kayttaja = Vastuuhenkilo::getTestiVH();
-            View::make('vastuuhenkilö/uusi_opettaja.html', array(
-                'kayttaja' => $kayttaja,
-                'errors' => $errors
-                ));
+            self::tyhjenna_sessio();
+            $_SESSION['kayttaja'] = $kayttaja->id;
+            $_SESSION['opettaja_status'] = 1;
+            self::koti();
         }
+    }
+    
+    public static function koti() {
+        self::tarkista_onko_kayttaja_opettaja();
+        $kayttaja = self::get_user_logged_in();
+        View::make('opettaja/koti.html', array(
+            'kayttaja' => $kayttaja
+        ));
     }
     
     public static function näytä($id) {
