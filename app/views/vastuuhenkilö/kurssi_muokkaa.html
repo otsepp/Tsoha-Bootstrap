@@ -17,7 +17,7 @@
 		</div>
 	{% endif %}
 
-	<form method="post" action="">
+	<form method="post" action="{{base_path}}/muokkaa_kurssia/{{kurssi.id}}">
 		<div class="form-group">
 			<label>Nimi</label>
 			<input name="nimi" type="text" class="form-control" value="{{kurssi.nimi}}">
@@ -31,7 +31,7 @@
 			<input name="kysely_kaynnissa" type="hidden" value="{{kurssi.kysely_kaynnissa}}">
 		</div>
 		<div class="form-group">
-			<button type="submit" class="btn btn-success">Lisää</button>
+			<button type="submit" class="btn btn-success">Valmis</button>
 		</div>
 	</form>
 

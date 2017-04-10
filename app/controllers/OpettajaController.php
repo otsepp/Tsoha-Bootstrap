@@ -22,14 +22,35 @@ class OpettajaController extends BaseController {
     public static function koti() {
         self::tarkista_onko_kayttaja_opettaja();
         $kayttaja = self::get_user_logged_in();
+        $kurssit = Kurssi::opettajanKurssit($kayttaja->id);
         View::make('opettaja/koti.html', array(
-            'kayttaja' => $kayttaja
+            'kayttaja' => $kayttaja,
+            'kurssit' => $kurssit
+        ));
+    }
+    
+    public static function luoKysely($id, $errors) {
+        self::tarkista_onko_kayttaja_opettaja();
+        $kayttaja = self::get_user_logged_in();
+        $kurssi = Kurssi::etsi($id);
+        
+        $yleiset_kysymykset = Kysymys::etsiYleisetKysymykset();
+        $laitoskysymykset = Kysymys::etsiLaitosKysymykset($kurssi->laitos_id);
+        $kurssikysymykset = Kysymys::etsiKurssiKysymykset($kurssi->id);
+        
+        View::make('opettaja/luo_kysely.html', array(
+           'kayttaja' => $kayttaja,
+           'kurssi' => $kurssi,
+           'yleiset_kysymykset' => $yleiset_kysymykset,
+           'laitoskysymykset' => $laitoskysymykset,
+           'kurssikysymykset' => $kurssikysymykset,
+           'errors' => $errors
         ));
     }
     
     public static function näytä($id) {
         self::tarkista_onko_kayttaja_vastuuhenkilo();
-        $kayttaja = Vastuuhenkilo::getTestiVH();
+        $kayttaja = self::get_user_logged_in();
         $opettaja = Opettaja::etsi($id);
         $kurssit = Kurssi::opettajanKurssit($opettaja->id);
         View::make('vastuuhenkilö/opettaja.html', array(

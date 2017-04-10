@@ -2,7 +2,7 @@
 {% block content %}
 
 	{% import "macros/menu.html" as menu %}
-	{{menu.menu("#{kayttaja.nimi}", "#{base_path}/vastuuhenkilo/koti")}}
+	{{menu.menu("#{kayttaja.nimi}", "#{base_path}/#{koti_path}")}}
 	
 	<h3>{{kurssi.nimi}}</h3>
 	<p><strong>Opettaja: </strong> {{opettaja.nimi}}</p>
@@ -11,13 +11,13 @@
 	{% if kurssi.kysely_kaynnissa == 0 and vastuuhenkiloStatus%}
 		<a href="{{base_path}}/vastuuhenkilo/muokkaa_kurssia/{{kurssi.id}}" class= "btn btn-warning">Muokkaa kurssia</a>
 	{% endif %}
+
 	{% if kurssi.kysely_kaynnissa %}
-		<a href="{{base_path}}/kurssi/{{kurssi.id}}/raportti" class="btn btn-primary"class="btn btn-primary">Näytä raportti</a>
+		<a href="{{base_path}}/kurssi/{{kurssi.id}}/raportti" class="btn btn-primary">Näytä raportti</a>
+	{% elseif  kurssi.kysely_kaynnissa == 0 and opettajaStatus %}
+		<a href="{{base_path}}/opettaja/luo_kysely/{{kurssi.id}}" class="btn btn-primary">Muokkaa kyselyä</a>
 	{% endif %}
-	<!--
-	<a href ="" class="btn btn-primary">Näytä kyselyraportti</a><br><br>
-	<a href ="" class="btn btn-warning">Muokkaa kurssia</a>
-	<a href ="" class="btn btn-danger">Poista kurssi</a>
-	-->
+	
+	
 
 {% endblock %}

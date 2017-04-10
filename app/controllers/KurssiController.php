@@ -37,34 +37,50 @@ class KurssiController extends BaseController{
         $errors = $kurssi->errors();
         if (count($errors) == 0) {
             $kurssi->paivita();
-            Redirect::to('/vastuuhenkilo/kurssit', array('message' => 'Kurssia muokattiin onnistuneesti'));
+            
+            if (self::kayttaja_on_vastuuhenkilo()) {
+                Redirect::to('/vastuuhenkilo/kurssit', array('message' => 'Kurssia muokattiin onnistuneesti'));
+            } else if (self::kayttaja_on_opettaja()) {
+                Redirect::to('/opettaja/luo_kysely/'.'5');
+            }
+            
         } else {
-            $kayttaja = self::get_user_logged_in();
-            $opettajat = Opettaja::laitoksenOpettajat($kayttaja->laitos_id);
-            $kurssi = Kurssi::etsi($id);
-            View::make('vastuuhenkilö/kurssi_muokkaa.html', array(
-                'kayttaja' => $kayttaja,
-                'kurssi' => $kurssi, 
-                'opettajat' => $opettajat,
-                'errors' => $errors
-            ));
+            if (self::kayttaja_on_vastuuhenkilo()) {
+                $kayttaja = self::get_user_logged_in();
+                $opettajat = Opettaja::laitoksenOpettajat($kayttaja->laitos_id);
+                $kurssi = Kurssi::etsi($id);
+                
+                View::make('vastuuhenkilö/kurssi_muokkaa.html', array(
+                    'kayttaja' => $kayttaja,
+                    'kurssi' => $kurssi, 
+                    'opettajat' => $opettajat,
+                    'errors' => $errors
+                ));
+            //turha?!
+            } else if (self::kayttaja_on_opettaja()) {
+                OpettajaController::luoKysely($id, array());
+            }
         }
     }
     
     public static function näytä($id) {
         $kurssi = Kurssi::etsi($id);
-        $kayttaja = self::get_user_logged_in(); //testaus
-        if (self::kayttaja_on_vastuuhenkilo()) {
-            $vastuuhenkiloStatus = true;
-            $opettajaStatus = false;
-        } else if (self::kayttaja_on_opettaja()) {
-            $vastuuhenkiloStatus = false;
-            $opettajaStatus = true;
-        } else if(!self::kayttaja_on_vastuuhenkilo() && !self::kayttaja_on_opettaja()) {
+        $kayttaja = self::get_user_logged_in();
+        
+        $vastuuhenkiloStatus = self::kayttaja_on_vastuuhenkilo();
+        $opettajaStatus = self::kayttaja_on_opettaja();
+        if (!$vastuuhenkiloStatus && !$opettajaStatus) {
             self::redirect_kun_ei_oikeuksia();
         }
         $opettaja = $kurssi->haeOpettaja();
         $osallistujienMaara = $kurssi->osallistujenMaara();
+        
+        $koti_path = null;
+        if ($vastuuhenkiloStatus) {
+            $koti_path = 'vastuuhenkilo/koti';
+        } else if ($opettajaStatus) {
+            $koti_path = 'opettaja/koti';
+        }
         
         View::make('kurssi.html', array(
             'kayttaja' => $kayttaja,
@@ -72,7 +88,8 @@ class KurssiController extends BaseController{
             'vastuuhenkiloStatus' => $vastuuhenkiloStatus,
             'opettajaStatus' => $opettajaStatus,
             'opettaja' => $opettaja,
-            'osallistujienMaara' => $osallistujienMaara
+            'osallistujienMaara' => $osallistujienMaara,
+            'koti_path' => $koti_path
             ));
     }
     
@@ -86,16 +103,28 @@ class KurssiController extends BaseController{
         $kommentit = Kysely::kommentit($kurssi->id);
         
         $vastaajienMaara = Kysely::vastaajienMaara($kurssi->id);
-        if ($vastaajienMaara > 0) {
-            $vastaajat = $vastaajienMaara . "/" . $kurssi->osallistujenMaara();
-        }
+        $vastaajat = $vastaajienMaara . "/" . $kurssi->osallistujenMaara();
         
+        $vastuuhenkiloStatus = self::kayttaja_on_vastuuhenkilo();
+        $opettajaStatus = self::kayttaja_on_opettaja();
+        if (!$vastuuhenkiloStatus && !$opettajaStatus) {
+            self::redirect_kun_ei_oikeuksia();
+        }
+        $koti_path = null;
+        if ($vastuuhenkiloStatus) {
+            $koti_path = 'vastuuhenkilo/koti';
+        } else if ($opettajaStatus) {
+            $koti_path = 'opettaja/koti';
+        }
         View::make('kurssiraportti.html', array(
            'kayttaja' => $kayttaja,
            'kurssi' => $kurssi,
            'tulokset' => $tulokset,
            'kommentit' => $kommentit,
-           'vastaajat' => $vastaajat
+           'vastaajat' => $vastaajat,
+           'vastuuhenkiloStatus' => $vastuuhenkiloStatus,
+           'opettajaStatus' => $opettajaStatus,
+            'koti_path' => $koti_path
         ));
     }
 }

@@ -2,8 +2,10 @@
 {% block content %}
 
 	{% import "macros/menu.html" as menu %}
-	{{menu.menu("#{kayttaja.nimi}", "#{base_path}/vastuuhenkilo/koti")}}
+	{{menu.menu("#{kayttaja.nimi}", "#{base_path}/#{koti_path}")}}
 	
+	
+
 	<h3>Kyselyraportti: {{kurssi.nimi}}</h3>
 
 	

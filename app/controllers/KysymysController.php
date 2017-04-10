@@ -9,10 +9,9 @@ class KysymysController extends BaseController {
             'kurssi_id' => null,
             'sisalto' => $params['sisalto']
         ));
-        KysymysController::tarkista_virheet($kysymys);
+        self::tarkista_virheet($kysymys);
     }
     
-    //ei valmis
      public static function luoLaitosKysymys() {
         $params = $_POST;
         $kysymys = new Kysymys(array(
@@ -20,13 +19,20 @@ class KysymysController extends BaseController {
             'kurssi_id' => null,
             'sisalto' => $params['sisalto']
         ));
-        KysymysController::tarkista_virheet($kysymys);
+        self::tarkista_virheet($kysymys);
+    }
+    
+    public static function luoKurssiKysymys() {
+        $params = $_POST;
+        $kysymys = new Kysymys(array(
+            'laitos_id' => null,
+            'kurssi_id' => $params['kurssi_id'],
+            'sisalto' => $params['sisalto']
+        ));
+        self::tarkista_virheet($kysymys);
     }
     
     public static function poista($id) {
-        $kysymys = new Kysymys(array(
-           'id' => $id 
-        ));
         $vastaukset = Vastaus::kysymyksen_vastaukset($kysymys->id);
         foreach($vastaukset as $vastaus) {
             $vastaus->poista($vastaus->kysymys_id);
@@ -39,13 +45,22 @@ class KysymysController extends BaseController {
        $errors = $kysymys->errors();
         if(count($errors) == 0) {
             $kysymys->talleta();
-            Redirect::to('/vastuuhenkilo/kysymykset', array('message' => 'Kysymys lisätty'));
+            if (self::kayttaja_on_vastuuhenkilo()) {
+                Redirect::to('/vastuuhenkilo/kysymykset', array('message' => 'Kysymys lisätty'));
+            } else {
+                Redirect::to('/opettaja/luo_kysely/'.$kysymys->kurssi_id);
+            }
         } else {
-            $kayttaja = Vastuuhenkilo::getTestiVH();
-            View::make('vastuuhenkilö/uusi_kysymys.html', array(
-                'kayttaja' => $kayttaja,
-                'errors' => $errors
-            ));
+            $kayttaja = self::get_user_logged_in();
+            
+            if (self::kayttaja_on_vastuuhenkilo()) {
+                View::make('vastuuhenkilö/uusi_kysymys.html', array(
+                    'kayttaja' => $kayttaja,
+                    'errors' => $errors
+                 ));
+            } else {
+                OpettajaController::luoKysely($kysymys->kurssi_id, $errors);
+            }
         }
    }
     

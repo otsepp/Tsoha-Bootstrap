@@ -3,8 +3,20 @@
 {% block content %}
 
 	{% import "macros/menu.html" as menu %}
-	{{menu.menu("#{kayttaja.nimi}", "#{base_path}/vastuuhenkilo/koti")}}
+	{{menu.menu("#{kayttaja.nimi}", "#{base_path}/opettaja/koti")}}
 
-	
+	<h3>Kurssini</h3>
+
+	<ul class="list-group">
+		{% for kurssi in kurssit %}
+			<li class="list-group-item">
+				<span class="badge"><a href="{{base_path}}/kurssi/{{kurssi.id}}">näytä</a></span>
+				{% if kurssi.kysely_kaynnissa %}
+					<span class="badge">kysely käynnissä</span>		 
+				{% endif %}
+				{{kurssi.nimi}}
+			</li>
+		{% endfor %}
+	</ul>
 
 {% endblock %}

@@ -13,7 +13,7 @@
 	<ul class="list-group">
 		{% for kysymys in yleisetKysymykset %}
 			<li class="list-group-item">
-				{{forms.destroy_button("#{base_path}/vastuuhenkilo/kysymykset/poista/#{kysymys.id}")}}
+				{{forms.destroy_button("#{base_path}/kysymykset/poista/#{kysymys.id}")}}
 				{{kysymys.sisalto}}
 			</li>
 		{% endfor %}
@@ -26,7 +26,7 @@
 	<ul class="list-group">
 		{% for kysymys in laitosKysymykset %}
 			<li class="list-group-item">
-				{{forms.destroy_button("#{base_path}/vastuuhenkilo/kysymykset/poista/#{kysymys.id}")}}
+				{{forms.destroy_button("#{base_path}/kysymykset/poista/#{kysymys.id}")}}
 				{{kysymys.sisalto}}		
 			</li>
 		{% endfor %}

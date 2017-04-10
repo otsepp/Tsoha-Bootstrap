@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+	{% import "macros/forms.html" as forms %}
+
+	{% import "macros/menu.html" as menu %}
+	{{menu.menu("#{kayttaja.nimi}", "#{base_path}/opettaja/koti")}}
+
+	<h3>Luo kysely: {{kurssi.nimi}}</h3>
+
+	{% if errors %}
+		<div class="alert alert-danger">
+			<ul>
+				{% for error in errors %}
+					<li>{{error}}</li>
+				{% endfor %}
+			</ul>
+		</div>
+	{% endif %}
+
+	<h4>Yleiset kysymykset:</h4>
+		<ul class="list-group">
+			{% for yk in yleiset_kysymykset %}
+				<li class="list-group-item">{{yk.sisalto}}</li>
+			{% endfor %}
+		</ul>
+
+	<h4>Laitoskohtaiset kysymykset:</h4>
+		<ul class="list-group">
+			{% for lk in laitoskysymykset %}
+				<li class="list-group-item">{{lk.sisalto}}</li>
+			{% endfor %}
+		</ul>
+
+	<h4>Kurssikohtaiset kysymykset:</h4>
+		<ul class="list-group">
+			{% for kk in kurssikysymykset %}
+				
+				<li class="list-group-item">
+					{{kk.sisalto}}
+				</li>
+			{% endfor %}
+		</ul>
+	<form method="post" action="{{base_path}}/uusi_kurssikysymys">
+		<input type="text" name="sisalto" class="form-control">
+		<input type ="hidden" name="kurssi_id" value="{{kurssi.id}}">
+		<br>
+		<button type="submit" class="btn btn-success">lisää kysymys</button>
+	</form>
+	
+	<div style="padding: 0px 0px 40px 0px"></div>
+	<form method="post" action="{{base_path}}/muokkaa_kurssia/{{kurssi.id}}">
+		<div class="form-group">
+			<input type="hidden" name="nimi" value="{{kurssi.nimi}}">
+			<input type="hidden" name="opettaja_id" value="{{kurssi.opettaja_id}}">
+			<input type="hidden" name="laitos_id" value="{{kurssi.laitos_id}}">
+			<input type="hidden" name="kysely_kaynnissa" value="1">	
+		</div>
+		<div class="form-group">
+			<button type="submit" class="btn btn-warning">Valmis</button>
+		</div>
+	<form>
+	
+	<div style="padding: 0px 0px 40px 0px"></div>
+	<a href="{{base_path}}/kurssi/{{kurssi.id}}" class="btn btn-primary" style="float:bottom">Takaisin</a>
+
+	<!--
+	<h4>Yleiset kysymykset:</h4>
+		<ul class="list-group">
+			<li class="list-group-item">Kuinka vaikea kurssi oli?</li>
+			<li class="list-group-item">Kuinka hauska kurssi oli?</li>
+		</ul>
+	<h4>Laitoskohtaiset kysymykset:</h4>
+		<ul class="list-group">
+			<li class="list-group-item">Opettiko kurssi uutta tietojenkäsittelytieteestä?</li>
+		</ul>
+	<h4>Kurssikohtaiset kysymykset:</h4>
+		<ul class="list-group">
+			<li class="list-group-item">esim.: aiemmin luotu kysymys</li>
+		</ul>
+		
+		<input class="form-control" placeholder="Uusi kysymys" type="text"><br>
+		<button class="btn btn-primary btn-sm">lisää kysymys</button><br>
+	
+	<div style="padding: 0px 0px 40px 0px"></div>
+
+	<button class="btn btn-success">Valmis</button>
+	-->
+
+{% endblock %}

@@ -2,6 +2,8 @@
 
 {% block content %}
 
+	{% import "macros/forms.html" as forms %}
+
 	{% import "macros/menu.html" as menu %}
 	{{menu.menu("#{kayttaja.nimi}", "#{base_path}/vastuuhenkilo/koti")}}
 
