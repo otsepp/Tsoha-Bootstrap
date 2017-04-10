@@ -1,6 +1,9 @@
 {% macro menu(nimi, koti_link) %}
 
 	<p>Hei <strong>{{nimi}}</strong></p>
+	<form method="post" action="{{base_path}}/tsoha/logout" style="margin:-18px 0px -7px -13px">
+		<button type="submit" class="btn btn-link">Kirjaudu ulos</button>
+	</form>
 	<a href="{{koti_link}}">Koti</a>
 	<h1 style="padding: 10px 0px 60px 0px"> Kurssikysely </h1>	
 

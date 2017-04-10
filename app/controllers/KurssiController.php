@@ -4,7 +4,6 @@ class KurssiController extends BaseController{
     
     public static function luoKurssi() {
         $params = $_POST;
-            
         $kurssi = new Kurssi(array(
             'laitos_id' => $params['laitos_id'],
             'opettaja_id' => $params['opettaja_id'],
@@ -40,12 +39,13 @@ class KurssiController extends BaseController{
             $kurssi->paivita();
             Redirect::to('/vastuuhenkilo/kurssit', array('message' => 'Kurssia muokattiin onnistuneesti'));
         } else {
-            $kayttaja = Vastuuhenkilo::getTestiVH();
-
+            $kayttaja = self::get_user_logged_in();
+            $opettajat = Opettaja::laitoksenOpettajat($kayttaja->laitos_id);
             $kurssi = Kurssi::etsi($id);
             View::make('vastuuhenkilö/kurssi_muokkaa.html', array(
                 'kayttaja' => $kayttaja,
                 'kurssi' => $kurssi, 
+                'opettajat' => $opettajat,
                 'errors' => $errors
             ));
         }
@@ -53,17 +53,16 @@ class KurssiController extends BaseController{
     
     public static function näytä($id) {
         $kurssi = Kurssi::etsi($id);
-        
         $kayttaja = self::get_user_logged_in(); //testaus
-        
         if (self::kayttaja_on_vastuuhenkilo()) {
             $vastuuhenkiloStatus = true;
             $opettajaStatus = false;
         } else if (self::kayttaja_on_opettaja()) {
             $vastuuhenkiloStatus = false;
             $opettajaStatus = true;
+        } else if(!self::kayttaja_on_vastuuhenkilo() && !self::kayttaja_on_opettaja()) {
+            self::redirect_kun_ei_oikeuksia();
         }
-        
         $opettaja = $kurssi->haeOpettaja();
         $osallistujienMaara = $kurssi->osallistujenMaara();
         
@@ -78,17 +77,19 @@ class KurssiController extends BaseController{
     }
     
     public static function raportti($id) {
+        if(!self::kayttaja_on_vastuuhenkilo() && !self::kayttaja_on_opettaja()) {
+            self::redirect_kun_ei_oikeuksia();
+        }
         $kayttaja = self::get_user_logged_in();
         $kurssi = Kurssi::etsi($id);
-        
         $tulokset = Kysely::raportti($kurssi->id);
-        
         $kommentit = Kysely::kommentit($kurssi->id);
         
         $vastaajienMaara = Kysely::vastaajienMaara($kurssi->id);
         if ($vastaajienMaara > 0) {
             $vastaajat = $vastaajienMaara . "/" . $kurssi->osallistujenMaara();
         }
+        
         View::make('kurssiraportti.html', array(
            'kayttaja' => $kayttaja,
            'kurssi' => $kurssi,

@@ -8,20 +8,20 @@
     HelloWorldController::sandbox();
   });
   
-  $routes->get('/luo_kayttaja', function() {
-      HelloWorldController::luo_kayttaja();
-  });
-  
   $routes->get('/aloitus', function() {
       HelloWorldController::aloitus();
   });
   
-  $routes->get('/vastuuhenkilo/koti', function() {
-      VastuuhenkiloController::koti();
+  $routes->post('/logout', function() {
+      BaseController::logout();
   });
   
   $routes->get('/vastuuhenkilo/login', function() {
       VastuuhenkiloController::login();
+  });
+  
+  $routes->get('/vastuuhenkilo/koti', function() {
+      VastuuhenkiloController::koti();
   });
   
   $routes->post('/vastuuhenkilo/login', function() {
@@ -55,7 +55,6 @@
   $routes->get('/vastuuhenkilo/opettajat', function() {
       VastuuhenkiloController::opettajat();
   });
-  
   
   $routes->get('/vastuuhenkilo/kysymykset', function() {
       VastuuhenkiloController::kysymykset();

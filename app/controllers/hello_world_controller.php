@@ -13,7 +13,11 @@ class HelloWorldController extends BaseController{
 
     public static function sandbox(){
         //Kint::dump($varname);
-        $vastaajia = Kysely::vastaajienMaara(1);
-        Kint::dump($vastaajia);
+        Kint::dump($_SESSION);
+        BaseController::logout();
+        Kint::dump($_SESSION);
+        if (!isset($_SESSION['oppilas_status'])) {
+            Kint::dump(1);
+        }
     }
   }

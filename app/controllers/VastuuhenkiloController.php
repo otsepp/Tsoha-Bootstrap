@@ -9,9 +9,7 @@ class VastuuhenkiloController extends BaseController {
     
     public static function handle_login() {
         $params = $_POST;
-        
         $kayttaja = Vastuuhenkilo::authenticate($params['nimi'], $params['salasana']);
-        
         if (!$kayttaja) {
             View::make('vastuuhenkilö/login.html', array('error' => 'väärä käyttäjätunnus tai salasana'));
         } else {
@@ -20,15 +18,16 @@ class VastuuhenkiloController extends BaseController {
             $_SESSION['vastuuhenkilo_status'] = 1;
             self::koti();
         }
-        
     }
     
     public static function koti() {
+        self::tarkista_onko_kayttaja_vastuuhenkilo();
         $kayttaja = self::get_user_logged_in();
         View::make('vastuuhenkilö/koti.html', array('kayttaja' => $kayttaja));
     }
     
     public static function kurssit() {
+        self::tarkista_onko_kayttaja_vastuuhenkilo();
         $kayttaja = self::get_user_logged_in();
         View::make('vastuuhenkilö/kurssit.html', array(
             'kayttaja' => $kayttaja,
@@ -37,6 +36,7 @@ class VastuuhenkiloController extends BaseController {
     }
     
     public static function kurssitYhteenveto() {
+        self::tarkista_onko_kayttaja_vastuuhenkilo();
         $kayttaja = self::get_user_logged_in();
         $rivit = Kysely::yhteenveto($kayttaja->laitos_id);
         View::make('vastuuhenkilö/yhteenveto.html', array(
@@ -46,6 +46,7 @@ class VastuuhenkiloController extends BaseController {
     }
     
     public static function uusiKurssi() {
+        self::tarkista_onko_kayttaja_vastuuhenkilo();
         $kayttaja = self::get_user_logged_in();
         $opettajat = Opettaja::laitoksenOpettajat($kayttaja->laitos_id);
         View::make('vastuuhenkilö/uusi_kurssi.html', array(
@@ -55,6 +56,7 @@ class VastuuhenkiloController extends BaseController {
     }
     
     public static function muokkaaKurssia($id) {
+        self::tarkista_onko_kayttaja_vastuuhenkilo();
         $kayttaja = self::get_user_logged_in();
         $kurssi = Kurssi::etsi($id);
         $opettajat = Opettaja::laitoksenOpettajat($kayttaja->laitos_id);
@@ -66,6 +68,7 @@ class VastuuhenkiloController extends BaseController {
     }
     
     public static function opettajat() {
+        self::tarkista_onko_kayttaja_vastuuhenkilo();
         $kayttaja = self::get_user_logged_in();
         $opettajat = Opettaja::laitoksenOpettajat($kayttaja->laitos_id);
         View::make('vastuuhenkilö/opettajat.html', array(
@@ -75,6 +78,7 @@ class VastuuhenkiloController extends BaseController {
     }
     
     public static function kysymykset() {
+        self::tarkista_onko_kayttaja_vastuuhenkilo();
         $kayttaja = self::get_user_logged_in();
         $yleisetKysymykset = Kysymys::etsiYleisetKysymykset();
         $laitosKysymykset = Kysymys::etsiLaitosKysymykset($kayttaja->laitos_id);
@@ -86,6 +90,7 @@ class VastuuhenkiloController extends BaseController {
     }
     
     public static function uusiKysymys() {
+        self::tarkista_onko_kayttaja_vastuuhenkilo();
         $kayttaja = self::get_user_logged_in();
         View::make('vastuuhenkilö/uusi_kysymys.html', array(
             'kayttaja' => $kayttaja

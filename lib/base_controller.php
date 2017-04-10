@@ -1,7 +1,6 @@
 <?php
 
   class BaseController{
-
     public static function get_user_logged_in(){
       // Toteuta kirjautuneen käyttäjän haku tähän
         $kayttaja = null;
@@ -18,24 +17,41 @@
         }
       return $kayttaja;
     }
-
-    public static function check_logged_in(){
-      // Toteuta kirjautumisen tarkistus tähän.
-      // Jos käyttäjä ei ole kirjautunut sisään, ohjaa hänet toiselle sivulle (esim. kirjautumissivulle).
+    
+    public static function tarkista_onko_kayttaja_vastuuhenkilo() {
+        if (!self::kayttaja_on_vastuuhenkilo()) {
+            self::redirect_kun_ei_oikeuksia();
+        }
     }
-
+    
+    public static function redirect_kun_ei_oikeuksia() {
+        Redirect::to('/aloitus', array('message' => 'Sinulla ei ole oikeuksia sivulle jota yritit käyttää'));
+    }
     public static function kayttaja_on_vastuuhenkilo() {
         if (isset($_SESSION['vastuuhenkilo_status'])) {
             return true;
         }
         return false;
     }
-    
     public static function kayttaja_on_opettaja() {
         if (isset($_SESSION['opettaja_status'])) {
             return true;
         }
         return false;
+    }
+    public static function kayttaja_on_oppilas() {
+         if (isset($_SESSION['oppilas_status'])) {
+            return true;
+        }
+        return false;
+    }
+    
+    public static function logout() {
+        $_SESSION['kayttaja'] = null;
+        $_SESSION['vastuuhenkilo_status'] = null;
+        $_SESSION['opettaja_status'] = null;
+        $_SESSION['oppilas_status'] = null;
+        Redirect::to('/aloitus');
     }
     
   }
