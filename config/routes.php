@@ -17,6 +17,21 @@
   });
   
   
+  
+  $routes->get('/oppilas/login', function() {
+      OppilasController::login();
+  });
+  
+  $routes->post('/oppilas/login', function() {
+      OppilasController::handle_login();
+  });
+  
+  $routes->get('/oppilas/koti', function() {
+      OppilasController::koti();
+  });
+  
+  
+  
   $routes->get('/opettaja/login', function() {
       OpettajaController::login();
   });

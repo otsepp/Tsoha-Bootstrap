@@ -29,6 +29,12 @@
         }
     }
     
+    public static function tarkista_onko_kayttaja_oppilas() {
+        if (!self::kayttaja_on_oppilas()) {
+            self::redirect_kun_ei_oikeuksia();
+        }
+    }
+    
     public static function redirect_kun_ei_oikeuksia() {
         Redirect::to('/aloitus', array('message' => 'Sinulla ei ole oikeuksia sivulle jota yritit käyttää'));
     }

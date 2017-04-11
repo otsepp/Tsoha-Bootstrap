@@ -1,12 +1,14 @@
 INSERT INTO Laitos (nimi) VALUES ('Tietojenkäsittelytieteen laitos');
+INSERT INTO Laitos (nimi) VALUES ('Historian laitos');
 
 INSERT INTO Oppilas (laitos_id, nimi, salasana) VALUES (1, 'Pekka', 'ssana');
 INSERT INTO Oppilas (laitos_id, nimi, salasana) VALUES (1, 'Mauri', 'ssana');
 INSERT INTO Opettaja (laitos_id, nimi, salasana) VALUES (1, 'Arto', 'ssana');
 INSERT INTO Opettaja (laitos_id, nimi, salasana) VALUES (1, 'Jaakko', 'ssana');
-INSERT INTO Opettaja (laitos_id, nimi, salasana) VALUES (1, 'Juuso', 'ssana');
-INSERT INTO Opettaja (laitos_id, nimi, salasana) VALUES (1, 'Kari','ssana');
+INSERT INTO Opettaja (laitos_id, nimi, salasana) VALUES (2, 'Juuso', 'ssana');
+INSERT INTO Opettaja (laitos_id, nimi, salasana) VALUES (2, 'Kari','ssana');
 INSERT INTO Vastuuhenkilo (laitos_id, nimi, salasana) VALUES (1, 'Matti', 'ssana');
+INSERT INTO Vastuuhenkilo (laitos_id, nimi, salasana) VALUES (2, 'Tuomas', 'ssana');
 
 INSERT INTO Kurssi (laitos_id, opettaja_id, nimi, kysely_kaynnissa) VALUES (1, 1, 'Tietokantojen perusteet', 1);
 INSERT INTO Kurssi (laitos_id, opettaja_id, nimi, kysely_kaynnissa) VALUES (1, 2, 'Tietokoneen toiminta', 1);

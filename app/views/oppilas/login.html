@@ -2,7 +2,7 @@
 
 {% block content %}
 
-	<h2>Kirjaudu sisään opettajana</h2> 
+	<h2>Kirjaudu sisään oppilaana</h2>
 
 	{% if error %}
 		<div class="alert alert-danger">
@@ -10,7 +10,7 @@
 		</div>
 	{% endif %}
 
-	<form method="post" action="{{base_path}}/opettaja/login">
+	<form method="post" action="{{base_path}}/oppilas/login">
 		<div class="form-group">
 			<label>Nimi</label>
 			<input class="form-control" name="nimi" type="text">

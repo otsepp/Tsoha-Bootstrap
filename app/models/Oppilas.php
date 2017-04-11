@@ -7,6 +7,17 @@ class Oppilas extends BaseModel {
         parent::__construct($attributes);
     }
     
+    public static function authenticate($nimi, $salasana) {
+        $query = DB::connection()->prepare('SELECT * FROM Oppilas WHERE nimi=:nimi AND salasana=:salasana LIMIT 1');
+        $query->execute(array('nimi' => $nimi, 'salasana' => $salasana));
+        $row = $query->fetch();
+        if ($row) {
+            return self::luo_olio($row);
+        } else {
+            return null;
+        }
+    }
+    
     public static function etsi($id) {
         $query = DB::connection()->prepare('SELECT * FROM Oppilas WHERE id=:id LIMIT 1');
         $query->execute(array('id' => $id));

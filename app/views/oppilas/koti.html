@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+	{% import "macros/menu.html" as menu %}
+	{{menu.menu("#{kayttaja.nimi}", "#{base_path}/opettaja/koti")}}
+
+	<h3>Tee kysely</h3>
+	<form method="post" action=""> 
+		<div class="form-group">
+			<select name="kurssi_id" class="form-control">
+				{% for kurssi in kurssit_joista_voi_tehda_kys %} 
+					<option value="{{kurssi.id}}">{{kurssi.nimi}}</option>
+				{% endfor %}
+			</select>
+		</div>
+		<div class="form-group">
+			<button type="submit" class="btn btn-primary">Valmis</button>
+		</div>
+	</form>
+
+
+	<h3>Ilmoittaudu kurssille</h3>
+	<form method="post" action=""> 
+		<div class="form-group">
+			<select name="kurssi_id" class="form-control">
+				{% for kurssi in kurssit_joille_ei_ilm %} 
+					<option value="{{kurssi.id}}">{{kurssi.nimi}}</option>
+				{% endfor %}
+			</select>
+		</div>
+		<div class="form-group">
+			<button type="submit" class="btn btn-primary">Valmis</button>
+		</div>
+	</form>
+
+{% endblock %}

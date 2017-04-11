@@ -41,25 +41,19 @@ class KurssiController extends BaseController{
             if (self::kayttaja_on_vastuuhenkilo()) {
                 Redirect::to('/vastuuhenkilo/kurssit', array('message' => 'Kurssia muokattiin onnistuneesti'));
             } else if (self::kayttaja_on_opettaja()) {
-                Redirect::to('/opettaja/luo_kysely/'.$id);
+                Redirect::to('/kurssi/'.$id);
             }
             
         } else {
-            if (self::kayttaja_on_vastuuhenkilo()) {
-                $kayttaja = self::get_user_logged_in();
-                $opettajat = Opettaja::laitoksenOpettajat($kayttaja->laitos_id);
-                $kurssi = Kurssi::etsi($id);
-                
-                View::make('vastuuhenkilö/kurssi_muokkaa.html', array(
-                    'kayttaja' => $kayttaja,
-                    'kurssi' => $kurssi, 
-                    'opettajat' => $opettajat,
-                    'errors' => $errors
-                ));
-            //turha?!
-            } else if (self::kayttaja_on_opettaja()) {
-                OpettajaController::luoKysely($id, array());
-            }
+            $kayttaja = self::get_user_logged_in();
+            $opettajat = Opettaja::laitoksenOpettajat($kayttaja->laitos_id);
+            $kurssi = Kurssi::etsi($id);
+            View::make('vastuuhenkilö/kurssi_muokkaa.html', array(
+                'kayttaja' => $kayttaja,
+                'kurssi' => $kurssi,
+                'opettajat' => $opettajat,
+                'errors' => $errors
+                    ));
         }
     }
     

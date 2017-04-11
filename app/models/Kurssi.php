@@ -41,6 +41,27 @@ class Kurssi extends BaseModel {
         return $row['count'];
     }
     
+    public static function kurssitJoillaEiOppilasta($oppilas_id) { 
+        $query = DB::connection()->prepare(
+                'SELECT * FROM Kurssi LEFT JOIN Ilmoittautuminen ON kurssi_id = Kurssi.id '
+                    . 'WHERE Kurssi.id NOT IN '
+                        . '(SELECT Kurssi.id FROM Kurssi LEFT JOIN Ilmoittautuminen ON kurssi_id = Kurssi.id '
+                         . 'WHERE oppilas_id = :oppilas_id)');
+        $query->execute(array('oppilas_id' => $oppilas_id));
+        $rows = $query->fetchAll();
+        return self::luoKurssiOliot($rows);
+    }
+    
+    public static function kurssitJoistaOppilasVoiTehdaKyselyn($oppilas_id) { 
+        $query = DB::connection()->prepare(
+                'SELECT Kurssi.* From Kurssi JOIN Ilmoittautuminen '
+                    . 'ON kurssi_id=Kurssi.id '
+                    . 'WHERE oppilas_id=:oppilas_id AND kysely_kaynnissa = 1');
+        $query->execute(array('oppilas_id' => $oppilas_id));
+        $rows = $query->fetchAll();
+        return self::luoKurssiOliot($rows);
+    }
+    
     public static function laitoksenKurssit($laitos_id) {
         $query = DB::connection()->prepare('SELECT * FROM Kurssi WHERE laitos_id=:id');
         $query->execute(array('id' => $laitos_id));
