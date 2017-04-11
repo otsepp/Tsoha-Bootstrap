@@ -43,7 +43,7 @@ class Kurssi extends BaseModel {
     
     public static function kurssitJoillaEiOppilasta($oppilas_id) { 
         $query = DB::connection()->prepare(
-                'SELECT * FROM Kurssi LEFT JOIN Ilmoittautuminen ON kurssi_id = Kurssi.id '
+                'SELECT DISTINCT Kurssi.* FROM Kurssi LEFT JOIN Ilmoittautuminen ON kurssi_id = Kurssi.id '
                     . 'WHERE Kurssi.id NOT IN '
                         . '(SELECT Kurssi.id FROM Kurssi LEFT JOIN Ilmoittautuminen ON kurssi_id = Kurssi.id '
                          . 'WHERE oppilas_id = :oppilas_id)');

@@ -30,6 +30,9 @@
       OppilasController::koti();
   });
   
+  $routes->post('/oppilas/ilmoittautumiset/uusi', function() {
+      IlmoittautuminenController::luo();
+  });
   
   
   $routes->get('/opettaja/login', function() {
