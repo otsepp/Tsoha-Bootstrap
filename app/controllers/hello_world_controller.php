@@ -12,5 +12,11 @@ class HelloWorldController extends BaseController{
     }
 
     public static function sandbox(){
+       $vastaus = new Vastaus(array(
+          'kysely_id' => 1,
+          'kysymys_id' => 1,
+          'arvosana' => '1.1'
+       ));
+       Kint::dump($vastaus->errors());
     }
   }

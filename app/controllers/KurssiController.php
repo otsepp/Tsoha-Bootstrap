@@ -14,7 +14,7 @@ class KurssiController extends BaseController{
             $kurssi->talleta();
             Redirect::to('/vastuuhenkilo/kurssit', array('message' => 'Kurssi lisätty'));
         } else {
-             $kayttaja = Vastuuhenkilo::getTestiVH();
+             $kayttaja = self::get_user_logged_in();
              $opettajat = Opettaja::laitoksenOpettajat($kayttaja->laitos_id);
              View::make('vastuuhenkilö/uusi_kurssi.html', array(
                 'kayttaja' => $kayttaja,

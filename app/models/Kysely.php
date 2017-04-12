@@ -5,6 +5,22 @@ class Kysely extends BaseModel {
   
   public function __construct($attributes) {
       parent::__construct($attributes);
+      $this->validators = $this->validate_string('kommentti', $this->kommentti, 500);
+  }
+  
+  
+  public function talleta() {
+      $query = DB::connection()->prepare(
+              'INSERT INTO Kysely (kurssi_id, oppilas_id, kommentti) '
+              .'VALUES (:kurssi_id, :oppilas_id, :kommentti) ' 
+              .'RETURNING id');
+      $query->execute(array(
+          'kurssi_id' => $this->kurssi_id,
+          'oppilas_id' => $this->oppilas_id,
+          'kommentti' => $this->kommentti
+      ));
+      $row = $query->fetch();
+      $this->id = $row['id'];
   }
   
   public static function kommentit($kurssi_id) {
@@ -31,7 +47,8 @@ class Kysely extends BaseModel {
               'JOIN Kurssi ON kurssi_id = Kurssi.id '.
               'JOIN Vastaus ON kysely_id = Kysely.id '.
               'JOIN Kysymys ON kysymys_id = Kysymys.id WHERE Kysely.kurssi_id=:kurssi_id '.
-              'GROUP BY sisalto'
+              'GROUP BY sisalto, Kysymys.kurssi_id '.
+              'ORDER BY Kysymys.kurssi_id DESC'
               );
       $query->execute(array('kurssi_id' => $kurssi_id));
       $rows = $query->fetchAll();
@@ -71,4 +88,6 @@ class Kysely extends BaseModel {
         return $tulokset;
     }
   
+    
+    
 }

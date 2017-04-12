@@ -17,7 +17,6 @@ class Kurssi extends BaseModel {
         ));
         $row = $query->fetch();
         $this->id = $row['id'];
-        
     }
     
     public function paivita() {
@@ -54,9 +53,14 @@ class Kurssi extends BaseModel {
     
     public static function kurssitJoistaOppilasVoiTehdaKyselyn($oppilas_id) { 
         $query = DB::connection()->prepare(
-                'SELECT Kurssi.* From Kurssi JOIN Ilmoittautuminen '
-                    . 'ON kurssi_id=Kurssi.id '
-                    . 'WHERE oppilas_id=:oppilas_id AND kysely_kaynnissa = 1');
+                'SELECT Kurssi.* From Kurssi '
+                    .'JOIN Ilmoittautuminen '
+                    .'ON kurssi_id=Kurssi.id '
+                .'WHERE oppilas_id=:oppilas_id AND kysely_kaynnissa = 1 '
+                    .'AND Kurssi.id NOT IN '
+                        .'(SELECT Kurssi.id FROM Kurssi '
+                        .'JOIN Kysely ON kurssi_id = Kurssi.id '
+                        .'WHERE oppilas_id = :oppilas_id)');
         $query->execute(array('oppilas_id' => $oppilas_id));
         $rows = $query->fetchAll();
         return self::luoKurssiOliot($rows);

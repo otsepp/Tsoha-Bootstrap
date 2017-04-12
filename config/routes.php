@@ -30,9 +30,18 @@
       OppilasController::koti();
   });
   
+  $routes->get('/oppilas/kysely/:id', function($id) {
+      KyselyController::kysely($id);
+  });
+  
+  $routes->post('/oppilas/kysely/uusi', function() {
+      KyselyController::luoKysely();
+  });
+  
   $routes->post('/oppilas/ilmoittautumiset/uusi', function() {
       IlmoittautuminenController::luo();
   });
+  
   
   
   $routes->get('/opettaja/login', function() {

@@ -3,40 +3,50 @@
 {% block content %}
 
 	{% import "macros/menu.html" as menu %}
-	{{menu.menu("#{kayttaja.nimi}", "#{base_path}/opettaja/koti")}}
+	{{menu.menu("#{kayttaja.nimi}", "#{base_path}/oppilas/koti")}}
 
 	{% if message %}
 		<div class="alert alert-success">{{message}}</div>
 	{% endif %}
 
-	<h3>Tee kysely</h3>
-	<form method="post" action=""> 
-		<div class="form-group">
-			<select name="kurssi_id" class="form-control">
-				{% for kurssi in kurssit_joista_voi_tehda_kys %} 
-					<option value="{{kurssi.id}}">{{kurssi.nimi}}</option>
-				{% endfor %}
-			</select>
-		</div>
-		<div class="form-group">
-			<button type="submit" class="btn btn-primary">Valmis</button>
-		</div>
-	</form>
+	
 
+	<h3>Tee kysely</h3>
+	{% if kurssit_joista_voi_tehda_kys %}
+		<div class="dropdown">
+		  	<button class="btn btn-default dropdown-toggle" 
+			type="button"  data-toggle="dropdown" 
+			aria-haspopup="true" aria-expanded="true">
+				Valitse kurssi
+				<span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu">
+				{% for kurssi in kurssit_joista_voi_tehda_kys %}  
+					<li><a href="{{base_path}}/oppilas/kysely/{{kurssi.id}}">{{kurssi.nimi}}</a></li>
+				{% endfor %}
+			</ul>
+		</div>
+	{% else %}
+		<p>Sinulla ei ole kursseja, joista voisit tehdä kyselyn</p>
+	{% endif %}
 
 	<h3>Ilmoittaudu kurssille</h3>
-	<form method="post" action="{{base_path}}/oppilas/ilmoittautumiset/uusi"> 
-		<div class="form-group">
-			<select name="kurssi_id" class="form-control">
-				{% for kurssi in kurssit_joille_ei_ilm %} 
-					<option value="{{kurssi.id}}">{{kurssi.nimi}}</option>
-				{% endfor %}
-			</select>
-			<input name="oppilas_id" type="hidden" value="{{kayttaja.id}}"> 
-		</div>
-		<div class="form-group">
-			<button type="submit" class="btn btn-primary">Valmis</button>
-		</div>
-	</form>
+	{% if kurssit_joille_ei_ilm %}
+		<form method="post" action="{{base_path}}/oppilas/ilmoittautumiset/uusi"> 
+			<div class="form-group">
+				<select name="kurssi_id" class="form-control">
+					{% for kurssi in kurssit_joille_ei_ilm %} 
+						<option value="{{kurssi.id}}">{{kurssi.nimi}}</option>
+					{% endfor %}
+				</select>
+				<input name="oppilas_id" type="hidden" value="{{kayttaja.id}}"> 
+			</div>
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary">Valmis</button>
+			</div>
+		</form>
+	{% else %}
+		<p>Ei kursseja saatavilla</p>
+	{% endif %}
 
 {% endblock %}
