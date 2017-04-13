@@ -36,7 +36,11 @@
 			<div class="form-group">
 				<select name="kurssi_id" class="form-control">
 					{% for kurssi in kurssit_joille_ei_ilm %} 
-						<option value="{{kurssi.id}}">{{kurssi.nimi}}</option>
+						<option value="{{kurssi.id}}">{{kurssi.nimi}} 
+						{% if kurssi.kysely_kaynnissa %}
+							(kysely käynnissä)
+						{% endif %}					
+						</option>
 					{% endfor %}
 				</select>
 				<input name="oppilas_id" type="hidden" value="{{kayttaja.id}}"> 
