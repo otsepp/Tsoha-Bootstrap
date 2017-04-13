@@ -12,11 +12,11 @@ class KyselyController extends BaseController {
         ));
         $errors = $kysely->errors();
         self::check_for_errors($errors, $params['kurssi_id']);
-        $kysely->talleta();
+        //$kysely->talleta();
         
         $kysymys_idt = $params['kysymys_id'];
         $arvosanat = $params['arvosana'];
-        
+	$vastaukset = array();
         for ($i = 0; $i < count($kysymys_idt); $i++) {
             $vastaus = new Vastaus(array(
                 'kysely_id' => $kysely->id,
@@ -25,8 +25,13 @@ class KyselyController extends BaseController {
             ));
             $errors = $vastaus->errors();
             self::check_for_errors($errors, $params['kurssi_id']);
-            $vastaus->talleta();
+	    $vastaukset[] = $vastaus;
+            //$vastaus->talleta();
         } 
+	$kysely->talleta();
+	foreach ($vastaukset as $vastaus) {
+		$vastaus->talleta();
+	}
         Redirect::to('/oppilas/koti', array('message' => 'Kysely lähetetty'));
     }
     
