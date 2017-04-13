@@ -38,7 +38,7 @@
 					{% for kurssi in kurssit_joille_ei_ilm %} 
 						<option value="{{kurssi.id}}">{{kurssi.nimi}} 
 						{% if kurssi.kysely_kaynnissa %}
-							(kysely käynnissä)
+							<strong>(kysely käynnissä)</strong>
 						{% endif %}					
 						</option>
 					{% endfor %}
