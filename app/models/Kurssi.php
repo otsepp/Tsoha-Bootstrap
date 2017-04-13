@@ -40,6 +40,7 @@ class Kurssi extends BaseModel {
         return $row['count'];
     }
     
+//hakee kurssit, joille oppilas ei ole ilmoittautunut
     public static function kurssitJoillaEiOppilasta($oppilas_id) { 
         $query = DB::connection()->prepare(
                 'SELECT DISTINCT Kurssi.* FROM Kurssi LEFT JOIN Ilmoittautuminen ON kurssi_id = Kurssi.id '
@@ -51,6 +52,7 @@ class Kurssi extends BaseModel {
         return self::luoKurssiOliot($rows);
     }
     
+	//hakee kurssit, joille oppilas on ilmoittautunut, joissa kysely on käynnissä, eikä oppilas ole jo tehnyt kyselyä
     public static function kurssitJoistaOppilasVoiTehdaKyselyn($oppilas_id) { 
         $query = DB::connection()->prepare(
                 'SELECT Kurssi.* From Kurssi '

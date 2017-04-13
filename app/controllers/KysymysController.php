@@ -59,6 +59,8 @@ class KysymysController extends BaseController {
                     'errors' => $errors
                  ));
             } else {
+		//jos käyttäjä on opettaja, viedään takaisin sivulle jossa "luodaan" kysely, eli
+		//luodaan kurssikohtaisia kysymyksiä ja laitetaan kysely käyntiin
                 OpettajaController::luoKysely($kysymys->kurssi_id, $errors);
             }
         }

@@ -3,7 +3,7 @@
 Yleisiä linkkejä:
 
 * [Linkki sovellukseeni](http://tuomasse.users.cs.helsinki.fi/tsoha/aloitus)
-Voit kirjautua tunnuksilla "Matti" ja "ssana"
+Voit kirjautua tunnuksilla "Matti" ja "ssana" (loput tunnukset dokumentaatiossa)
 
 * [Linkki dokumentaatiooni](https://github.com/otsepp/Tsoha-Bootstrap/blob/master/doc/dokumentaatio.pdf)
 

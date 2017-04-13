@@ -69,6 +69,7 @@ class KurssiController extends BaseController{
         $opettaja = $kurssi->haeOpettaja();
         $osallistujienMaara = $kurssi->osallistujenMaara();
         
+	//Menun koti-nappulaa varten
         $koti_path = null;
         if ($vastuuhenkiloStatus) {
             $koti_path = 'vastuuhenkilo/koti';
@@ -87,6 +88,7 @@ class KurssiController extends BaseController{
             ));
     }
     
+	//kurssin kyselyraportti
     public static function raportti($id) {
         if(!self::kayttaja_on_vastuuhenkilo() && !self::kayttaja_on_opettaja()) {
             self::redirect_kun_ei_oikeuksia();

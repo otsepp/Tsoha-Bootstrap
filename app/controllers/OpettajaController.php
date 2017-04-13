@@ -29,6 +29,8 @@ class OpettajaController extends BaseController {
         ));
     }
     
+	//Opettaja ei luo riviä Kysely-tauluun, vaan luo kurssikohtaisia kysmyksiä ja 
+	//laitaa kyselyn käyntiin, epäselvä
     public static function luoKysely($id, $errors) {
         self::tarkista_onko_kayttaja_opettaja();
         $kayttaja = self::get_user_logged_in();
@@ -48,6 +50,7 @@ class OpettajaController extends BaseController {
         ));
     }
     
+	//tämän varmaan tulisi olla vastuuhenkilön kontrollerissa
     public static function näytä($id) {
         self::tarkista_onko_kayttaja_vastuuhenkilo();
         $kayttaja = self::get_user_logged_in();

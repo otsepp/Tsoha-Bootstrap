@@ -12,7 +12,6 @@ class KyselyController extends BaseController {
         ));
         $errors = $kysely->errors();
         self::check_for_errors($errors, $params['kurssi_id']);
-        //$kysely->talleta();
         
         $kysymys_idt = $params['kysymys_id'];
         $arvosanat = $params['arvosana'];
@@ -26,7 +25,6 @@ class KyselyController extends BaseController {
             $errors = $vastaus->errors();
             self::check_for_errors($errors, $params['kurssi_id']);
 	    $vastaukset[] = $vastaus;
-            //$vastaus->talleta();
         } 
 	$kysely->talleta();
 	foreach ($vastaukset as $vastaus) {
@@ -41,6 +39,7 @@ class KyselyController extends BaseController {
          }
     }
     
+	//renderöi kyselyn
     public static function kysely($id) {
         self::tarkista_onko_kayttaja_oppilas();
         $kayttaja = self::get_user_logged_in();

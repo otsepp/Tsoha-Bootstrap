@@ -26,6 +26,7 @@ class VastuuhenkiloController extends BaseController {
         View::make('vastuuhenkilö/koti.html', array('kayttaja' => $kayttaja));
     }
     
+	//Näyttää opettajan laitoksen kurssit
     public static function kurssit() {
         self::tarkista_onko_kayttaja_vastuuhenkilo();
         $kayttaja = self::get_user_logged_in();
@@ -67,6 +68,7 @@ class VastuuhenkiloController extends BaseController {
         ));
     }
     
+	//näyttää laitokset opettajat
     public static function opettajat() {
         self::tarkista_onko_kayttaja_vastuuhenkilo();
         $kayttaja = self::get_user_logged_in();
@@ -89,6 +91,7 @@ class VastuuhenkiloController extends BaseController {
         ));   
     }
     
+//VH voi luoda yleisiä ja laitoskohtaisia kysymyksiä
     public static function uusiKysymys() {
         self::tarkista_onko_kayttaja_vastuuhenkilo();
         $kayttaja = self::get_user_logged_in();

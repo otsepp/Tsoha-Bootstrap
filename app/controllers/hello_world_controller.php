@@ -7,6 +7,7 @@ class HelloWorldController extends BaseController{
       View::make('home.html');
     }
     
+    //Renderöi kurssikyselyn aloitussivun
     public static function aloitus() {
         View::make('aloitus.html');
     }

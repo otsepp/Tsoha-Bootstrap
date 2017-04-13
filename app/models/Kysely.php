@@ -42,6 +42,7 @@ class Kysely extends BaseModel {
       return $row['count'];
   }
   
+//hakee kurssin kyselyn kysymysten sisällöt, vastaukset ja niiden keskiarvot
   public static function raportti($kurssi_id) {
       $query = DB::connection()->prepare('SELECT sisalto, ROUND(AVG(arvosana),1) AS keskiarvo FROM Kysely '.
               'JOIN Kurssi ON kurssi_id = Kurssi.id '.
@@ -63,6 +64,7 @@ class Kysely extends BaseModel {
       return $tulokset;
   }
   
+//hakee laitokset kurssien kyselyiden sisällöt, vastaukset ja niiden keskiarvot
   public static function yhteenveto($laitos_id) {
         $query = DB::connection()->prepare(' SELECT nimi, sisalto, ROUND(AVG(arvosana),1) AS keskiarvo FROM Kysely '.
                 'JOIN Kurssi on kurssi_id=Kurssi.id '.

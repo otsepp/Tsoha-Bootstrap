@@ -25,6 +25,7 @@ class Kysymys extends BaseModel {
         $this->id = $row['id'];
     }
     
+	//kysymykset, jotka esiintyvät kaikissa kyselyissä
     public static function etsiYleisetKysymykset() {
         $query = DB::connection()->prepare('SELECT * FROM Kysymys WHERE laitos_id IS NULL AND kurssi_id IS NULL');
         $query->execute();
