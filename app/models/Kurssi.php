@@ -8,6 +8,13 @@ class Kurssi extends BaseModel {
         $this->validators = $this->validate_string('nimi', $this->nimi, 50);;
     }
     
+    public function poista() {
+        $query = DB::connection()->prepare('DELETE FROM Kurssi WHERE id=:id');
+        $query->execute(array(
+            'id' => $this->id
+        ));
+    }
+    
     public function talleta() {
         $query = DB::connection()->prepare('INSERT INTO Kurssi (laitos_id, opettaja_id, nimi) VALUES (:laitos_id, :opettaja_id, :nimi) RETURNING id');
         $query->execute(array(

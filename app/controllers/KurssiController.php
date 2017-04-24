@@ -2,6 +2,12 @@
 
 class KurssiController extends BaseController{
     
+    public static function poista($id) {
+        $kurssi = Kurssi::etsi($id);
+        $kurssi->poista();
+        Redirect::to('/vastuuhenkilo/kurssit', array('message' => 'Kurssi poistettu'));
+    }
+    
     public static function luoKurssi() {
         $params = $_POST;
         $kurssi = new Kurssi(array(

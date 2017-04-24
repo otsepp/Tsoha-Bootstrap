@@ -33,7 +33,8 @@ class KysymysController extends BaseController {
     }
     
     public static function poista($id) {
-        $vastaukset = Vastaus::kysymyksen_vastaukset($kysymys->id);
+        $kysymys = Kysymys::etsi($id);
+        $vastaukset = Vastaus::kysymyksen_vastaukset($id);
         foreach($vastaukset as $vastaus) {
             $vastaus->poista($vastaus->kysymys_id);
         }

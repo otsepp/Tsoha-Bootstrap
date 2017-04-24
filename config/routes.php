@@ -142,6 +142,10 @@
       KurssiController::paivita($id);
   });
   
+  $routes->post('/poista_kurssi/:id', function($id) {
+      KurssiController::poista($id);
+  });
+  
   
   
   $routes->get('/opettaja/:id', function($id) {

@@ -10,6 +10,10 @@
 
 	{% if kurssi.kysely_kaynnissa == 0 and vastuuhenkiloStatus%}
 		<a href="{{base_path}}/vastuuhenkilo/muokkaa_kurssia/{{kurssi.id}}" class= "btn btn-warning">Muokkaa kurssia</a>
+
+		<form method="post" action="{{base_path}}/poista_kurssi/{{kurssi.id}}" style="display:inline-block">
+			<button type="submit" class="btn btn-danger">Poista kurssi</button>
+		</form>
 	{% endif %}
 
 	{% if kurssi.kysely_kaynnissa %}

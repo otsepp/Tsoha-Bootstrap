@@ -25,6 +25,22 @@ class Kysymys extends BaseModel {
         $this->id = $row['id'];
     }
     
+    public static function etsi($id) {
+        $query = DB::connection()->prepare('SELECT * FROM Kysymys WHERE id=:id LIMIT 1');
+        $query->execute(array('id' => $id));
+        $row = $query->fetch();
+        $kysymys = NULL;
+        if ($row) {
+            $kysymys = new Kysymys(array(
+                'id' => $row['id'],
+                'laitos_id' => $row['laitos_id'],
+                'kurssi_id' => $row['kurssi_id'],
+                'sisalto' => $row['sisalto']
+            ));
+        }
+        return $kysymys;
+    }
+    
 	//kysymykset, jotka esiintyvät kaikissa kyselyissä
     public static function etsiYleisetKysymykset() {
         $query = DB::connection()->prepare('SELECT * FROM Kysymys WHERE laitos_id IS NULL AND kurssi_id IS NULL');
