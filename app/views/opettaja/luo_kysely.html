@@ -38,6 +38,8 @@
 			{% for kk in kurssikysymykset %}
 				
 				<li class="list-group-item">
+					{{forms.destroy_button("#{base_path}/kysymykset/poista/#{kk.id}")}}
+					{{forms.edit_button("#{base_path}/kysymykset/muokkaa/#{kk.id}")}}
 					{{kk.sisalto}}
 				</li>
 			{% endfor %}
@@ -64,28 +66,5 @@
 	
 	<div style="padding: 0px 0px 40px 0px"></div>
 	<a href="{{base_path}}/kurssi/{{kurssi.id}}" class="btn btn-primary">Takaisin</a>
-
-	<!--
-	<h4>Yleiset kysymykset:</h4>
-		<ul class="list-group">
-			<li class="list-group-item">Kuinka vaikea kurssi oli?</li>
-			<li class="list-group-item">Kuinka hauska kurssi oli?</li>
-		</ul>
-	<h4>Laitoskohtaiset kysymykset:</h4>
-		<ul class="list-group">
-			<li class="list-group-item">Opettiko kurssi uutta tietojenkäsittelytieteestä?</li>
-		</ul>
-	<h4>Kurssikohtaiset kysymykset:</h4>
-		<ul class="list-group">
-			<li class="list-group-item">esim.: aiemmin luotu kysymys</li>
-		</ul>
-		
-		<input class="form-control" placeholder="Uusi kysymys" type="text"><br>
-		<button class="btn btn-primary btn-sm">lisää kysymys</button><br>
-	
-	<div style="padding: 0px 0px 40px 0px"></div>
-
-	<button class="btn btn-success">Valmis</button>
-	-->
 
 {% endblock %}

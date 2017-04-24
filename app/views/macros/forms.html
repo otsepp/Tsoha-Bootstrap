@@ -1,9 +1,15 @@
 {% macro destroy_button(action) %}
-
 	<span class="badge">
 		<form method="post" action="{{action}}" style="display:inline-block">
-			<button type="submit" class="btn btn-link" style="margin:-10px -10px -5px -10px; color: red">poista</button>
+			<button type="submit" class="btn btn-link" style="margin:-15px -10px -8px -10px; color: red">poista</button>
 		</form>
 	</span>
+{% endmacro %}
 
+{% macro edit_button(path) %}
+	<span class="badge">
+		<a href="{{path}}">
+			<font color="orange">muokkaa</font>
+		</a>
+	</span>
 {% endmacro %}

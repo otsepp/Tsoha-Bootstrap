@@ -88,6 +88,17 @@ class Kurssi extends BaseModel {
         $rows = $query->fetchAll();
         return self::luoKurssiOliot($rows);
     }
+    
+    public static function opettajanKurssitIdt($opettaja_id) {
+        $query = DB::connection()->prepare('SELECT id FROM Kurssi WHERE opettaja_id=:id');
+        $query->execute(array('id' => $opettaja_id));
+        $rows = $query->fetchAll();
+        $idt = array();
+        foreach($rows as $row) {
+            $idt[] = $row['id'];
+        }
+        return $idt;
+    }
 
     public static function etsi($id) {
         $query = DB::connection()->prepare('SELECT * FROM Kurssi WHERE id=:id LIMIT 1');

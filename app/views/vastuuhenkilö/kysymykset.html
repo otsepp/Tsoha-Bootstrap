@@ -14,19 +14,19 @@
 		{% for kysymys in yleisetKysymykset %}
 			<li class="list-group-item">
 				{{forms.destroy_button("#{base_path}/kysymykset/poista/#{kysymys.id}")}}
+				{{forms.edit_button("#{base_path}/kysymykset/muokkaa/#{kysymys.id}")}}
 				{{kysymys.sisalto}}
 			</li>
 		{% endfor %}
 	</ul>
 	<br><br>
 
-	
-
 	<label>Laitoskohtaiset kysymykset</label>
 	<ul class="list-group">
 		{% for kysymys in laitosKysymykset %}
 			<li class="list-group-item">
 				{{forms.destroy_button("#{base_path}/kysymykset/poista/#{kysymys.id}")}}
+				{{forms.edit_button("#{base_path}/kysymykset/muokkaa/#{kysymys.id}")}}
 				{{kysymys.sisalto}}		
 			</li>
 		{% endfor %}

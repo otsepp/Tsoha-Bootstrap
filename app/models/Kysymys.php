@@ -8,6 +8,18 @@ class Kysymys extends BaseModel {
         $this->validators = $this->validate_string('sisalto', $this->sisalto, 50);
     }
     
+    
+    public function paivita() {
+        $query = DB::connection()->prepare(
+                'UPDATE Kysymys SET ' .
+                'sisalto=:sisalto ' .
+                'WHERE id=:id');
+        $query->execute(array(
+            'sisalto' => $this->sisalto,
+            'id' => $this->id
+        ));
+    }
+    
     public function poista() {
         $query = DB::connection()->prepare('DELETE FROM Kysymys WHERE id=:id');
         $query->execute(array(

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+
+	{% import "macros/menu.html" as menu %}
+	{{menu.menu("#{kayttaja.nimi}", "#{base_path}/#{koti_path}")}}
+	
+	<h3>Muokkaa kysymystä</h3>
+
+	{% if errors %}
+		<div class="alert alert-danger">
+			<ul>
+				{% for error in errors %}
+					<li>{{error}}</li>
+				{% endfor %}
+			</ul>
+		</div>
+	{% endif %}
+
+	<form method="post" action="{{base_path}}/kysymykset/muokkaa/{{kysymys.id}}">
+		<div class="form-group">
+			<label>Sisältö</label>
+			<input name="sisalto" type="text" value="{{kysymys.sisalto}}" class="form-control">
+			<input name="laitos_id" type="hidden" value="{{kysymys.laitos_id}}">
+			<input name="kurssi_id" type="hidden" value="{{kysymys.kurssi_id}}">
+		</div>
+		<div class="form-group">
+			<button type="submit" class="btn btn-success">Valmis</button>
+		</div>
+	</form>
+	
+	
+
+{% endblock %}

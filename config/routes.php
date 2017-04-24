@@ -128,6 +128,13 @@
       KysymysController::poista($id);
   });
   
+  $routes->get('/kysymykset/muokkaa/:id', function($id) {
+      KysymysController::muokkausNakyma($id, array());
+  });
+  
+  $routes->post('/kysymykset/muokkaa/:id', function($id) {
+      KysymysController::paivita($id);
+  });
   
   
   $routes->get('/kurssi/:id', function($id) {      
