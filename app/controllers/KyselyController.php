@@ -28,6 +28,7 @@ class KyselyController extends BaseController {
         } 
 	$kysely->talleta();
 	foreach ($vastaukset as $vastaus) {
+                $vastaus->kysely_id = $kysely->id;
 		$vastaus->talleta();
 	}
         Redirect::to('/oppilas/koti', array('message' => 'Kysely lähetetty'));
@@ -45,6 +46,11 @@ class KyselyController extends BaseController {
         $kayttaja = self::get_user_logged_in();
         
         $kurssi = Kurssi::etsi($id);
+        
+        $kurssit_joista_voi_tehda_kyselyn = Kurssi::kurssitJoistaOppilasVoiTehdaKyselyn($kayttaja->id);
+        if (!in_array($kurssi, $kurssit_joista_voi_tehda_kyselyn)) {
+            self::redirect_kun_ei_oikeuksia();
+        }
         
         $yk = Kysymys::etsiYleisetKysymykset();
         $lk = Kysymys::etsiLaitosKysymykset($kurssi->laitos_id);
