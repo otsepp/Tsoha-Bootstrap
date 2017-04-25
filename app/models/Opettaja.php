@@ -7,6 +7,7 @@ class Opettaja extends BaseModel {
         parent::__construct($attributes);
     }
     
+    
     public static function authenticate($nimi, $salasana) {
         $query = DB::connection()->prepare('SELECT * FROM Opettaja WHERE nimi=:nimi AND salasana=:salasana LIMIT 1');
         $query->execute(array('nimi' => $nimi, 'salasana' => $salasana));
@@ -22,14 +23,14 @@ class Opettaja extends BaseModel {
         $query = DB::connection()->prepare('SELECT * FROM Opettaja WHERE laitos_id=:id');
         $query->execute(array('id' => $laitos_id));
         $rows = $query->fetchAll();
-        return self::luoOpettajaOliot($rows);
+        return self::luoOliot($rows);
     }
     
     public static function kaikki() {
         $query = DB::connection()->prepare('SELECT * FROM Opettaja');
         $query->execute();
         $rows = $query->fetchAll();
-        return self::luoOpettajaOliot($rows);
+        return self::luoOliot($rows);
     }
     
     public static function etsi($id) {
@@ -43,7 +44,7 @@ class Opettaja extends BaseModel {
         return $opettaja;
     }
     
-     private static function luoOpettajaOliot($rows) {
+     private static function luoOliot($rows) {
         $opettajat = array();
         foreach($rows as $row) {
             $opettajat[] = self::luoOlio($row);

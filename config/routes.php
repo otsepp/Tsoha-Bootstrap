@@ -91,12 +91,8 @@
   });
   
   $routes->get('/vastuuhenkilo/muokkaa_kurssia/:id', function($id) {
-      VastuuhenkiloController::muokkaaKurssia($id);
+      VastuuhenkiloController::muokkaaKurssia($id, array());
   });
-  
-//  $routes->post('/vastuuhenkilo/muokkaa_kurssia/:id', function($id) {
-//      KurssiController::paivita($id);
-//  });
   
   $routes->get('/vastuuhenkilo/opettajat', function() {
       VastuuhenkiloController::opettajat();

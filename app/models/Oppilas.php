@@ -7,12 +7,13 @@ class Oppilas extends BaseModel {
         parent::__construct($attributes);
     }
     
+    
     public static function authenticate($nimi, $salasana) {
         $query = DB::connection()->prepare('SELECT * FROM Oppilas WHERE nimi=:nimi AND salasana=:salasana LIMIT 1');
         $query->execute(array('nimi' => $nimi, 'salasana' => $salasana));
         $row = $query->fetch();
         if ($row) {
-            return self::luo_olio($row);
+            return self::luoOlio($row);
         } else {
             return null;
         }
@@ -26,7 +27,7 @@ class Oppilas extends BaseModel {
         $oppilas = NULL;
         
         if ($row) {
-            $oppilas = self::luo_olio($row);
+            $oppilas = self::luoOlio($row);
         }
         return $oppilas;
     }
@@ -39,12 +40,12 @@ class Oppilas extends BaseModel {
         $oppilaat = array();
         
         foreach($rows as $row) {
-            $oppilaat[] = self::luo_olio($row);
+            $oppilaat[] = self::luoOlio($row);
         }
         return $oppilaat;
     }
     
-    private static function luo_olio($row) {
+    private static function luoOlio($row) {
         return new Oppilas(array(
             'id' => $row['id'],
             'laitos_id' => $row['laitos_id'],

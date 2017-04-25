@@ -7,10 +7,6 @@ class Vastuuhenkilo extends BaseModel {
         parent::__construct($attributes);
     }
     
-    public static function getTestiVH() {
-        $arr = Vastuuhenkilo::kaikki();
-        return $arr[0];
-    }
     
     public static function authenticate($nimi, $salasana) {
         $query = DB::connection()->prepare('SELECT * FROM Vastuuhenkilo WHERE nimi=:nimi AND salasana=:salasana LIMIT 1');
@@ -20,7 +16,7 @@ class Vastuuhenkilo extends BaseModel {
         ));
         $row = $query->fetch();
         if ($row) {
-            return self::luo_olio($row);
+            return self::luoOlio($row);
         } else {
             return null;
         }
@@ -34,7 +30,7 @@ class Vastuuhenkilo extends BaseModel {
         $vastuuhenkilo = NULL;
         
         if ($row) {
-            $vastuuhenkilo = self::luo_olio($row);
+            $vastuuhenkilo = self::luoOlio($row);
         }
         return $vastuuhenkilo;
     }
@@ -47,13 +43,13 @@ class Vastuuhenkilo extends BaseModel {
         $vastuuhenkilot = array();
         
         foreach($rows as $row) {
-            $vastuuhenkilot[] = self::luo_olio($row);
+            $vastuuhenkilot[] = self::luoOlio($row);
 
         }
         return $vastuuhenkilot;
     }
     
-    public static function luo_olio($row) {
+    private static function luoOlio($row) {
         $vastuuhenkilo = new Vastuuhenkilo(array(
                 'id' => $row['id'],
                 'laitos_id' => $row['laitos_id'],

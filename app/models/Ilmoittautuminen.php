@@ -7,6 +7,7 @@ class Ilmoittautuminen extends BaseModel {
         parent::__construct($attributes);
     }
     
+    
     public function talleta() {
         $query = DB::connection()->prepare(
                 'INSERT INTO Ilmoittautuminen (kurssi_id, oppilas_id) '

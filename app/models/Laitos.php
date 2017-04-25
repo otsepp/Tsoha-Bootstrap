@@ -7,6 +7,7 @@ class Laitos extends BaseModel {
         parent::__construct($attributes);
     }
     
+    
     public static function kaikki() {
         $query = DB::connection()->prepare('SELECT * FROM Laitos');
         $query->execute();
@@ -15,10 +16,7 @@ class Laitos extends BaseModel {
         $laitokset = array();
         
         foreach($rows as $row) {
-            $laitokset[] = new Laitos(array(
-               'id' => $row['id'],
-               'nimi' => $row['nimi']
-            ));
+            $laitokset[] = self::luoOlio($row);
         }
         return $laitokset;
     }
@@ -31,13 +29,7 @@ class Laitos extends BaseModel {
         $kurssit = array();
         
         foreach($rows as $row) {
-            $kurssit[] = new Kurssi(array(
-                    'id' => $row['id'],
-                    'laitos_id' => $row['laitos_id'],
-                    'opettaja_id' => $row['opettaja_id'],
-                    'nimi' => $row['nimi'],
-                    'kysely_kaynnissa' => $row['kysely_kaynnissa']
-            ));
+            $kurssit[] = Kurssi::luoOlio($row);
         }
         return $kurssit;
     }
@@ -50,12 +42,16 @@ class Laitos extends BaseModel {
         $laitos = NULL;
         
         if ($row) {
-            $laitos = new Laitos(array(
-                'id' => $row['id'],
-                'nimi' => $row['nimi']
-            ));
+            $laitos = self::luoOlio($row);
         }
         return $laitos;
     }
     
+    private static function luoOlio($row) {
+        return new Laitos(array(
+           'id' => $row['id'],
+           'nimi' => $row['nimi'] 
+        ));
+    }
+   
 }

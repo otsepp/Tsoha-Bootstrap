@@ -8,6 +8,7 @@ class Kurssi extends BaseModel {
         $this->validators = $this->validate_string('nimi', $this->nimi, 50);;
     }
     
+    
     public function poista() {
         $query = DB::connection()->prepare('DELETE FROM Kurssi WHERE id=:id');
         $query->execute(array(
@@ -56,37 +57,37 @@ class Kurssi extends BaseModel {
                          . 'WHERE oppilas_id = :oppilas_id)');
         $query->execute(array('oppilas_id' => $oppilas_id));
         $rows = $query->fetchAll();
-        return self::luoKurssiOliot($rows);
+        return self::luoOliot($rows);
     }
     
 	//hakee kurssit, joille oppilas on ilmoittautunut, joissa kysely on käynnissä, eikä oppilas ole jo tehnyt kyselyä
     public static function kurssitJoistaOppilasVoiTehdaKyselyn($oppilas_id) { 
         $query = DB::connection()->prepare(
                 'SELECT Kurssi.* From Kurssi '
-                    .'JOIN Ilmoittautuminen '
-                    .'ON kurssi_id=Kurssi.id '
-                .'WHERE oppilas_id=:oppilas_id AND kysely_kaynnissa = 1 '
-                    .'AND Kurssi.id NOT IN '
-                        .'(SELECT Kurssi.id FROM Kurssi '
-                        .'JOIN Kysely ON kurssi_id = Kurssi.id '
-                        .'WHERE oppilas_id = :oppilas_id)');
+                    .'JOIN Ilmoittautuminen ON kurssi_id=Kurssi.id '
+                .'WHERE oppilas_id=:oppilas_id '
+                .'AND kysely_kaynnissa = 1 '
+                .'AND Kurssi.id NOT IN '
+                    .'(SELECT Kurssi.id FROM Kurssi '
+                    .'JOIN Kysely ON kurssi_id = Kurssi.id '
+                    .'WHERE oppilas_id = :oppilas_id)');
         $query->execute(array('oppilas_id' => $oppilas_id));
         $rows = $query->fetchAll();
-        return self::luoKurssiOliot($rows);
+        return self::luoOliot($rows);
     }
     
     public static function laitoksenKurssit($laitos_id) {
         $query = DB::connection()->prepare('SELECT * FROM Kurssi WHERE laitos_id=:id');
         $query->execute(array('id' => $laitos_id));
         $rows = $query->fetchAll();
-        return self::luoKurssiOliot($rows);
+        return self::luoOliot($rows);
     }
     
     public static function opettajanKurssit($opettaja_id) {
         $query = DB::connection()->prepare('SELECT * FROM Kurssi WHERE opettaja_id=:id');
         $query->execute(array('id' => $opettaja_id));
         $rows = $query->fetchAll();
-        return self::luoKurssiOliot($rows);
+        return self::luoOliot($rows);
     }
     
     public static function opettajanKurssitIdt($opettaja_id) {
@@ -118,19 +119,23 @@ class Kurssi extends BaseModel {
         }
         return $kurssi;
     }
-
-    private static function luoKurssiOliot($rows) {
+    
+    private static function luoOliot($rows) {
         $kurssit = array();
         foreach($rows as $row) {
-            $kurssit[] = new Kurssi(array(
-                    'id' => $row['id'],
-                    'laitos_id' => $row['laitos_id'],
-                    'opettaja_id' => $row['opettaja_id'],
-                    'nimi' => $row['nimi'],
-                    'kysely_kaynnissa' => $row['kysely_kaynnissa']
-            ));
+            $kurssit[] = self::luoOlio($row);
         }
         return $kurssit;
     }
     
+    //public koska käytetään Laitos-luokassa
+    public static function luoOlio($row) {
+        return new Kurssi(array(
+            'id' => $row['id'],
+            'laitos_id' => $row['laitos_id'],
+            'opettaja_id' => $row['opettaja_id'],
+            'nimi' => $row['nimi'],
+            'kysely_kaynnissa' => $row['kysely_kaynnissa']
+        ));
+    }
 }

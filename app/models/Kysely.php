@@ -23,6 +23,7 @@ class Kysely extends BaseModel {
       $this->id = $row['id'];
   }
   
+  //Hakee kurssista tehtyjen kyselyiden kommentit
   public static function kommentit($kurssi_id) {
       $query = DB::connection()->prepare('SELECT kommentti FROM Kysely WHERE kurssi_id=:kurssi_id');
       $query->execute(array('kurssi_id' => $kurssi_id));

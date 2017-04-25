@@ -8,6 +8,7 @@ class Vastaus extends BaseModel {
          $this->validators = $this->validate_arvosana();
      }
      
+     
      public function validate_arvosana() {
          $errors = array();
          if (!filter_var($this->arvosana, FILTER_VALIDATE_INT)) {

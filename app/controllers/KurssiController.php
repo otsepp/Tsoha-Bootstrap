@@ -49,17 +49,8 @@ class KurssiController extends BaseController{
             } else if (self::kayttaja_on_opettaja()) {
                 Redirect::to('/kurssi/'.$id);
             }
-            
         } else {
-            $kayttaja = self::get_user_logged_in();
-            $opettajat = Opettaja::laitoksenOpettajat($kayttaja->laitos_id);
-            $kurssi = Kurssi::etsi($id);
-            View::make('vastuuhenkilö/kurssi_muokkaa.html', array(
-                'kayttaja' => $kayttaja,
-                'kurssi' => $kurssi,
-                'opettajat' => $opettajat,
-                'errors' => $errors
-                    ));
+            VastuuhenkiloController::muokkaaKurssia($kurssi->id, $errors);
         }
     }
     
@@ -94,7 +85,7 @@ class KurssiController extends BaseController{
             ));
     }
     
-	//kurssin kyselyraportti
+    //kurssin kyselyraportti
     public static function raportti($id) {
         if(!self::kayttaja_on_vastuuhenkilo() && !self::kayttaja_on_opettaja()) {
             self::redirect_kun_ei_oikeuksia();
@@ -126,7 +117,7 @@ class KurssiController extends BaseController{
            'vastaajat' => $vastaajat,
            'vastuuhenkiloStatus' => $vastuuhenkiloStatus,
            'opettajaStatus' => $opettajaStatus,
-            'koti_path' => $koti_path
+           'koti_path' => $koti_path
         ));
     }
 }
