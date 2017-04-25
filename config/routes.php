@@ -107,7 +107,7 @@
   });
   
   
-  
+
   $routes->post('/uusi_yleinen_kysymys', function() {
       KysymysController::luoYleinenKysymys();
   });
@@ -131,6 +131,7 @@
   $routes->post('/kysymykset/muokkaa/:id', function($id) {
       KysymysController::paivita($id);
   });
+  
   
   
   $routes->get('/kurssi/:id', function($id) {      

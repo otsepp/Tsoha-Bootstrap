@@ -16,7 +16,7 @@ INSERT INTO Kurssi (laitos_id, opettaja_id, nimi, kysely_kaynnissa) VALUES (1, 1
 INSERT INTO Kurssi (laitos_id, opettaja_id, nimi, kysely_kaynnissa) VALUES (1, 2, 'Tietokoneen toiminta', 1);
 INSERT INTO Kurssi (laitos_id, opettaja_id, nimi) VALUES (1, 1, 'Webdevving (online course)');
 INSERT INTO Kurssi (laitos_id, opettaja_id, nimi) VALUES (1, 2, 'Game Dev Course');
-INSERT INTO Kurssi (laitos_id, opettaja_id, nimi) VALUES (2, 3, 'Barokkiajan taide & muoti');
+INSERT INTO Kurssi (laitos_id, opettaja_id, nimi, kysely_kaynnissa) VALUES (2, 3, 'Barokkiajan taide & muoti', 1);
 INSERT INTO Kurssi (laitos_id, opettaja_id, nimi) VALUES (2, 4, 'Toinen maailmansota');
 
 INSERT INTO Ilmoittautuminen (kurssi_id, oppilas_id) VALUES (1, 1);
@@ -30,6 +30,7 @@ INSERT INTO Kysymys (sisalto) VALUES ('Oliko kurssi vaikea?');
 INSERT INTO Kysymys (sisalto) VALUES ('Kuinka hauska kurssi oli?');
 INSERT INTO Kysymys (laitos_id, sisalto) VALUES (1, 'Opettiko kurssi tkt:sta?');
 INSERT INTO Kysymys (kurssi_id, sisalto) VALUES (1, 'Oliko ryhmätyö haastava?');
+INSERT INTO Kysymys (laitos_id, sisalto) VALUES (2, 'Opitko paljon historiaa?');
 
 INSERT INTO Vastaus(kysely_id, kysymys_id, arvosana) VALUES (1, 1, 4);
 INSERT INTO Vastaus(kysely_id, kysymys_id, arvosana) VALUES (1, 2, 3);
