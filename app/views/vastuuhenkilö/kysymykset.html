@@ -9,9 +9,8 @@
 
 	<h3>Kysymykset</h3>
 
-	{% if message %}
-		<div class="alert alert-success">{{message}}</div>
-	{% endif %}
+	{% import "macros/errors_and_messages.html" as messages %}
+	{{messages.message_box(message)}}
 
 	<label>Yleiset kysymykset</label>
 	<ul class="list-group">

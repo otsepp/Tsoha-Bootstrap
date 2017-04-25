@@ -31,7 +31,7 @@
   });
   
   $routes->get('/oppilas/kysely/:id', function($id) {
-      KyselyController::kysely($id);
+      KyselyController::kysely($id, array());
   });
   
   $routes->post('/oppilas/kysely/uusi', function() {
@@ -103,7 +103,7 @@
   });
   
   $routes->get('/vastuuhenkilo/kysymykset/uusi', function() {
-      VastuuhenkiloController::uusiKysymys();
+      VastuuhenkiloController::uusiKysymys(array());
   });
   
   

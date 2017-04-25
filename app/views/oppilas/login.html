@@ -4,11 +4,8 @@
 
 	<h2>Kirjaudu sisään oppilaana</h2>
 
-	{% if error %}
-		<div class="alert alert-danger">
-			{{error}}
-		</div>
-	{% endif %}
+	{% import "macros/errors_and_messages.html" as messages %}
+	{{messages.error_box(error)}}
 
 	<form method="post" action="{{base_path}}/oppilas/login">
 		<div class="form-group">

@@ -7,12 +7,9 @@
 
 	<h3>Kurssini</h3>
 
-	{% if message %}
-		<div class="alert alert-success">{{message}}</div>
-	{% endif %}
-	{% if error %}
-		<div class="alert alert-danger">{{error}}</div>
-	{% endif %}
+	{% import "macros/errors_and_messages.html" as messages %}
+	{{messages.message_box(message)}}
+	{{messages.error_box(error)}}
 
 	<ul class="list-group">
 		{% for kurssi in kurssit %}

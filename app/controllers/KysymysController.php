@@ -73,10 +73,10 @@ class KysymysController extends BaseController {
             $kysymys->paivita();
             
             if (self::kayttaja_on_vastuuhenkilo()) {
-                Redirect::to('/vastuuhenkilo/kysymykset');
+                Redirect::to('/vastuuhenkilo/kysymykset', array('message' => 'Kysymystä muokattiin onnistuneesti'));
             } elseif (self::kayttaja_on_opettaja()) {
                 $kurssi_id = $kysymys->kurssi_id;
-                Redirect::to('/opettaja/luo_kysely/'.$kurssi_id);
+                Redirect::to('/opettaja/luo_kysely/'.$kurssi_id, array('message' => 'Kysymystä muokattiin onnistuneesti'));
             }
         } else {
             KysymysController::muokkausNakyma($id, $errors);
@@ -109,12 +109,8 @@ class KysymysController extends BaseController {
             }
         } else {
             $kayttaja = self::get_user_logged_in();
-            
             if (self::kayttaja_on_vastuuhenkilo()) {
-                View::make('vastuuhenkilö/uusi_kysymys.html', array(
-                    'kayttaja' => $kayttaja,
-                    'errors' => $errors
-                 ));
+                VastuuhenkiloController::uusiKysymys($errors);
             } else {
                 OpettajaController::luoKysely($kysymys->kurssi_id, $errors);
             }

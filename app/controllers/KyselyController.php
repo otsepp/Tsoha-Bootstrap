@@ -10,9 +10,6 @@ class KyselyController extends BaseController {
             'oppilas_id' => $params['oppilas_id'],
             'kommentti' => $params['kommentti']
         ));
-        $errors = $kysely->errors();
-        self::check_for_errors($errors, $params['kurssi_id']);
-        
         $kysymys_idt = $params['kysymys_id'];
         $arvosanat = $params['arvosana'];
 	$vastaukset = array();
@@ -22,7 +19,7 @@ class KyselyController extends BaseController {
                 'kysymys_id' => $kysymys_idt[$i],
                 'arvosana' => $arvosanat[$i]
             ));
-            $errors = $vastaus->errors();
+            $errors = array_merge($kysely->errors(), $vastaus->errors());
             self::check_for_errors($errors, $params['kurssi_id']);
 	    $vastaukset[] = $vastaus;
         } 
@@ -34,14 +31,14 @@ class KyselyController extends BaseController {
         Redirect::to('/oppilas/koti', array('message' => 'Kysely lähetetty'));
     }
     
-    private static function check_for_errors($error, $id) {
-         if (count($error) != 0) {
-             Redirect::to('/oppilas/kysely/'.$id, array('error' => $error));
+    private static function check_for_errors($errors, $id) {
+         if (count($errors) != 0) {
+             self::kysely($id, $errors);
          }
     }
     
 	//renderöi kyselyn
-    public static function kysely($id) {
+    public static function kysely($id, $errors) {
         self::tarkista_onko_kayttaja_oppilas();
         $kayttaja = self::get_user_logged_in();
         
@@ -50,6 +47,7 @@ class KyselyController extends BaseController {
         $kurssit_joista_voi_tehda_kyselyn = Kurssi::kurssitJoistaOppilasVoiTehdaKyselyn($kayttaja->id);
         if (!in_array($kurssi, $kurssit_joista_voi_tehda_kyselyn)) {
             Redirect::to('/oppilas/koti', array('error' => 'Olet jo tehnyt kurssin kyselyn'));
+            
         }
         
         $yk = Kysymys::etsiYleisetKysymykset();
@@ -60,7 +58,8 @@ class KyselyController extends BaseController {
         View::make('oppilas/kysely.html', array(
            'kayttaja' => $kayttaja,
            'kurssi' => $kurssi,
-           'kysymykset' => $kysymykset
+           'kysymykset' => $kysymykset,
+           'errors' => $errors
         ));
     }
     

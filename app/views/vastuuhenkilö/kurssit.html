@@ -7,9 +7,8 @@
 
 	<h3>Kurssit:</h3>
 
-	{% if message %}
-		<div class="alert alert-success">{{message}}</div>
-	{% endif %}
+	{% import "macros/errors_and_messages.html" as messages %}
+	{{messages.message_box(message)}}
 
 	<a href="{{base_path}}/vastuuhenkilo/kurssit/yhteenveto" class="btn btn-primary">Näytä yhteenveto</a>
 	<br><br>
