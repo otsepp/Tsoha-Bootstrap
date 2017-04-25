@@ -34,9 +34,9 @@ class KyselyController extends BaseController {
         Redirect::to('/oppilas/koti', array('message' => 'Kysely lähetetty'));
     }
     
-    private static function check_for_errors($errors, $id) {
-         if (count($errors) != 0) {
-             Redirect::to('/oppilas/kysely/'.$id, array('errors' => $errors));
+    private static function check_for_errors($error, $id) {
+         if (count($error) != 0) {
+             Redirect::to('/oppilas/kysely/'.$id, array('error' => $error));
          }
     }
     
@@ -49,7 +49,7 @@ class KyselyController extends BaseController {
         
         $kurssit_joista_voi_tehda_kyselyn = Kurssi::kurssitJoistaOppilasVoiTehdaKyselyn($kayttaja->id);
         if (!in_array($kurssi, $kurssit_joista_voi_tehda_kyselyn)) {
-            self::redirect_kun_ei_oikeuksia();
+            Redirect::to('/oppilas/koti', array('error' => 'Olet jo tehnyt kurssin kyselyn'));
         }
         
         $yk = Kysymys::etsiYleisetKysymykset();

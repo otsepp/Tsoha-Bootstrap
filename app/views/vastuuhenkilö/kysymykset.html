@@ -9,6 +9,10 @@
 
 	<h3>Kysymykset</h3>
 
+	{% if message %}
+		<div class="alert alert-success">{{message}}</div>
+	{% endif %}
+
 	<label>Yleiset kysymykset</label>
 	<ul class="list-group">
 		{% for kysymys in yleisetKysymykset %}

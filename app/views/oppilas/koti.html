@@ -9,7 +9,9 @@
 		<div class="alert alert-success">{{message}}</div>
 	{% endif %}
 
-	
+	{% if error %}
+		<div class="alert alert-danger">{{error}}</div>
+	{% endif %}
 
 	<h3>Tee kysely</h3>
 	{% if kurssit_joista_voi_tehda_kys %}

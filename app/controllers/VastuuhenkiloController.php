@@ -60,6 +60,7 @@ class VastuuhenkiloController extends BaseController {
         self::tarkista_onko_kayttaja_vastuuhenkilo();
         $kayttaja = self::get_user_logged_in();
         $kurssi = Kurssi::etsi($id);
+        
         $opettajat = Opettaja::laitoksenOpettajat($kayttaja->laitos_id);
         View::make('vastuuhenkilö/kurssi_muokkaa.html', array(
             'kayttaja' => $kayttaja,

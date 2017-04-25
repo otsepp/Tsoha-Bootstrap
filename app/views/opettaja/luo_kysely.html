@@ -19,11 +19,20 @@
 		</div>
 	{% endif %}
 
+	{% if message %}
+		<div class="alert alert-success">{{message}}</div>
+	{% endif %}
+
 	<h4>Yleiset kysymykset:</h4>
 		<ul class="list-group">
 			{% for yk in yleiset_kysymykset %}
 				<li class="list-group-item">{{yk.sisalto}}</li>
 			{% endfor %}
+        if (self::kayttaja_on_vastuuhenkilo()) {
+            Redirect::to('/vastuuhenkilo/kysymykset', array('message' => 'Kysymys poistettu'));
+        } else if (self::kayttaja_on_opettaja()) {
+            $kurssi_id = Kurssi::etsi($kysymys->kurssi_id)->id;
+            Redirect::to('/opettaja/luo_kysely/'.$kurssi_id, array('messa
 		</ul>
 
 	<h4>Laitoskohtaiset kysymykset:</h4>

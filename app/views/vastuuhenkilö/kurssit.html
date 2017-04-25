@@ -6,6 +6,11 @@
 	{{menu.menu("#{kayttaja.nimi}", "#{base_path}/vastuuhenkilo/koti")}}
 
 	<h3>Kurssit:</h3>
+
+	{% if message %}
+		<div class="alert alert-success">{{message}}</div>
+	{% endif %}
+
 	<a href="{{base_path}}/vastuuhenkilo/kurssit/yhteenveto" class="btn btn-primary">Näytä yhteenveto</a>
 	<br><br>
 

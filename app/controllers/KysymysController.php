@@ -105,7 +105,7 @@ class KysymysController extends BaseController {
             if (self::kayttaja_on_vastuuhenkilo()) {
                 Redirect::to('/vastuuhenkilo/kysymykset', array('message' => 'Kysymys lisätty'));
             } else {
-                Redirect::to('/opettaja/luo_kysely/'.$kysymys->kurssi_id);
+                Redirect::to('/opettaja/luo_kysely/'.$kysymys->kurssi_id, array('message' => 'Kysymys lisätty'));
             }
         } else {
             $kayttaja = self::get_user_logged_in();

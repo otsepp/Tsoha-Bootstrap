@@ -5,6 +5,10 @@
 	{{menu.menu("#{kayttaja.nimi}", "#{base_path}/#{koti_path}")}}
 	
 	<h3>{{kurssi.nimi}}</h3>
+	{% if message %}
+		<div class="alert alert-success">{{message}}</div>
+	{% endif %}
+
 	<p><strong>Opettaja: </strong> {{opettaja.nimi}}</p>
 	<p><strong>Osallistujia: </strong>{{osallistujienMaara}}</p>
 

@@ -30,12 +30,16 @@ class OpettajaController extends BaseController {
         ));
     }
     
-	//Opettaja ei luo riviä Kysely-tauluun, vaan luo kurssikohtaisia kysmyksiä ja 
-	//laitaa kyselyn käyntiin, epäselvä!?
+    //Opettaja ei luo riviä Kysely-tauluun, vaan luo kurssikohtaisia kysmyksiä ja 
+    //laittaa kyselyn käyntiin (epäselvä!?)
     public static function luoKysely($id, $errors) {
         self::tarkista_onko_kayttaja_opettaja();
         $kayttaja = self::get_user_logged_in();
         $kurssi = Kurssi::etsi($id);
+        
+        if ($kurssi->kysely_kaynnissa == 1) {
+            Redirect::to('/opettaja/koti', array('error' => 'Kysely on jo käynnissä'));
+        }
         
         $yleiset_kysymykset = Kysymys::etsiYleisetKysymykset();
         $laitoskysymykset = Kysymys::etsiLaitosKysymykset($kurssi->laitos_id);

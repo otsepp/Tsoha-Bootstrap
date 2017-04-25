@@ -45,9 +45,9 @@ class KurssiController extends BaseController{
             $kurssi->paivita();
             
             if (self::kayttaja_on_vastuuhenkilo()) {
-                Redirect::to('/vastuuhenkilo/kurssit', array('message' => 'Kurssia muokattiin onnistuneesti'));
+                Redirect::to('/kurssi/'.$id, array('message' => 'Kurssia muokattiin onnistuneesti'));
             } else if (self::kayttaja_on_opettaja()) {
-                Redirect::to('/kurssi/'.$id);
+                Redirect::to('/opettaja/koti', array('message' => 'Kysely on nyt käynnissä'));
             }
         } else {
             VastuuhenkiloController::muokkaaKurssia($kurssi->id, $errors);
