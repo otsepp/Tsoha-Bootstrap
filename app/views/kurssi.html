@@ -25,6 +25,10 @@
 		<a href="{{base_path}}/opettaja/luo_kysely/{{kurssi.id}}" class="btn btn-primary">Muokkaa kyselyä</a>
 	{% endif %}
 	
-	
+	<br><br>
+
+	{% if vastuuhenkiloStatus %}
+		<a href="{{base_path}}/vastuuhenkilo/kurssit" class="btn btn-primary">< Kurssit</a>
+	{% endif %}
 
 {% endblock %}
