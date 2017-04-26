@@ -31,7 +31,7 @@
   });
   
   $routes->get('/oppilas/kysely/:id', function($id) {
-      KyselyController::kysely($id, array());
+      KyselyController::kysely($id);
   });
   
   $routes->post('/oppilas/kysely/uusi', function() {
@@ -57,7 +57,7 @@
   });
   
   $routes->get('/opettaja/luo_kysely/:id', function($id) {
-      OpettajaController::luoKysely($id, array());
+      OpettajaController::luoKysely($id);
   });
   
   
@@ -91,7 +91,7 @@
   });
   
   $routes->get('/vastuuhenkilo/muokkaa_kurssia/:id', function($id) {
-      VastuuhenkiloController::muokkaaKurssia($id, array());
+      VastuuhenkiloController::muokkaaKurssia($id);
   });
   
   $routes->get('/vastuuhenkilo/opettajat', function() {
@@ -103,7 +103,7 @@
   });
   
   $routes->get('/vastuuhenkilo/kysymykset/uusi', function() {
-      VastuuhenkiloController::uusiKysymys(array());
+      VastuuhenkiloController::uusiKysymys();
   });
   
   
@@ -125,7 +125,7 @@
   });
   
   $routes->get('/kysymykset/muokkaa/:id', function($id) {
-      KysymysController::muokkausNakyma($id, array());
+      KysymysController::muokkausNakyma($id);
   });
   
   $routes->post('/kysymykset/muokkaa/:id', function($id) {

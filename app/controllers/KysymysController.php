@@ -32,7 +32,7 @@ class KysymysController extends BaseController {
         self::tarkista_virheet($kysymys);
     }
     
-    public static function muokkausNakyma($id, $errors) {
+    public static function muokkausNakyma($id) {
         $kayttaja = self::get_user_logged_in();
         
         $kysymys = Kysymys::etsi($id);
@@ -54,8 +54,7 @@ class KysymysController extends BaseController {
         }
         View::make('kysymys_muokkaa.html', array(
             'kayttaja' => $kayttaja,
-            'kysymys' => $kysymys,
-            'errors' => $errors
+            'kysymys' => $kysymys
         )); 
     }
     
@@ -79,7 +78,7 @@ class KysymysController extends BaseController {
                 Redirect::to('/opettaja/luo_kysely/'.$kurssi_id, array('message' => 'Kysymystä muokattiin onnistuneesti'));
             }
         } else {
-            KysymysController::muokkausNakyma($id, $errors);
+            Redirect::to('/kysymykset/muokkaa/'.$kysymys->id, array('errors' => $errors));
         }
     }
     
@@ -98,7 +97,7 @@ class KysymysController extends BaseController {
         }
     }
     
-   public static function tarkista_virheet($kysymys) {
+   private static function tarkista_virheet($kysymys) {
        $errors = $kysymys->errors();
         if(count($errors) == 0) {
             $kysymys->talleta();
@@ -110,9 +109,9 @@ class KysymysController extends BaseController {
         } else {
             $kayttaja = self::get_user_logged_in();
             if (self::kayttaja_on_vastuuhenkilo()) {
-                VastuuhenkiloController::uusiKysymys($errors);
+                Redirect::to('/vastuuhenkilo/kysymykset/uusi', array('errors' => $errors));
             } else {
-                OpettajaController::luoKysely($kysymys->kurssi_id, $errors);
+                Redirect::to('/opettaja/luo_kysely/'.$kysymys->kurssi_id, array('errors' => $errors));
             }
         }
    }

@@ -20,7 +20,7 @@ class KurssiController extends BaseController{
             $kurssi->talleta();
             Redirect::to('/vastuuhenkilo/kurssit', array('message' => 'Kurssi lisätty'));
         } else {
-             VastuuhenkiloController::muokkaaKurssia($kurssi->id, $errors);
+            Redirect::to('/vastuuhenkilo/kurssit/uusi', array('errors' => $errors));
         }
     }
     
@@ -44,7 +44,7 @@ class KurssiController extends BaseController{
                 Redirect::to('/opettaja/koti', array('message' => 'Kysely on nyt käynnissä'));
             }
         } else {
-            VastuuhenkiloController::muokkaaKurssia($kurssi->id, $errors);
+            Redirect::to('/vastuuhenkilo/muokkaa_kurssia/'.$kurssi->id, array('errors' => $errors));
         }
     }
     

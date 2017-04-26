@@ -56,17 +56,20 @@ class VastuuhenkiloController extends BaseController {
         ));
     }
     
-    public static function muokkaaKurssia($id, $errors) {
+    public static function muokkaaKurssia($id) {
         self::tarkista_onko_kayttaja_vastuuhenkilo();
         $kayttaja = self::get_user_logged_in();
         $kurssi = Kurssi::etsi($id);
+        
+        if ($kurssi->kysely_kaynnissa == 1) {
+            Redirect::to('/vastuuhenkilo/kurssit', array('error' => 'Kurssin kysely on jo käynnissä, muokkaus ei sallittu'));
+        }
         
         $opettajat = Opettaja::laitoksenOpettajat($kayttaja->laitos_id);
         View::make('vastuuhenkilö/kurssi_muokkaa.html', array(
             'kayttaja' => $kayttaja,
             'kurssi' => $kurssi,
-            'opettajat' =>$opettajat,
-            'errors' => $errors
+            'opettajat' =>$opettajat
         ));
     }
     
@@ -94,12 +97,11 @@ class VastuuhenkiloController extends BaseController {
     }
     
 //VH voi luoda yleisiä ja laitoskohtaisia kysymyksiä
-    public static function uusiKysymys($errors) {
+    public static function uusiKysymys() {
         self::tarkista_onko_kayttaja_vastuuhenkilo();
         $kayttaja = self::get_user_logged_in();
         View::make('vastuuhenkilö/uusi_kysymys.html', array(
-            'kayttaja' => $kayttaja,
-            'errors' => $errors
+            'kayttaja' => $kayttaja
         ));
     }
 }

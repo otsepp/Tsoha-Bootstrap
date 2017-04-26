@@ -33,12 +33,12 @@ class KyselyController extends BaseController {
     
     private static function check_for_errors($errors, $id) {
          if (count($errors) != 0) {
-             self::kysely($id, $errors);
+             Redirect::to('/oppilas/kysely/'.$id, array('errors' => $errors));
          }
     }
     
 	//renderöi kyselyn
-    public static function kysely($id, $errors) {
+    public static function kysely($id) {
         self::tarkista_onko_kayttaja_oppilas();
         $kayttaja = self::get_user_logged_in();
         
@@ -58,8 +58,7 @@ class KyselyController extends BaseController {
         View::make('oppilas/kysely.html', array(
            'kayttaja' => $kayttaja,
            'kurssi' => $kurssi,
-           'kysymykset' => $kysymykset,
-           'errors' => $errors
+           'kysymykset' => $kysymykset
         ));
     }
     
