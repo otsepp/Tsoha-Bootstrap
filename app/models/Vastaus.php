@@ -38,6 +38,11 @@ class Vastaus extends BaseModel {
          $query->execute(array('id' => $id));
      }
      
+     public static function poista_kysymyksen_vastaukset($kysymys_id) {
+         $query = DB::connection()->prepare("DELETE FROM Vastaus WHERE kysymys_id=:kysymys_id");
+        $query->execute(array('kysymys_id' => $kysymys_id));
+     }
+     
      public static function kysymyksen_vastaukset($kysymys_id) {
          $query = DB::connection()->prepare('SELECT * FROM Vastaus WHERE kysymys_id=:id');
          $query->execute(array(

@@ -27,6 +27,11 @@ class Kysymys extends BaseModel {
         ));
     }
     
+    public static function poista_kurssikysymykset($kurssi_id) {
+        $query = DB::connection()->prepare("DELETE FROM Kysymys WHERE kurssi_id=:kurssi_id");
+        $query->execute(array('kurssi_id' => $kurssi_id));
+    }
+    
      public function talleta() {
         $query = DB::connection()->prepare("INSERT INTO Kysymys (sisalto, laitos_id, kurssi_id) VALUES (:sisalto, :laitos_id, :kurssi_id) RETURNING id");
         $query->execute(array('sisalto' => $this->sisalto, 

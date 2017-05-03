@@ -13,9 +13,7 @@ class HelloWorldController extends BaseController{
     }
 
     public static function sandbox(){
-      $oppilas = Oppilas::etsi(1);
-      $kt = Kurssi::kurssitJoillaEiOppilasta($oppilas->id);
-      Kint::dump($oppilas);
-      Kint::dump($kt);
+      $ilm = Ilmoittautuminen::kurssin_ilmoittautumiset(1);
+      Kint::dump($ilm);
     }
   }

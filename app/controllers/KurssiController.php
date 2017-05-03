@@ -4,6 +4,8 @@ class KurssiController extends BaseController{
     
     public static function poista($id) {
         $kurssi = Kurssi::etsi($id);
+        Kysymys::poista_kurssikysymykset($kurssi->id);
+        Ilmoittautuminen::poista_kurssin_ilmoittautumiset($kurssi->id);
         $kurssi->poista();
         Redirect::to('/vastuuhenkilo/kurssit', array('message' => 'Kurssi poistettu'));
     }

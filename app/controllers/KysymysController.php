@@ -84,11 +84,13 @@ class KysymysController extends BaseController {
     
     public static function poista($id) {
         $kysymys = Kysymys::etsi($id);
-        $vastaukset = Vastaus::kysymyksen_vastaukset($id);
-        foreach($vastaukset as $vastaus) {
-            $vastaus->poista($vastaus->kysymys_id);
-        }
+//        $vastaukset = Vastaus::kysymyksen_vastaukset($id);
+//        foreach($vastaukset as $vastaus) {
+//            $vastaus->poista($vastaus->kysymys_id);
+//        }
+        Vastaus::poista_kysymyksen_vastaukset($kysymys->id);
         $kysymys->poista();
+        
         if (self::kayttaja_on_vastuuhenkilo()) {
             Redirect::to('/vastuuhenkilo/kysymykset', array('message' => 'Kysymys poistettu'));
         } else if (self::kayttaja_on_opettaja()) {

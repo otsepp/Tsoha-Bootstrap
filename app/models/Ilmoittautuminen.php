@@ -18,4 +18,25 @@ class Ilmoittautuminen extends BaseModel {
         ));
     }
     
+    public static function poista_kurssin_ilmoittautumiset($kurssi_id) {
+        $query = DB::connection()->prepare("DELETE FROM Ilmoittautuminen WHERE kurssi_id=:kurssi_id");
+        $query->execute(array('kurssi_id' => $kurssi_id));
+    }
+    
+    public static function kurssin_ilmoittautumiset($id) {
+        $query = DB::connection()->prepare("SELECT * FROM Ilmoittautuminen WHERE kurssi_id=:id");
+        $query->execute(array('id' => $id));
+        $rows = $query->fetchAll();
+        
+        $ilmoittautumiset = array();
+        foreach ($rows as $row) {
+            $ilmoittautumiset[] = new Ilmoittautuminen(array(
+                'id' => $row['id'],
+                'kurssi_id' => $row['kurssi_id'],
+                'oppilas_id' => $row['oppilas_id']
+            ));
+        }
+        return $ilmoittautumiset;
+    }
+    
 }
